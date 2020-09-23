@@ -1,0 +1,41 @@
+/* CSS reset */
+
+
+/* Global styles */
+/* Background, color, font-family */
+/* Layout */
+/* For .special-content */
+/* Navigation bar */
+#menu {
+    list-style-type: none;
+    margin: auto;
+    padding: 0;
+    width: 80vw;
+    overflow: hidden;
+    background-color: #333;
+    alignment: center;
+}
+
+#menu li {
+    float: left;
+}
+
+#menu li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#menu li a:hover {
+    background-color: #111;
+}
+p{
+    width: 50vw;
+}
+div
+{
+    margin: auto;
+    width: 80vw;
+}

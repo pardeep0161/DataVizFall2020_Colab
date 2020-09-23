@@ -1,0 +1,22 @@
+.even {
+  border-radius: 5px;
+  background-color: #cccccc;
+  padding: 20px;
+}
+.odd {
+  border-radius: 5px;
+  background-color: #808080;
+  padding: 20px;
+}
+body {
+    text-align: center;
+    background-color: : #e6ffff;
+}
+form {
+	text-align: left;
+    display: inline-block;
+}
+.heading {
+	text-align: left;
+    display: inline-block;
+}

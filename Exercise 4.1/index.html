@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Individual Project Form</title>
+    <link href="style/style.css" rel="stylesheet">
+</head>
+<body style="background-color:#e6ffff;">
+    <h1 class = "heading">
+        Individual Project
+    </h1><br>
+    <h3 class = "heading">Choose a topic, and research interest for the individual visualization project.</h3>
+
+    <div id = "projectform">
+        <form>
+            <div class="odd">
+                <label for="email">Email Address</label><br>
+                <input type="email" id="email" name="email" placeholder = "Your Email"><br>
+            </div>
+            <div class="even">
+                <label for="fname">Firstname</label><br>
+                <input type="text" id="fname" name="fname" placeholder="Your Answer"><br>
+            </div>
+            <div class="odd">
+                <label for="lname">Lastname</label><br>
+                <input type="text" id="lname" name="lname" placeholder="Your Answer"><br>
+            </div>
+            <div class="even">
+                <label for="resint">Research Interest (list at least 3)</label><br>
+                <input type="text" id="resint" name="resint" placeholder="Your Answer" required><br>
+            </div>
+            <div class="odd">
+                <label for="projtitle">Project Title - (e.g. income vs education US Census) </label><br>
+                <input type="text" id="projtitle" name="projtitle" placeholder="Your Answer" required><br>
+            </div>
+            <div class="even">
+                <label for="topskill">Top Skills</label><br>
+                <label><input type="checkbox" id="topskill" value="SQL">SQL</label><br>
+                <label><input type="checkbox" id="topskill" value="python">Python programming</label><br>
+                <label><input type="checkbox" id="topskill" value="matlab">Matlab</label><br>
+                <label><input type="checkbox" id="topskill" value="d3js">D3js and Javascript</label><br>
+                <label><input type="checkbox" id="topskill" value="chash">C# VB.net</label><br>
+                <label><input type="checkbox" id="topskill" value="php">PHP</label><br>
+                <label><input type="checkbox" id="topskill" value="node">Node.JS</label><br>
+                <label><input type="checkbox" id="topskill" value="webdesign">Web design tools (e.g. Wordpress)</label><br>
+                <label><input type="checkbox" id="topskill" value="excel">Excel</label><br>
+                <label><input type="checkbox" id="topskill" value="powerbi">PowerBI</label><br>
+                <label><input type="checkbox" id="topskill" value="htmlcss">HTML and CSS</label><br>
+                <label><input type="checkbox" id="topskill" value="tableau">Tableau</label><br>
+                <label><input type="checkbox" id="topskill" value="other">Other: <input type="text" id="otherskill" name="projtitle"></label><br>
+            </div>
+            
+            <div class="odd">
+                <label for="projtitle">Suggestions or Questions</label><br>
+                <input type="text" id="suggnques" name="suggnques" placeholder="Your Answer" required><br>
+            </div>
+            <input type="checkbox" name="Send me a copy of my responses.">Send me a copy of my responses.</input><br>
+            <button type="Submit" value="Submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
