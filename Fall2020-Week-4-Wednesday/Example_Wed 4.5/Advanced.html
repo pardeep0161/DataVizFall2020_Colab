@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example Wed 4.5</title>
+</head>
+<body>
+<h3>
+    User interface 2: SVG Change by Range and scale it!
+</h3>
+<form name="form1">
+    <label for="text1">Range value</label><br>
+    <input type="text" id="text1"
+           name="range_value"><br>
+    <label for="range1">Range</label><br>
+    <input type="range" id="range1"
+           name="range"
+           value="0"
+           onchange="jsFunction()">
+</form>
+<svg id="svg1"
+     width="400px" height="200px"
+     viewBox="0 0 400 200"
+     style="background-color: black"
+>
+    <circle id="circle1"
+            cx="10" cy="10" r="10" fill="red" stroke-width="0">
+    </circle>
+</svg>
+<script>
+    let theForm =document.form1;
+    let svg = document.getElementById('svg1')
+    theForm.range_value.value=theForm.range.value;
+    function jsFunction(){
+        let x = theForm.range.value
+        theForm.range_value.value=x;
+        // 1. get the size of svg
+        let viewBox = svg.getAttributeNS(null,'viewBox');  // Get the sizes of the viewBox
+        let domain =viewBox.split(' '); //split by " " and make a list
+        let domain_x = [parseFloat(domain[0]) , parseFloat(domain[2])];
+        let domain_y = [parseFloat(domain[1]) , parseFloat(domain[3])];
+        console.log(domain_x,domain_y);
+        // 2. scale the value based on the svg size
+        let scaleX = domain_x[0]+ (x/100 * (domain_x[1]-domain_x[0]));
+        let y = Math.abs(domain_y[1]*Math.sin(scaleX));
+        svg.getElementById('circle1').setAttributeNS(null,'cx',scaleX);
+        svg.getElementById('circle1').setAttributeNS(null,'cy',y);
+    }
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example Wed 4.4</title>
+</head>
+<body>
+<h3>
+    User interface 2: SVG Change by Range
+</h3>
+<form name="form1">
+    <label for="X">X</label>
+    <input type="range" id="X"
+           name="X"
+           value="0"
+           min="0"
+           max="400"
+           onchange="jsFunction()"><br>
+    <label for="X">Y</label>
+    <input type="range" id="Y"
+           name="Y"
+           value="0"
+           min="0"
+           max="200"
+           onchange="jsFunction()"><br>
+    <label for="X">R</label>
+    <input type="range" id="R"
+           name="R"
+           value="0"
+           min="10"
+           max="100"
+           onchange="jsFunction()"><br><br>
+</form>
+<svg id="svg1"
+     width="400px" height="200px"
+     viewBox="0 0 400 200"
+     style="background-color: black"
+>
+    <circle id="circle1"
+            cx="10" cy="10" r="10" fill="red" stroke-width="0">
+    </circle>
+</svg>
+<script>
+    let theForm =document.form1;
+    let svg = document.getElementById('svg1')
+    function jsFunction(){
+        let x = theForm.X.value
+        let y = theForm.Y.value
+        let r = theForm.R.value
+        console.log(x,y,r);
+        svg.getElementById('circle1').setAttributeNS(null,'cx',x);
+        svg.getElementById('circle1').setAttributeNS(null,'cy',y);
+        svg.getElementById('circle1').setAttributeNS(null,'r',r);
+
+    }
+</script>
+
+
+</body>
+</html>

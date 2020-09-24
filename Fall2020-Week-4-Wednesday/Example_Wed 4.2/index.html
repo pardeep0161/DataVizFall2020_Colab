@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>SVG Car!</title>
+</head>
+<body>
+<svg viewBox="0 0 25 25">
+    <!-- body -->
+    <!-- rear lights -->
+    <!-- M movetox,movetoy -->
+    <!-- a rx ry angle large-arc-flag sweep-flag dx dy+-->
+    <path fill="red" stroke="red" stroke-width=".1" style = "opacity:.8"
+          d="M 5.5,5.1
+		   a .5 .4 0 0 0 -1.1,.9">
+    </path>
+
+    <rect
+            id = "car_body_top_body"
+            x="5.4"
+            y="3.1"
+            width = "5.5"
+            height ="4"
+            fill = "gray"
+            rx="2"
+    >
+    </rect>
+
+    <rect
+            id = "car_body_top_glass"
+            x="5.4"
+            y="3.4"
+            width = "6"
+            height ="4"
+            fill = "steelBlue"
+            rx="2"
+    >
+    </rect>
+
+    <rect
+            id = "car_body_lower"
+            x="4"
+            y="5"
+            width = "10"
+            height ="4"
+            fill = "gray"
+            rx="2"
+    >
+    </rect>
+
+    <!-- front light -->
+    <path stroke = "none"
+          fill = "lightgray"
+          d= "
+				  M13,6
+				  a .5 .5    0 1 1
+				    .5,1
+				  "
+    >
+    </path>
+    <g id = "wheels_layer">
+        <!-- tyres -->
+        <circle
+                id = "back_wheel0"
+                cx="6"
+                cy="8.7"
+                r = "1"
+                fill = "black"
+        >
+        </circle>
+        <circle
+                id = "front_wheel0"
+                cx="12"
+                cy="8.7"
+                r = "1"
+                fill = "black"
+        >
+        </circle>
+        <!-- inside wheels -->
+        <circle
+                id = "back_wheel1"
+                cx="6"
+                cy="8.7"
+                r = ".5"
+                fill = "#ee0809"
+        >
+        </circle>
+        <circle
+                id = "front_wheel1"
+                cx="12"
+                cy="8.7"
+                r = ".5"
+                fill = "#ee0809"
+        >
+        </circle>
+    </g>
+
+    <text x="4" y="1.6" fill="red" style="font-size: .9pt">
+        SVG Car:
+        <tspan x="4" y="2.6">A simple SVG design example.</tspan>
+    </text>
+</svg>
+
+</body>
+</html>
+
+

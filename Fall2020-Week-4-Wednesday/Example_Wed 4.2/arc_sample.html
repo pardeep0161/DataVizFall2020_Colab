@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>arc Path</title>
+</head>
+<body>
+    <svg viewBox="-5 0 40 40">
+        <rect x="5"
+              y="5"
+              height="10"
+              width="10"
+              fill="none"
+              stroke="black"
+              stroke-width=".1"></rect>
+        <path stroke="red" fill="none" stroke-width=".1"
+              d="M 5,5 L 15 15"
+                ></path>
+        <path stroke="red" fill="none" stroke-width=".1"
+              d="M 15,5 L 5 15"
+        ></path>
+        <! --
+        M x y move the cursor to this point
+        A     Start the Arc
+        2.5   X direction Radius
+        2.5   Y direction Radius
+        0     rotation around x axis
+        0     Flag(0 or 1) if 0 it is large side of the arc, 1
+        0     Flag(0 or 1) if 0 it is large side of the arc, 1
+        x     x where arc ends
+        y     y where arc ends
+        -->
+        <path stroke="green" fill="none" stroke-width=".1"
+              d="M 5,5
+              A 2.5 2.5
+              0
+              0
+              1
+              15 5
+               "
+        ></path>
+        <path stroke="green" fill="none" stroke-width=".1"
+              d="M 5,5
+              A 2.5 2.5
+              0
+              0
+              0
+              5 15
+               "
+        ></path>
+        <path stroke="green" fill="none" stroke-width=".1"
+              d="M 15,5
+              A 2.5 2.5
+              0
+              0
+              1
+              15 15
+               "
+        ></path>
+        <path stroke="green" fill="none" stroke-width=".1"
+              d="M 15,15
+              A 2.5 2.5
+              0
+              0
+              1
+              5 15
+               "
+        ></path>
+    </svg>
+</body>
+</html>

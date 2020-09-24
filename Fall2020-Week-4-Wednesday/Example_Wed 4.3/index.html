@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example Wed 4.3</title>
+</head>
+<body>
+<h3>
+    User interface 1: Range Selector
+</h3>
+<form name="form1">
+    <label for="text1">Range value</label><br>
+    <input type="text" id="text1"
+           name="range_value"><br>
+    <label for="range1">Range</label><br>
+    <input type="range" id="range1"
+           name="range" onchange="jsFunction()">
+</form>
+
+<script>
+let theForm =document.form1;
+theForm.range_value.value=theForm.range.value;
+function jsFunction(){
+    theForm.range_value.value=theForm.range.value;
+}
+</script>
+
+
+</body>
+</html>

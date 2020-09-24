@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vanilla JS Scatter Plot</title>
+</head>
+<body>
+<h3>
+    Vanilla js Scatter plot
+</h3>
+
+<svg width="400px" height="200px" viewBox="0 0 100 50"
+     style="background-color: #c0c0c0"
+id="svg1"
+>
+</svg>
+
+<script>
+    // get the svg element
+    let svg = document.getElementById('svg1');
+    // create dummy dataset
+    let viewBoxX = 100;
+    let viewBoxy = 50;
+    let margin = 5;
+    let freq = .5;
+    let x=[];
+    let y=[];
+
+    // populate the arrays for the scatter plot
+    for(let i=0;i<=viewBoxX;i+=.1) //0.1 is the step or spacing
+    {
+        x.push(i);
+        y.push((viewBoxy/2) + Math.sin(freq*i)*((viewBoxy-margin)/2)); // we will have to scale it later
+    }
+    // add axis to the scatter plot
+    function addLine(svg,x1,y1,x2,y2,color='black'){
+        //create a line element (on Name Space)
+        let line = document.createElementNS('http://www.w3.org/2000/svg','line');
+        // let us set the attributes x1 y1 x2 y2 and color and stroke
+        // append the created line to the SVG
+        line.setAttributeNS(null,'x1',x1);
+        line.setAttributeNS(null,'y1',y1);
+        line.setAttributeNS(null,'x2',x2);
+        line.setAttributeNS(null,'y2',y2);
+
+        line.setAttributeNS(null,'stroke-width',.4);
+        line.setAttributeNS(null,'stroke',color);
+        svg.appendChild(line);
+    }
+    // x axis
+    addLine(svg,0,viewBoxy/2,viewBoxX,viewBoxy/2);
+    // y axis
+    addLine(svg,viewBoxX/2,0,viewBoxX/2,viewBoxy);
+    function addDots(svg,x,y,r=.1,color='black'){
+        let circle = document.createElementNS("http://www.w3.org/2000/svg",'circle');
+
+        circle.setAttributeNS(null,'cx',x);
+        circle.setAttributeNS(null,'cy',y);
+        circle.setAttributeNS(null,'r',r);
+
+        circle.setAttributeNS(null,'fill',color);
+        circle.setAttributeNS(null,'stroke',"none");
+
+        svg.appendChild(circle)
+    }
+    for(let i=0;i<x.length;i++){
+        addDots(svg,x[i],y[i],r=.2,color='black');
+    }
+
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example Wed 4.4</title>
+</head>
+<body>
+<h3>
+    User interface 2: SVG Change by Range
+</h3>
+<form name="form1">
+    <label for="text1">Range value</label><br>
+    <input type="text" id="text1"
+           name="range_value"><br>
+    <label for="range1">Range</label><br>
+    <input type="range" id="range1"
+           name="range"
+           value="0"
+           onchange="jsFunction()">
+</form>
+<svg id="svg1"
+        width="400px" height="200px"
+        viewBox="0 0 400 200"
+style="background-color: black"
+>
+    <circle id="circle1"
+            cx="10" cy="10" r="10" fill="red" stroke-width="0">
+    </circle>
+</svg>
+<script>
+    let theForm =document.form1;
+    let svg = document.getElementById('svg1')
+    theForm.range_value.value=theForm.range.value;
+    function jsFunction(){
+        let x = theForm.range.value
+        theForm.range_value.value=x;
+        svg.getElementById('circle1').setAttributeNS(null,'cx',x);
+    }
+</script>
+
+
+</body>
+</html>
