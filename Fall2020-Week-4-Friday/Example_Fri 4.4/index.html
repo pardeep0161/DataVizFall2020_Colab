@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scale and Plot</title>
+    <script src="../libs/d3/d3.min.js"></script>
+</head>
+<body>
+<script>
+    // add svg element to body.
+    let svg = d3.select('body').append('svg');
+
+    // apply size and viewBox
+    svg.style('width','60vw')
+        .style('height','40vw')
+        .style('background-color','#efeded')
+        .attr('viewBox',"0 0 600,400")
+
+    // for the sake of testing we do this:
+    let species_color = {"Iris-setosa":'red',
+        "Iris-versicolor":'#7dac7d',
+        "Iris-virginica":'#556098'}
+    let species_names=["Iris-setosa","Iris-versicolor","Iris-virginica"]
+    let temp=""
+    // load data
+    let iris_data = "../data/iris.csv"
+    d3.csv(iris_data)
+        .then(
+            function(data)
+        {
+            // 1 get data extents
+            let x_extents = d3.extent(data, function(d){return +d['sepal_length']})
+            let y_extents = d3.extent(data, function(d){return +d['sepal_width']})
+            console.log(x_extents)
+            console.log(y_extents)
+            let margin = 30;
+            let xScale = d3.scaleLinear()
+                            .domain(x_extents)
+                            .range([0+margin,600-margin]);
+            let yScale = d3.scaleLinear()
+                            .domain(y_extents)
+                            .range([400-margin,0+margin]);
+
+            svg.selectAll('circle').data(data)
+            .enter()
+            .append('circle')
+            .attr('cx',function (d)
+            {
+                return xScale(+d.sepal_length);
+            })
+            .attr('cy',function (d){
+                return yScale(+d.sepal_width);
+            })
+            .attr('r',function (d){
+                return 4
+            })
+            .attr('fill',function (d)
+            {
+                return species_color[d.species]
+            })
+            .on("mouseenter", function (d){
+                // store the color of the last visited mouse enter
+                temp = d3.select(this).attr('fill')
+                // using transition change the circle size
+                d3.select(this)
+                    .transition()
+                    .duration(100)
+                    .attr('r',20)
+                    .transition()
+                    .duration(100)
+                    .attr('r',4)
+                    .transition()
+                    .duration(100)
+                    .attr('r',10)
+                    .attr('fill','orange')
+                })
+            .on("mouseout", function (d){
+                //return to the original size
+                d3.select(this)
+                    .transition()
+                    .duration(300)
+                    .attr('r',4)
+                    .attr('fill',temp)
+                })
+
+            svg.append("g")
+                .attr("transform", "translate("+margin+" , 0)")
+                .call(d3.axisLeft(yScale));
+
+            svg.append("g")
+                .attr("transform", "translate(0," + (400-margin) + ")")
+                .call(d3.axisBottom(xScale));
+
+
+        }
+        )
+
+
+</script>
+</body>
+</html>

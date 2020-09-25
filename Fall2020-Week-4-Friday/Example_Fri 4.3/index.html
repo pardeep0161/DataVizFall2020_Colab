@@ -1,0 +1,89 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Loading data from file!</title>
+    <script src="../libs/d3/d3.js"></script>
+</head>
+<body>
+<h3>
+    Plot (not scaled) -- Scale will change everything
+</h3>
+<script>
+    // add svg element to body.
+    let svg = d3.select('body').append('svg');
+    // apply size and viewBox
+    svg.style('width','70vw')
+        .style('height','40vw')
+        .style('background-color','silver')
+        .attr('viewBox',"4 1 4,4")
+    // for the sake of testing we do this:
+    let species_color = {"Iris-setosa":'red',
+                        "Iris-versicolor":'green',
+                        "Iris-virginica":'blue'}
+    let species_names=["Iris-setosa","Iris-versicolor","Iris-virginica"]
+
+    svg.selectAll('rect')
+        .data(species_names)
+        .enter()
+        .append('rect')
+        .attr('x',function (){
+            return 7.8
+        })
+        .attr('y',function (d,i){
+            return 1.1+(i/5)
+        })
+        .attr('width',.1)
+        .attr('height',.1)
+        .attr('fill',function(d){return species_color[d]})
+
+
+    svg.selectAll('text')
+        .data(species_names)
+        .enter()
+        .append('text')
+        .attr('x',function (){
+            return 8
+        })
+        .attr('y',function (d,i){
+            return 1.2+(i/5)
+        })
+        .text(function(d){return d})
+        .style('font-size','.15pt')
+
+
+    let iris_data = "../data/iris.csv"
+    d3.csv(iris_data)
+        .then(function(data)
+        {
+            svg.selectAll('circle').data(data)
+                .enter()
+                .append('circle')
+                .attr('cx',function (d)
+                {
+                    return +d.sepal_length;
+                })
+                .attr('cy',function (d){
+                    return +d.sepal_width;
+                })
+                .attr('r',function (d){
+                    return .04
+                })
+                .attr('fill',function (d)
+                {
+                    return species_color[d.species]
+                })
+        })
+/* if more than one data source is needed
+var promises = [
+  d3.json("Source1.json"),
+  d3.csv("source2.csv"),
+  d3.csv("source3.csv")
+]
+Promise.all(promises).then(ready)
+ */
+
+
+
+</script>
+</body>
+</html>

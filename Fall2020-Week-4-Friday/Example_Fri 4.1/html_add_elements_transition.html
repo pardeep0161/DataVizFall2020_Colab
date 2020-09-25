@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Adding transition</title>
+    <script src="../libs/d3/d3.js"></script>
+</head>
+<body>
+<script>
+    //https://github.com/d3/d3-transition
+    //https://github.com/d3/d3-ease#easeCubic
+    let randomValues = d3.randomInt(20,500)
+    let randomFontSize = d3.randomInt(1,14);
+    let randomColor = d3.randomInt(0,255);
+    let rndNums = Int16Array.from({length:1000},randomValues)
+    let div = d3.selectAll('div')
+    div.data(rndNums)
+        .enter()
+        .append('div').text(d=> d.toString())
+        .style('position','absolute')
+        .style('left',function(){return randomValues().toString()+'px'})
+        .style('top','0px')
+        .transition()
+        .duration(3000)
+        .ease(d3.easeExpOut)
+        .style('top',function(d){return d.toString()+'px'})
+        .style('font-size',function (){return randomFontSize().toString()+'pt'})
+        .style('color',function(){return d3.rgb(randomColor(),randomColor(),randomColor())})
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

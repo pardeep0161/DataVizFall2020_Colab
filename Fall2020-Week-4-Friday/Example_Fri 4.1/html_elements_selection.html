@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select elements</title>
+    <script src="../libs/d3/d3.js"></script>
+</head>
+<body>
+<h1>My First Heading</h1>
+<p>My first paragraph.</p>
+<p>My second paragraph.</p>
+<p>My third paragraph.</p>
+<p>My last paragraph.</p>
+<h2>Another heading</h2>
+<ol type="A">
+    <li>
+        Item 1 from the list
+    </li>
+    <li>
+        Item 2 from the list
+    </li>
+    <li>
+        Item 3 from the list
+    </li>
+    <li>
+        Item 4 from the list
+    </li>
+</ol>
+<hr/>
+<br>
+<table border="1">
+    <thead>
+    <tr>
+        <td>
+             Col 1
+        </td>
+        <td>
+            Col 2
+        </td>
+        <td>
+            Col 3
+        </td>
+        <td>
+            Col 4
+        </td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+             11
+        </td>
+        <td>
+             12
+        </td>
+        <td>
+             13
+        </td>
+        <td>
+             14
+        </td>
+    </tr>
+    <tr>
+        <td>
+            21
+        </td>
+        <td>
+            22
+        </td>
+        <td>
+            23
+        </td>
+        <td>
+             24
+        </td>
+    </tr>
+    <tr>
+        <td>
+            31
+        </td>
+        <td>
+            32
+        </td>
+        <td>
+            33
+        </td>
+        <td>
+            34
+        </td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<hr/>
+<h3>My Third Heading</h3>
+
+
+
+
+
+
+
+
+<script>
+    let colors = [{color:'red',         size: '10pt'},
+                  {color:'green',       size: '12pt'},
+                  {color:'blue',        size: '16pt'},
+                  {color:'steelblue',   size: '20pt'}];
+    let P = d3.selectAll('p')
+    P.data(colors)
+        .style('color',    function (d){return d.color})
+        .style('font-size',function (d){return d.size})
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

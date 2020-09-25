@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Removing extra elements</title>
+    <script src="../libs/d3/d3.min.js"></script>
+</head>
+<body>
+<script>
+    let rndNums = Int16Array.from({length:10},d3.randomInt(1,20))
+    let div = d3.selectAll('div')
+    let added_divs = div.data(rndNums)
+                    .enter()
+                    .append('div')
+                    .text(d=> d.toString())
+                    .style('position','relative')
+                    .style('left',d=> (d*10).toString()+'px')
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

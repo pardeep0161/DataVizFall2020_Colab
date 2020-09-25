@@ -1,0 +1,17 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Loading data from file!</title>
+    <script src="../libs/d3/d3.js"></script>
+</head>
+<body>
+<script>
+    let iris_data = "../data/iris.csv"
+
+    d3.csv(iris_data)
+        .then(function(data) {
+            console.log(data)
+        })
+</script>
+</body>
+</html>
