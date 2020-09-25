@@ -8,7 +8,8 @@
 <body>
 <script>
     let rndNums = Int16Array.from({length:10},d3.randomInt(1,20))
-    let div = d3.selectAll('div')
+    let body = d3.selectAll('body')
+    let div = body.selectAll('div')
     let added_divs = div.data(rndNums)
                     .enter()
                     .append('div')

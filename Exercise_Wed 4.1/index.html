@@ -40,102 +40,37 @@ Draw A home Clip Art using SVG tags
     </emps>
 </p>
 <svg viewBox="0 0 25 25">
-<!--    <path fill="red" stroke="red" stroke-width=".1" style = "opacity:.8"-->
-<!--          d="M 5.5,5.1-->
-<!--		   a .5 .4 0 0 0 -1.1,.9">-->
-<!--    </path>-->
 
-    <rect
-            id = "car_body_top_body"
-            x="7"
-            y="-5"
-            width = ".5"
-            height ="7"
-            fill = "brown"
-            transform="rotate(65)"
-    >
-    </rect>
-    <rect
-            id = "car_body_top_body"
-            x="8.6"
-            y="0.68"
-            width = "7"
-            height =".5"
-            fill = "brown"
-            transform="rotate(25)"
-    >
-    </rect>
-<!--    <rect-->
-<!--            id = "car_body_top_glass"-->
-<!--            x="5.4"-->
-<!--            y="3.4"-->
-<!--            width = "6"-->
-<!--            height ="4"-->
-<!--            fill = "steelBlue"-->
-<!--            rx="2"-->
-<!--    >-->
-<!--    </rect>-->
+<!--House Structure-->
+    <polygon points="2.5 7,2.5 15,12.5 15,12.5 7,7.5 4.5" style="fill:cadetblue;" />
+<!--Left Roof-->
+    <rect   x="7" y="-5" width = ".5" height ="7" fill = "saddlebrown" transform="rotate(65)"/>
+<!--Right Roof-->
+    <rect x="8.6" y="0.68" width = "7" height =".5" fill = "saddlebrown" transform="rotate(25)"/>
 
-<!--    <rect-->
-<!--            id = "car_body_lower"-->
-<!--            x="4"-->
-<!--            y="5"-->
-<!--            width = "10"-->
-<!--            height ="4"-->
-<!--            fill = "gray"-->
-<!--            rx="2"-->
-<!--    >-->
-<!--    </rect>-->
+<!--Window-->
+    <polygon points="4 8, 4 10, 6 10, 6 8, 4 8, 4 9, 6 9, 6 8, 5 8, 5 10,6 10, 6 8 " style="fill:#add8e6;stroke: saddlebrown;stroke-width:0.05;opacity:.8" />
 
-<!--    &lt;!&ndash; front light &ndash;&gt;-->
-<!--    <path stroke = "none"-->
-<!--          fill = "lightgray"-->
-<!--          d= "-->
-<!--				  M13,6-->
-<!--				  a .5 .5    0 1 1-->
-<!--				    .5,1-->
-<!--				  "-->
-<!--    >-->
-<!--    </path>-->
-<!--    <g id = "wheels_layer">-->
-<!--        &lt;!&ndash; tyres &ndash;&gt;-->
-<!--        <circle-->
-<!--                id = "back_wheel0"-->
-<!--                cx="6"-->
-<!--                cy="8.7"-->
-<!--                r = "1"-->
-<!--                fill = "black"-->
-<!--        >-->
-<!--        </circle>-->
-<!--        <circle-->
-<!--                id = "front_wheel0"-->
-<!--                cx="12"-->
-<!--                cy="8.7"-->
-<!--                r = "1"-->
-<!--                fill = "black"-->
-<!--        >-->
-<!--        </circle>-->
-<!--        &lt;!&ndash; inside wheels &ndash;&gt;-->
-<!--        <circle-->
-<!--                id = "back_wheel1"-->
-<!--                cx="6"-->
-<!--                cy="8.7"-->
-<!--                r = ".5"-->
-<!--                fill = "#ee0809"-->
-<!--        >-->
-<!--        </circle>-->
-<!--        <circle-->
-<!--                id = "front_wheel1"-->
-<!--                cx="12"-->
-<!--                cy="8.7"-->
-<!--                r = ".5"-->
-<!--                fill = "#ee0809"-->
-<!--        >-->
-<!--        </circle>-->
-<!--    </g>-->
+<!--    Curtains    -->
+    <path fill="red" stroke="red" stroke-width=".05" style = "opacity:.3" d="M 5 8
+    		   a .15 .5 0 0 1 -1 0"/>
+
+    <path fill="red" stroke="red" stroke-width=".05" style = "opacity:.3" d="M 5 8
+    		   a .15 .5 0 0 0 1 0"/>
+
+<!--Door-->
+    <polygon points="8 10.5,8 15, 11 15, 11 10.5" style="fill:#e6ffff;stroke: saddlebrown;stroke-width:0.05"/>
+<!--    Door Knob   -->
+    <circle cx="8.25" cy="13" r=".15" fill="saddlebrown" stroke-width="0"/>
+<!--    Door Window     -->
+    <polygon points="9 11.25, 9 12, 10.2 12, 10.2 11.25, 9 11.25, 9 11.625, 10.2 11.625, 10.2 11.25, 9.6 11.25, 9.6 12, 10.2 12, 10.2 11.25 " style="fill:#add8e6;stroke: saddlebrown;stroke-width:0.05;opacity:.8" />
+
+<!--    Door Window arc     -->
+    <path fill="#add8e6" stroke="saddlebrown" stroke-width=".05" style = "opacity:.8" d="M 9 11.25
+    		   a .5 .5 0 0 1 1.2 0"/>
 
     <text x="4" y="1.6" fill="red" style="font-size: .9pt">
-        SVG Car:
+        SVG House:
         <tspan x="4" y="2.6">A simple SVG design example.</tspan>
     </text>
 </svg>
