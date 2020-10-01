@@ -8,12 +8,12 @@
         h3{
             font-family: Helvetica;
         }
-        .bar{
-            fill:lightblue;
-            stroke-width: 1px;
-            stroke: navy;
-            fill-opacity: 50%;
-        }
+        /*.bar{*/
+        /*    fill:lightblue;*/
+        /*    stroke-width: 1px;*/
+        /*    stroke: navy;*/
+        /*    fill-opacity: 50%;*/
+        /*}*/
     </style>
 </head>
 <body>
@@ -27,7 +27,7 @@
         .append('svg')
         .attr('width','80%')
         .attr('height','60vw')
-        .attr('viewBox','0 0 800 1000')
+        .attr('viewBox','0 0 1000 1000')
         .style('background-color','#f5f3f3');
     let margins = 30;
     let width = 800 - 2 * margins;
@@ -38,11 +38,11 @@
 
     let g = svg.append("g")
         .attr("transform", "translate(" + 100 + "," + 100 + ")");
-    const formatDate = d3.timeFormat('%m-%y');
+    const formatMonth = d3.timeFormat('%m-%y');
     const loadData = d3.csv("data_sample.csv",
         function(d) {
             return {
-                date: formatDate(new Date(d.date)),
+                date: formatMonth(new Date(d.date)),
                 EstimatedCost: Number(d.EstimatedCost),
                 RawMaterial: Number(d.RawMaterial),
                 Workmanship: Number(d.Workmanship),
@@ -52,10 +52,8 @@
     loadData.then(data => {
         xScale.domain(data.map(function(d) { return d.date; }));
         yScale.domain([0,
-            d3.max(data, function(d) { return d.EstimatedCost; })])
+            d3.max(data, function(d) { return d.EstimatedCost; })+d3.max(data, function(d) { return d.RawMaterial; })])
 
-        console.log(xScale)
-        console.log(yScale)
         g.append("g")
             .attr("transform", "translate(0," + height + ")")
             .call(d3.axisBottom(xScale));
@@ -64,22 +62,35 @@
             .call(d3.axisLeft(yScale).tickFormat(function(d){
                 return d;
             }).ticks(10));
+        // g.selectAll(".bar")
+        //     .data(data)
+        //     .enter().append("rect")
+        //     .attr("class", "bar")
+        //     .attr("x", function(d) { return xScale(d.date); })
+        //     .attr("y", height)
+        //     .attr("width", xScale.bandwidth())
+        //     .attr("height", 0);
         g.selectAll(".bar")
             .data(data)
+            // .transition().duration(2000)
             .enter().append("rect")
-            .attr("class", "bar")
-            .attr("x", function(d) { return xScale(d.date); })
-            .attr("y", height)
-            .attr("width", xScale.bandwidth())
-            .attr("height", 0);
-        g.selectAll(".bar")
-            .data(data)
-            .transition().duration(2000)
             .attr("class", "bar")
             .attr("x", function(d) { return xScale(d.date); })
             .attr("y", function(d) { return yScale(d.EstimatedCost); })
             .attr("width", xScale.bandwidth())
-            .attr("height", function(d) { return height - yScale(d.EstimatedCost); });
+            .attr("height", function(d) { return height - yScale(d.EstimatedCost); })
+            .style("fill", 'red')
+            .exit();
+        g.selectAll(".bar2")
+            .data(data)
+            .enter().append("rect")
+            .attr("class", "bar2")
+            .attr("x", function(d) { return xScale(d.date); })
+            .attr("y", function(d) { return yScale(d.EstimatedCost) + yScale(d.RawMaterial) - height; })
+            .attr("width", xScale.bandwidth())
+            .attr("height", function(d) { return height - yScale(d.RawMaterial); })
+            .style("fill", 'blue')
+            .exit();
     });
 </script>
 </body>

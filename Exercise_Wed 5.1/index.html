@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Line Chart</title>
+    <script src="../libs/d3/d3.min.js"></script>
+</head>
+<body>
+<h1>Line Chart</h1>
+<div style="width: 100%">
+    <svg id="main" width="80%" height="80%" viewBox="0 0 1000 800"/>
+</div>
+<script>
+    let svg = d3.select('svg#main');
+    let margins = 20;
+    let width = 900 - 2 * margins;
+    let height = 800 - 2 * margins;
+
+    const loadData = d3.csv("data_sample.csv",
+        function(d) {
+            return {
+                date: new Date(d.date),
+                EstimatedCost: Number(d.EstimatedCost),
+                RawMaterial: Number(d.RawMaterial),
+                Workmanship: Number(d.Workmanship),
+                YearlyStorage: Number(d.YearlyStorage)}
+        })
+
+    lineColors = ['#cc3300',
+        '#ff9900',
+        '#cccc00',
+        '#99cc00']
+
+    keys = ['EstimatedCost', 'RawMaterial', 'Workmanship','YearlyStorage'];
+    loadData.then(data => {
+
+        let x = d3.scaleTime()
+            .domain(d3.extent(data, function(d) { return d.date; }))
+            .range([margins, width]);
+        let y = d3.scaleLinear()
+            .domain([0,
+                d3.max(data, function(d) { return Math.max(d.EstimatedCost, d.RawMaterial, d.Workmanship, d.YearlyStorage);  })])
+            .range([height, margins]);
+
+        let i;
+        for (i = 0; i < keys.length; i++) {
+            let line = d3.line()
+                .x(function(d) { return x(d.date); })
+                .y(function(d) { return y(d[keys[i]]); });
+
+            svg.append("path")
+                .data([data])
+                .attr("class", "line")
+                .attr("d", line)
+                .attr("fill",'none')
+                .style("stroke",lineColors[i])
+                .style("stroke-width","2px");
+        }
+
+        svg.append("g")
+            .attr("transform", "translate("+ '0' + "," + height + ")")
+            .call(d3.axisBottom(x));
+
+        svg.append("g")
+            .attr("transform", "translate("+ margins + "," + '0' + ")")
+            .call(d3.axisLeft(y));
+
+    });
+
+    let lineLegend = svg.selectAll(".lineLegend").data(keys)
+        .enter().append("g")
+        .attr("class","lineLegend")
+        .attr("transform", function (d,i) {
+            return "translate(" + width + "," + (i*20)+")";
+        });
+
+    lineLegend.append("text").text(function (d) {return d;})
+        .attr("transform", "translate(15,15)"); //align texts with boxes
+
+    lineLegend.append("rect")
+        .attr("fill", function (d, i) {return lineColors[i]; })
+        .attr("transform", "translate(0,5)")
+        .attr("width", 10).attr("height", 10);
+
+</script>
+</body>
+</html>
