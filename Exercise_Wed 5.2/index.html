@@ -85,20 +85,20 @@
 
     });
 
-    // let lineLegend = svg.selectAll(".lineLegend").data(keys)
-    //     .enter().append("g")
-    //     .attr("class","lineLegend")
-    //     .attr("transform", function (d,i) {
-    //         return "translate(" + width + "," + (i*20)+")";
-    //     });
-    //
-    // lineLegend.append("text").text(function (d) {return d;})
-    //     .attr("transform", "translate(15,15)"); //align texts with boxes
-    //
-    // lineLegend.append("rect")
-    //     .attr("fill", function (d, i) {return stackcolors[i]; })
-    //     .attr("transform", "translate(0,5)")
-    //     .attr("width", 10).attr("height", 10);
+    let lineLegend = svg.selectAll(".lineLegend").data(keys)
+        .enter().append("g")
+        .attr("class","lineLegend")
+        .attr("transform", function (d,i) {
+            return "translate(" + width + "," + (i*20)+")";
+        });
+
+    lineLegend.append("text").text(function (d) {return d;})
+        .attr("transform", "translate(15,15)"); //align texts with boxes
+
+    lineLegend.append("rect")
+        .attr("fill", function (d, i) {return stackColors[i]; })
+        .attr("transform", "translate(0,5)")
+        .attr("width", 10).attr("height", 10);
 
 </script>
 </body>
