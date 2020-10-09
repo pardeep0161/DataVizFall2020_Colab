@@ -31,6 +31,9 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\UMassD\Semester 2 Fall\CIS 568\DataVizFall2020_Colab\data" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\UMassD\Semester 2 Fall\CIS 568\DataVizFall2020_Colab" />
     </key>
@@ -51,7 +54,9 @@
       <workItem from="1601579311004" duration="124000" />
       <workItem from="1601654619253" duration="1113000" />
       <workItem from="1601658940889" duration="1002000" />
-      <workItem from="1601913552929" duration="998000" />
+      <workItem from="1601913552929" duration="2213000" />
+      <workItem from="1602009701190" duration="822000" />
+      <workItem from="1602259293104" duration="2759000" />
     </task>
     <servers />
   </component>
