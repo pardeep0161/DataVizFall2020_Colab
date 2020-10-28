@@ -20,10 +20,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3033c7fa-664f-41e7-a67d-417d638c1105" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Individual Project/data_sample.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Individual Project/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Individual Project/page1.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Individual Project/page2.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/DataVizFall2020_Colab.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DataVizFall2020_Colab.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
@@ -52,12 +48,14 @@
       <change beforePath="$PROJECT_DIR$/Fall2020-Week-4-Monday/Example 4.6/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Fall2020-Week-4-Monday/Example 4.6/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Fall2020-Week-4-Monday/Example 4.6/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/Fall2020-Week-4-Monday/Example 4.6/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Fall2020-Week-4-Monday/SVG Example/svg.html" beforeDir="false" afterPath="$PROJECT_DIR$/Fall2020-Week-4-Monday/SVG Example/svg.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Individual Project/efw-2020-master-index-data-for-researchers.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Individual Project/efw_cc.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Individual Project/index2020_data.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fall2020-Week-5-Monday/Example_Mon 5.2/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Fall2020-Week-5-Monday/Example_Mon 5.2/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Individual Project/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Individual Project/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Individual Project/page1.html" beforeDir="false" afterPath="$PROJECT_DIR$/Individual Project/page1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Individual Project/page2.html" beforeDir="false" afterPath="$PROJECT_DIR$/Individual Project/page2.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Python_Basics_lec02.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Python_Basics_lec02.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/cb_2018_us_state_20m.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/cb_2018_us_state_20m.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/practice.html" beforeDir="false" afterPath="$PROJECT_DIR$/practice.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,6 +118,9 @@
       <workItem from="1603298439953" duration="1688000" />
       <workItem from="1603300213309" duration="195000" />
       <workItem from="1603408373119" duration="10529000" />
+      <workItem from="1603894795917" duration="2574000" />
+      <workItem from="1603898612460" duration="1193000" />
+      <workItem from="1603907920478" duration="3826000" />
     </task>
     <servers />
   </component>
@@ -136,6 +137,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="526" y="236" key="#Notifications" timestamp="1603300406722">

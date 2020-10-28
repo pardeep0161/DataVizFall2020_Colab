@@ -58,12 +58,12 @@
     let projection = d3.geoAlbersUsa()
         .scale(1300).translate([500, 400])
 
-    Promise.all(
-        [
-            d3.json(geojson),
-            d3.csv(covid19)],
-            d3.autoType())
-        .then(main)
+        Promise.all(
+            [
+                d3.json(geojson),
+                d3.csv(covid19)],
+                d3.autoType())
+            .then(main)
 
     function main(data){
         let geoJson = topojson.feature(data[0], data[0].objects.cb_2018_us_state_20m).features;
