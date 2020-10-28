@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>D3 Map</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://d3js.org/topojson.v2.min.js"></script>
+
+</head>
+<body>
+<div id="caption">
+    US COVID-19 Cases by State.
+</div>
+<div id = "container">
+    <svg id = "canvas" viewBox="0 0 1000 800">
+    </svg>
+</div>
+
+<div id="tooltip"></div>
+<script>
+    let X = [0 ,1, 2, 3,4,5,6,7,8,9];
+    console.log(X)
+    let q = Math.round(d3.sum(d3.map(X, function(d){return Math.sin(d)*Math.tan(Math.pow(d,2.7))})))
+    console.log(q)
+    let w = d3.extent(X,function(d){return d})
+    console.log(w)
+    let e = d3.sum(d3.map(X,function(d,i){return d*i}))
+    console.log(e)
+    let r = d3.extent(d3.map(X,function(d,i){return d*i}))
+    console.log(r)
+</script>
+</body>
+</html>

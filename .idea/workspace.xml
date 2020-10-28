@@ -1,7 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="3033c7fa-664f-41e7-a67d-417d638c1105" name="Default Changelist" comment="" />
+    <list default="true" id="3033c7fa-664f-41e7-a67d-417d638c1105" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Individual Project/data_sample.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Individual Project/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Individual Project/page1.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Individual Project/page2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/DataVizFall2020_Colab.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DataVizFall2020_Colab.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Class_Activity_Lec03.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Class_Activity_Lec03.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Class_Activity_Week03.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Class_Activity_Week03.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exercise 4.1/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Exercise 4.1/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exercise 4.1/style/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/Exercise 4.1/style/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exercise 4.3/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/Exercise 4.3/about.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exercise 4.3/groupProject.html" beforeDir="false" afterPath="$PROJECT_DIR$/Exercise 4.3/groupProject.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exercise 4.3/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/Exercise 4.3/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exercise 4.3/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Exercise 4.3/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exercise 4.3/individualProject.html" beforeDir="false" afterPath="$PROJECT_DIR$/Exercise 4.3/individualProject.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exercise 4.3/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/Exercise 4.3/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exercise_D3_COVID_19_States_MAP/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Exercise_D3_COVID_19_States_MAP/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exercise_Mon 5.1/index2.html" beforeDir="false" afterPath="$PROJECT_DIR$/Exercise_Mon 5.1/index2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exercise_Mon 5.1/index3.html" beforeDir="false" afterPath="$PROJECT_DIR$/Exercise_Mon 5.1/index3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fall2020-Week-4-Friday/data/iris.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Fall2020-Week-4-Friday/data/iris.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fall2020-Week-4-Monday/Example 4.1/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Fall2020-Week-4-Monday/Example 4.1/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fall2020-Week-4-Monday/Example 4.2/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Fall2020-Week-4-Monday/Example 4.2/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fall2020-Week-4-Monday/Example 4.3/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Fall2020-Week-4-Monday/Example 4.3/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fall2020-Week-4-Monday/Example 4.4/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Fall2020-Week-4-Monday/Example 4.4/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fall2020-Week-4-Monday/Example 4.5/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Fall2020-Week-4-Monday/Example 4.5/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fall2020-Week-4-Monday/Example 4.5/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/Fall2020-Week-4-Monday/Example 4.5/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fall2020-Week-4-Monday/Example 4.6/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Fall2020-Week-4-Monday/Example 4.6/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fall2020-Week-4-Monday/Example 4.6/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/Fall2020-Week-4-Monday/Example 4.6/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fall2020-Week-4-Monday/SVG Example/svg.html" beforeDir="false" afterPath="$PROJECT_DIR$/Fall2020-Week-4-Monday/SVG Example/svg.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Individual Project/efw-2020-master-index-data-for-researchers.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Individual Project/efw_cc.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Individual Project/index2020_data.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python_Basics_lec02.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Python_Basics_lec02.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/cb_2018_us_state_20m.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/cb_2018_us_state_20m.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -27,16 +84,17 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/data" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Individual Project" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\UMassD\Semester 2 Fall\CIS 568\DataVizFall2020_Colab\data" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\UMassD\Semester 2 Fall\CIS 568\DataVizFall2020_Colab\Individual Project" />
       <recent name="D:\UMassD\Semester 2 Fall\CIS 568\DataVizFall2020_Colab\data" />
       <recent name="D:\UMassD\Semester 2 Fall\CIS 568\DataVizFall2020_Colab" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\UMassD\Semester 2 Fall\CIS 568\DataVizFall2020_Colab\data" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -58,17 +116,40 @@
       <workItem from="1601913552929" duration="2213000" />
       <workItem from="1602009701190" duration="822000" />
       <workItem from="1602259293104" duration="11426000" />
+      <workItem from="1603122090699" duration="2987000" />
+      <workItem from="1603298439953" duration="1688000" />
+      <workItem from="1603300213309" duration="195000" />
+      <workItem from="1603408373119" duration="10529000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="WindowStateProjectService">
+    <state x="526" y="236" key="#Notifications" timestamp="1603300406722">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="526" y="236" key="#Notifications/0.0.1536.824@0.0.1536.824" timestamp="1603300406722" />
     <state x="529" y="214" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1601513577509">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="529" y="214" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1601513577509" />
+    <state x="449" y="148" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1603300071398">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="449" y="148" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1536.824@0.0.1536.824" timestamp="1603300071398" />
     <state x="762" y="0" width="781" height="830" key="dock-window-1" timestamp="1602277785516">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -85,9 +166,9 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="41" y="189" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1602278000956" />
-    <state x="430" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1602285231664">
+    <state x="430" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1603425534599">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="430" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1602285231664" />
+    <state x="430" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1603425534599" />
   </component>
 </project>
