@@ -16,7 +16,8 @@
 
 
     <!-- Load d3.js -->
-    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://d3js.org/topojson.v2.min.js"></script>
 
 </head>
 <body>
@@ -35,6 +36,22 @@
             </div>
         </div>
     </nav>
+    <div id="worldMAp"></div>
 </div>
+<script>
+    let geojson = "C:\\Users\\Parde\\PycharmProjects\\pythonProject\\Individual Project\\data\\ne_10m_admin_0_countries_topo.json";
+
+    let projection = d3.geoEquirectangular()
+        .scale(1300).translate([500, 400])
+
+    let topjson
+    d3.json(geojson).then(d => {
+        topjson = topojson.feature(d, d.objects.cb_2018_us_state_20m).features;
+    })
+
+
+
+
+</script>
 </body>
 </html>
