@@ -72,12 +72,14 @@
     //*****************************
     // Step 2.2 apply stratify function on data
     let data_formatted = stratify_function(data)
+    console.log(data_formatted)
     //*****************************
     // Step 2.3 make hierarchy from data
     let hier_root = d3.hierarchy(data_formatted)
     hier_root.sum(function(d) {
         return d.data.val;
     })
+    console.log(hier_root)
     // *****************************
     // Color scale
     let color_scale = d3.scaleLinear()
@@ -98,7 +100,7 @@
     //*****************************
     // Step 3.2 apply tree map to hierarchical data
     treemapLayout(hier_root);
-
+    console.log(typeof hier_root)
     //*****************************
     // Step 4.1 add groups to svg
     let nodes = svg

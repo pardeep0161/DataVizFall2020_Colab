@@ -7,12 +7,14 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
 
 
     <!-- Load d3.js -->
@@ -25,7 +27,8 @@
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -39,19 +42,73 @@
     <div id="worldMAp"></div>
 </div>
 <script>
-    let geojson = "C:\\Users\\Parde\\PycharmProjects\\pythonProject\\Individual Project\\data\\ne_10m_admin_0_countries_topo.json";
+    let geojson = "https://raw.githubusercontent.com/pardeep0161/DataVizFall2020_Colab/master/Individual%20Project/data/ne_10m_admin_0_countries_topo.json";
 
     let projection = d3.geoEquirectangular()
-        .scale(1300).translate([500, 400])
+        .scale(300).translate([500, 500])
 
-    let topjson
-    d3.json(geojson).then(d => {
-        topjson = topojson.feature(d, d.objects.cb_2018_us_state_20m).features;
-    })
+    let apiURL = 'http://127.0.0.1:5000';
+    let responseJson = fetch(apiURL + '/page1')
+        .then(function (response) {
+            return response.json(); // But parse it as JSON this time
+        })
+    Promise.all(
+        [
+            d3.json(geojson),
+            responseJson],
+        d3.autoType())
+        .then(main)
 
+    function main(data) {
+        let topo_Json = topojson.feature(data[0], data[0].objects.ne_10m_admin_0_countries).features;
+        let geo_generator = d3.geoPath().projection(projection)
 
+        let indexData = d3.group(data[1], function (d) {
+            return d.Country;
+        });
+        console.log(indexData)
 
+        let spi_domain = [0, d3.max(data[1], function (d) {
+            return d.Social_Progress_Index;
+        })]
+        let colorScale = d3.scaleLinear()
+            .domain(spi_domain)
+            .range(["yellow", "darkred"])
+            .interpolate(d3.interpolateCubehelix.gamma(10));
 
+        let svg = d3.select('#worldMAp').append('svg')
+            .attr('width', '100%')
+            .attr('height', '30vw')
+            .attr('viewBox', '0 0 1000 800')
+            .style('background-color', '#f5f3f3');
+
+        console.log(topo_Json)
+        let mapCanvas = svg.append('g')
+        mapCanvas.selectAll('path')
+            .data(topo_Json)
+            .enter()
+            .append('path')
+            .attr("class", "path_geo")
+            .attr("d", geo_generator)
+            .attr("fill", "white")
+            .style("fill", function (d) {
+                try {
+                    color = colorScale(parseInt(indexData.get(d.properties.NAME)[0].Social_Progress_Index))
+                    return color;
+                } catch (error) {
+                    return "white"
+                }
+            })
+        svg.call(d3.zoom()
+            .extent([[0,0],[1000,800]])
+            .scaleExtent([1,8])
+            .on("zoom",zoomed)
+        )
+        function zoomed({transform}){
+            console.log(transform)
+            mapCanvas.attr("transform",transform)
+        }
+    }
 </script>
 </body>
 </html>

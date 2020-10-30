@@ -67,10 +67,11 @@
 
     function main(data){
         let geoJson = topojson.feature(data[0], data[0].objects.cb_2018_us_state_20m).features;
+        console.log(geoJson)
         let geo_generator = d3.geoPath().projection(projection)
         let mapCanvas = svg.append('g')
         let covid_data = d3.group(data[1],function(d){return d.fips;});
-
+    console.log(covid_data)
         let cases_extent = d3.extent(data[1],function (d){
             return +d.cases
         })
@@ -104,7 +105,7 @@
             // .duration(1000)
             .style("fill",function (d){
                 try{
-                    color = colorScale(parseInt(covid_data.get(d.properties.GEOID)[0].cases))
+                    let color = colorScale(parseInt(covid_data.get(d.properties.GEOID)[0].cases))
                     return color;
                 }
                 catch (error)

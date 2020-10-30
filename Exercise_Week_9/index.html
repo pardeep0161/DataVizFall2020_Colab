@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+    <meta charset="utf-8">
+    <script src="../libs/echarts.min.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <title>
+        Sample Data Tree Map
+    </title>
+</head>
+<body style="height: 100%; margin: 0">
+<div id="container" style="height: 100%"></div>
+<script type="text/javascript">
+
+    let data = [
+        {"parentColumn": "", "childColumn": "A"},
+        {"parentColumn": "A", "childColumn": "B"},
+        {"parentColumn": "A", "childColumn": "C"},
+        {"parentColumn": "B", "childColumn": "D", "val": 30},
+        {"parentColumn": "B", "childColumn": "E", "val": 50},
+        {"parentColumn": "C", "childColumn": "F", "val": 20},
+        {"parentColumn": "C", "childColumn": "G", "val": 40},
+        {"parentColumn": "C", "childColumn": "H", "val": 60}
+    ]
+
+    let stratify_function = d3.stratify()
+        .id(d => d["childColumn"])
+        .parentId(d => d["parentColumn"])
+
+    let data_formatted = stratify_function(data)
+
+    function convertData(root) {
+        if (root.children === undefined) {
+            return {"name": root.id, "value": root.data.val}
+        } else {
+            let children = []
+            for (const i in root.children) {
+                children[i] = convertData(root.children[i]);
+            }
+            return {
+                "name": root.id,
+                "children": children
+            }
+        }
+    }
+
+    let jsonData = [convertData(data_formatted)];
+
+    console.log(jsonData)
+    let dom = document.getElementById("container"); // select container
+    let treeMap = echarts.init(dom); // initiate echarts object
+
+
+    treeMap.setOption({             // define type of visualization
+        series: [
+            {
+                type: 'treemap', // visualization type
+                data: jsonData,     // data
+                label: {        // show or hide labels
+                    show: true,
+                    formatter: '{b}'
+                },
+            }
+        ]
+    }, true);
+
+</script>
+</body>
+</html>
