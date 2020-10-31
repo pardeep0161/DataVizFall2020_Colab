@@ -48,7 +48,14 @@
       <change beforePath="$PROJECT_DIR$/Fall2020-Week-4-Monday/Example 4.6/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Fall2020-Week-4-Monday/Example 4.6/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Fall2020-Week-4-Monday/Example 4.6/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/Fall2020-Week-4-Monday/Example 4.6/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Fall2020-Week-4-Monday/SVG Example/svg.html" beforeDir="false" afterPath="$PROJECT_DIR$/Fall2020-Week-4-Monday/SVG Example/svg.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Fall2020-Week-5-Monday/Example_Mon 5.2/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Fall2020-Week-5-Monday/Example_Mon 5.2/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Individual Project/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/Individual Project/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Individual Project/.idea/Individual Project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Individual Project/.idea/Individual Project.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Individual Project/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Individual Project/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Individual Project/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Individual Project/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Individual Project/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Individual Project/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Individual Project/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/Individual Project/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Individual Project/data/EFI.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Individual Project/data/EFI.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Individual Project/data_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Individual Project/data_main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Individual Project/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Individual Project/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Individual Project/page1.html" beforeDir="false" afterPath="$PROJECT_DIR$/Individual Project/page1.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Individual Project/page2.html" beforeDir="false" afterPath="$PROJECT_DIR$/Individual Project/page2.html" afterDir="false" />
@@ -124,7 +131,8 @@
       <workItem from="1603894795917" duration="2574000" />
       <workItem from="1603898612460" duration="1193000" />
       <workItem from="1603907920478" duration="8724000" />
-      <workItem from="1604012992106" duration="14014000" />
+      <workItem from="1604012992106" duration="14347000" />
+      <workItem from="1604087322518" duration="799000" />
     </task>
     <servers />
   </component>

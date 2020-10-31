@@ -19,5 +19,18 @@ def page1():
     message = {'greeting': 'Hello from Flask!'}
     return data # serialize and use JSON headers
 
+@app.route('/corr')
+def corr():
+
+    # POST request
+    if request.method == 'POST':
+        print('Incoming...POST...')
+        print(request.get_json())  # parse as JSON
+        return 'OK', 200
+
+    data = data_main.get_Correlation()
+    print('Incoming...GET...')
+    message = {'greeting': 'Hello from Flask!'}
+    return data # serialize and use JSON headers
 
 app.run()

@@ -64,7 +64,7 @@
         let geo_generator = d3.geoPath().projection(projection)
 
         let indexData = d3.group(data[1], function (d) {
-            return d.Country;
+            return d.SPI_country_code;
         });
         console.log(indexData)
 
@@ -93,7 +93,7 @@
             .attr("fill", "white")
             .style("fill", function (d) {
                 try {
-                    color = colorScale(parseInt(indexData.get(d.properties.NAME)[0].Social_Progress_Index))
+                    color = colorScale(parseInt(indexData.get(d.properties.ISO_A3_EH)[0].Social_Progress_Index))
                     return color;
                 } catch (error) {
                     return "white"
