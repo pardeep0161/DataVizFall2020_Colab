@@ -39,16 +39,19 @@
             </div>
         </div>
     </nav>
-    <div id="worldMAp"></div>
+    <div>
+        <svg id="worldMAp" viewBox="0 0 1000 800"></svg>
+    </div>
 </div>
 <script>
-    let geojson = "https://raw.githubusercontent.com/pardeep0161/DataVizFall2020_Colab/master/Individual%20Project/data/ne_10m_admin_0_countries_topo.json";
+    let geojson = "https://raw.githubusercontent.com/pardeep0161/DataVizFall2020_Colab/master/Individual%20Project/data/countries_geo_topo.json";
 
+    corrAttr = "spi"
     let projection = d3.geoEquirectangular()
         .scale(300).translate([500, 500])
 
     let apiURL = 'http://127.0.0.1:5000';
-    let responseJson = fetch(apiURL + '/page1')
+    let responseJson = fetch(apiURL + '/raw_data')
         .then(function (response) {
             return response.json(); // But parse it as JSON this time
         })
@@ -60,13 +63,13 @@
         .then(main)
 
     function main(data) {
-        let topo_Json = topojson.feature(data[0], data[0].objects.ne_10m_admin_0_countries).features;
+        let topo_Json = topojson.feature(data[0], data[0].objects.countries_geo).features;
         let geo_generator = d3.geoPath().projection(projection)
 
         let indexData = d3.group(data[1], function (d) {
             return d.SPI_country_code;
         });
-        console.log(indexData)
+
 
         let spi_domain = [0, d3.max(data[1], function (d) {
             return d.Social_Progress_Index;
@@ -76,13 +79,13 @@
             .range(["yellow", "darkred"])
             .interpolate(d3.interpolateCubehelix.gamma(10));
 
-        let svg = d3.select('#worldMAp').append('svg')
+        let svg = d3.select('#worldMAp')
             .attr('width', '100%')
             .attr('height', '30vw')
             .attr('viewBox', '0 0 1000 800')
             .style('background-color', '#f5f3f3');
 
-        console.log(topo_Json)
+
         let mapCanvas = svg.append('g')
         mapCanvas.selectAll('path')
             .data(topo_Json)
@@ -93,20 +96,21 @@
             .attr("fill", "white")
             .style("fill", function (d) {
                 try {
-                    color = colorScale(parseInt(indexData.get(d.properties.ISO_A3_EH)[0].Social_Progress_Index))
+                    color = colorScale(parseInt(indexData.get(d.id)[0].Social_Progress_Index))
                     return color;
                 } catch (error) {
                     return "white"
                 }
             })
         svg.call(d3.zoom()
-            .extent([[0,0],[1000,800]])
-            .scaleExtent([1,8])
-            .on("zoom",zoomed)
+            .extent([[0, 0], [1000, 800]])
+            .scaleExtent([1, 8])
+            .on("zoom", zoomed)
         )
-        function zoomed({transform}){
-            console.log(transform)
-            mapCanvas.attr("transform",transform)
+
+        function zoomed({transform}) {
+
+            mapCanvas.attr("transform", transform)
         }
     }
 </script>

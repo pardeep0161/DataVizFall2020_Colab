@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercise 10</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <style>
+        .axis {
+            font-size: 30pt;
+        }
+
+        circle {
+            fill-opacity: .7;
+        }
+
+        .title {
+            font-size: 50pt;
+            font-family: sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Step 2 -->
+<div id="fig"></div>
+<script>
+    let palmer_penguin_species = "../data/palmer_penguin_species.tsv";
+    // loading data
+
+    let figure = d3.select("#fig")
+    let w = 1000;
+
+    d3.tsv(palmer_penguin_species).then(main)
+
+    function subplots(figure, m, n) {
+        let axis = {}
+        for (let i = 0; i < m; i++) {
+            for (let j = 0; j < n; j++) {
+                axis[`svg_${i}_${j}`] = figure.append("svg")
+                    .attr("id", `svg_${i}_${j}`)
+                    .attr("viewBox", function () {
+                        return "0 0 1000 1000"
+                    })
+                    .attr("width", parseInt(w / m))
+                    .attr("height", parseInt(w / m))
+                    .append("g").attr("id", `g_${i}_${j}`)
+                axis[`svg_${i}_${j}`]
+                    .append("rect").attr('x', "0").attr('y', "0")
+                    .attr("width", 1000 - 5)
+                    .attr("height", 1000 - 5)
+                    .attr("fill", "#eaeaea")
+            }
+        }
+        return axis
+    }
+
+    function scatter_plot(X, Y, markersize, ColorData, axis_key, title) {
+        let margin = 100;
+
+        let xScale = d3.scaleLinear().domain(d3.extent(X)).range([0 + margin, 1000 - margin])
+        let yScale = d3.scaleLinear().domain(d3.extent(Y)).range([1000 - margin, 0 + margin])
+        let colorScale = d3.scaleLinear().domain(d3.extent(ColorData)).range(['steelblue', 'brown'])
+        let axis = d3.select(`#${axis_key}`)
+        axis.selectAll('.markers')
+            .data(X)
+            .enter()
+            .append('g')
+            .attr('transform', function (d, i) {
+                return `translate(${xScale(X[i])}, ${yScale(Y[i])})`
+            })
+            .append('circle').attr("r", markersize)
+            .style("fill", function (d, i) {
+                return colorScale(ColorData[i])
+            })
+
+        let x_axis = d3.axisBottom(xScale).ticks(4)
+        let y_axis = d3.axisLeft(yScale).ticks(4)
+
+        axis.append("g").attr("class", "axis")
+            .attr("transform", `translate(${0},${1000 - margin})`)
+            .call(x_axis)
+
+        axis.append("g").attr("class", "axis")
+            .attr("transform", `translate(${margin},${0})`)
+            .call(y_axis)
+        axis.append('text')
+            .attr('x', 500)
+            .attr('y', 150)
+            .attr("text-anchor", "middle")
+            .text(title)
+            .attr("class", "title")
+
+    }
+
+    function main(data) {
+        let species = d3.map(data, function (d) {
+            return d.species
+        })
+        let species_types = new Set(species)
+
+        let species_code = d3.map(data, function (d) {
+            species = d.species
+            if (species === "Adelie") {
+                return 0
+            } else if (species === "Gentoo") {
+                return 1
+            } else {
+                return 2
+            }
+        })
+
+        //keep state data only (remove the rows with state<0)
+        // keep the birth and population columns only
+        let dict = {}
+        d3.map(data, function (d) {
+            if (dict[d["species"]] === undefined) {
+                dict[d["species"]] = {"culmen_length_mm": [], "culmen_depth_mm": []}
+            }
+            dict[d["species"]]["culmen_length_mm"].push(+d["culmen_length_mm"])
+            dict[d["species"]]["culmen_depth_mm"].push(+d["culmen_depth_mm"])
+
+        })
+        //////////////////////// Add subplots
+        let axis = Object.keys(subplots(figure, 3, 1))
+
+        d3.map(species_types, function (d, i) {
+            scatter_plot(dict[d]['culmen_length_mm'], dict[d]['culmen_depth_mm'], 20, species_code, axis[i], d)
+        })
+
+    }
+</script>
+
+</body>
+</html>

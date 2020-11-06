@@ -5,32 +5,16 @@ import data_main
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/page1')
+@app.route('/raw_data')
 def page1():
-
-    # POST request
-    if request.method == 'POST':
-        print('Incoming...POST...')
-        print(request.get_json())  # parse as JSON
-        return 'OK', 200
-
-    data = data_main.get_data()
     print('Incoming...GET...')
-    message = {'greeting': 'Hello from Flask!'}
-    return data # serialize and use JSON headers
+    return data_main.get_data() # serialize and use JSON headers
 
 @app.route('/corr')
 def corr():
 
-    # POST request
-    if request.method == 'POST':
-        print('Incoming...POST...')
-        print(request.get_json())  # parse as JSON
-        return 'OK', 200
-
-    data = data_main.get_Correlation()
-    print('Incoming...GET...')
-    message = {'greeting': 'Hello from Flask!'}
-    return data # serialize and use JSON headers
+    attr_var = request.args.get('attr_var')
+    print('Incoming...GET...Correlation for : '+attr_var)
+    return data_main.get_Correlation(attr_var) # serialize and use JSON headers
 
 app.run()

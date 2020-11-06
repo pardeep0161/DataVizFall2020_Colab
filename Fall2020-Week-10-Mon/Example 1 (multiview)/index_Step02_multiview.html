@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>sub plots</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+</head>
+<body>
+
+<!-- Step 2 -->
+<div id="fig"></div>
+<script>
+    // load and process data
+    d3.csv("../data/us_population_counties_states.csv").then(main)
+
+    let figure = d3.select("#fig")
+    let w=1000;
+
+    function subplots(figure,n,m)
+    {   let axis = {}
+        for(let i=0;i<m;i++){
+            for(let j=0;j<n;j++)
+            {
+                axis[`${i}_${j}`]=figure.append("svg")
+                    .attr("id",`${i}_${j}`)
+                    .attr("viewBox",function () {
+                        return "0 0 1000 1000"
+                    })
+                    .attr("width",parseInt(w/m))
+                    .attr("height",parseInt(w/m))
+                    .append("g").attr("id",`g_${i}_${j}`)
+                    .append("rect").attr('x',"5").attr('y',"5")
+                    .attr("width",1000-5)
+                    .attr("height",800-5)
+                    .attr("fill","#cacaca")
+            }
+        }
+        return axis
+    }
+
+
+    function main(data){
+        // list of years from 2010 to 2019
+        let years = d3.range(2011,2020);
+        // columns that we need (birth ratios)
+        let birth_columns = d3.map(years,function (d){return `RBIRTH${d}`})
+        let death_columns = d3.map(years,function (d){return `RDEATH${d}`})
+        // filter data to keep only state data
+        data = data.filter(function (d){return +d.STATE>0}) //keep state data only (remove the rows with state<0)
+        // keep the birth and population columns only
+        let dict = {}
+        d3.map(data,function (d){
+             dict[d["NAME"]]={"birth_ratio":[],"death_ratio":[],"POPESTIMATE2019":+d["POPESTIMATE2019"]}
+             birth_columns.forEach(function (b_col)
+             {
+                return dict[d["NAME"]]["birth_ratio"].push(+d[b_col]);
+             })
+            death_columns.forEach(function (b_col)
+            {
+                return dict[d["NAME"]]["death_ratio"].push(+d[b_col]);
+            })
+        })
+        //////////////////////// Add subplots
+        let axis = subplots(figure,13,4)
+
+
+    }
+</script>
+
+
+
+</body>
+</html>

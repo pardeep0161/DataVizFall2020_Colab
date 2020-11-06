@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercise 01</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="js/scatter_plot_withSlider.js?22000"></script>
+    <link rel="stylesheet" href="styles/style.css?s">
+    <style>
+
+        svg {
+            width: 30vw;
+            height: 30vw;
+
+        }
+
+        input {
+            margin-left: 2vw;
+            width: 25vw;
+        }
+
+    </style>
+</head>
+<body>
+<svg id="scatter_plot" viewBox="0 0 1000 1000">
+</svg>
+<br>
+Min. flipper length(mm)
+<input type="range" value="250" min="150" max="250" id="sliderX">
+<script>
+
+    let data_points = d3.map(d3.range(0, 90, .05), function (d) {
+        return {x: d, y: Math.sin(d), r: 4, c: d3.rgb(33, d + 100, d)}
+    })
+
+
+    let palmer_penguin_species = "../data/palmer_penguin_species.tsv";
+    // loading data
+
+    let figure = d3.select("#fig")
+    let w = 1000;
+
+    d3.tsv(palmer_penguin_species).then(main)
+
+    function main(data) {
+
+
+        // let radius = d3.scaleLog().domain([0, 1000]).range([0, 10])
+
+        data_points = d3.map(data, function (d) {
+            return {
+                x: d['culmen_length_mm'],
+                y: d['culmen_depth_mm'],
+                r: d[['flipper_length_mm']],
+                c: d3.rgb(33, d + 100, d)
+            }
+        })
+        scatter_plot(data = data_points, ax = "#scatter_plot",
+            title = "Palmer Penguin Species",
+            xLabel = "Culmen Length(mm)",
+            yLabel = "Culmen Depth(mm)")
+        d3.select("#sliderX").on("change", function () {
+            let value = +this.value; // get the value of the slider
+            let filtered_data = d3.filter(data_points, function (d) {
+                return d.r <= value
+            })
+            scatter_plot_update(filtered_data)
+        });
+    }
+
+</script>
+</body>
+</html>

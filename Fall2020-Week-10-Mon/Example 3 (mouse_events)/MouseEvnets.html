@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mouse Events</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <style>
+        circle{
+            fill-opacity: .4;
+        }
+    </style>
+</head>
+<body>
+<svg id="svg1" viewBox="0 0 1000 1000" width="25vw" height="25vw"></svg>
+<svg id="svg2" viewBox="0 0 1000 1000" width="25vw" height="25vw"></svg>
+<svg id="svg3" viewBox="0 0 1000 1000" width="25vw" height="25vw"></svg>
+<svg id="svg4" viewBox="0 0 1000 1000" width="25vw" height="25vw"></svg>
+<script>
+    let svg1=d3.selectAll("#svg1")
+    let svg2=d3.selectAll("#svg2")
+    let svg3=d3.selectAll("#svg3")
+    let svg4=d3.selectAll("#svg4")
+    //mousedown, mouseup, click, mouseover, mouseout, dblclick, mouseenter, mouseleave
+
+    svg1.append('g')
+        .attr("transform",`translate(${500},${500})`)
+        .append('circle').attr("r",300).attr("fill","orange")
+        .on("mousedown",function (m){
+            console.log(m)
+            console.log(this)
+            console.log(d3.select(this))
+        })
+
+    svg2.append('g')
+        .attr("transform",`translate(${500},${500})`)
+        .append('ellipse').attr("ry",200).attr("rx",400).attr("fill","orange")
+
+    svg3.append('g')
+        .attr("transform",`translate(${400},${400})`)
+        .append('rect').attr("width",300).attr("height",300).attr("fill","orange")
+
+    svg4.append('g')
+        .attr("transform",`translate(${500},${500})`)
+        .append('circle').attr("r",300).attr("fill","orange")
+
+</script>
+</body>
+</html>
