@@ -93,24 +93,24 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Exercise_Week 10.2_Wed" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Exercise_Week 10.3_Wed" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\UMassD\Semester 2 Fall\CIS 568 DV\DataVizFall2020_Colab\Exercise_Week 10.2_Wed" />
-      <recent name="D:\UMassD\Semester 2 Fall\CIS 568 DV\DataVizFall2020_Colab\Exercise_Week 10_Mon" />
-      <recent name="D:\UMassD\Semester 2 Fall\CIS 568 DV\DataVizFall2020_Colab\Fall2020-Week-10-Wed\Exercise 01" />
-      <recent name="D:\UMassD\Semester 2 Fall\CIS 568\DataVizFall2020_Colab\Exercise_Week_9" />
-      <recent name="D:\UMassD\Semester 2 Fall\CIS 568\DataVizFall2020_Colab\Individual Project" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\UMassD\Semester 2 Fall\CIS 568 DV\DataVizFall2020_Colab" />
       <recent name="D:\UMassD\Semester 2 Fall\CIS 568 DV\DataVizFall2020_Colab\Exercise_Week_10_Wed" />
       <recent name="D:\UMassD\Semester 2 Fall\CIS 568 DV\DataVizFall2020_Colab\data" />
       <recent name="D:\UMassD\Semester 2 Fall\CIS 568\DataVizFall2020_Colab\data" />
       <recent name="D:\UMassD\Semester 2 Fall\CIS 568\DataVizFall2020_Colab\libs" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\UMassD\Semester 2 Fall\CIS 568 DV\DataVizFall2020_Colab\Exercise_Week 10.3_Wed" />
+      <recent name="D:\UMassD\Semester 2 Fall\CIS 568 DV\DataVizFall2020_Colab\Exercise_Week 10.2_Wed" />
+      <recent name="D:\UMassD\Semester 2 Fall\CIS 568 DV\DataVizFall2020_Colab\Exercise_Week 10_Mon" />
+      <recent name="D:\UMassD\Semester 2 Fall\CIS 568 DV\DataVizFall2020_Colab\Fall2020-Week-10-Wed\Exercise 01" />
+      <recent name="D:\UMassD\Semester 2 Fall\CIS 568\DataVizFall2020_Colab\Exercise_Week_9" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -145,6 +145,9 @@
       <workItem from="1604390057211" duration="3927000" />
       <workItem from="1604510507101" duration="3927000" />
       <workItem from="1604541481771" duration="12578000" />
+      <workItem from="1604680531721" duration="1580000" />
+      <workItem from="1604816048310" duration="17400000" />
+      <workItem from="1604944826512" duration="572000" />
     </task>
     <servers />
   </component>

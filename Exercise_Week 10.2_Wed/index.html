@@ -32,8 +32,9 @@
                 let color = d3.scaleOrdinal()
                     .domain(species)
                     .range(classic_colors)
-                let formatted_data = d3.map(data,function (d){
+                let formatted_data = d3.map(data,function (d, i){
                     return {
+                        id: i,
                         x: d.culmen_length_mm,
                         y: d.culmen_depth_mm,
                         r: d.flipper_length_mm,

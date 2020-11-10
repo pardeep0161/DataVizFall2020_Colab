@@ -47,8 +47,9 @@ Min. flipper length(mm)
 
         // let radius = d3.scaleLog().domain([0, 1000]).range([0, 10])
 
-        data_points = d3.map(data, function (d) {
+        data_points = d3.map(data, function (d, i) {
             return {
+                id: i,
                 x: d['culmen_length_mm'],
                 y: d['culmen_depth_mm'],
                 r: d[['flipper_length_mm']],

@@ -86,7 +86,7 @@ function scatter_plot(data,
 function scatter_plot_update(data) {
 
     let svg = d3.select("svg")
-    let markers =svg.selectAll(".markers").data(data) // assign data
+    let markers =svg.selectAll(".markers").data(data,function (d){return d.id}) // assign data
     markers.exit().remove();//remove unneeded circles
     // append not existing data points
     markers.enter()

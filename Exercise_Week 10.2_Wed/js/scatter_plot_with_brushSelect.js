@@ -9,8 +9,7 @@ function scatter_plot(data,
 
     let xScale = d3.scaleLinear().domain(d3.extent(data, function (d) {
         return d.x
-    }))
-        .range([margin, 1000 - margin])
+    })).range([margin, 1000 - margin])
     let yScale = d3.scaleLinear().domain(d3.extent(data, function (d) {
         return d.y
     })).range([1000 - margin, margin])
@@ -97,15 +96,15 @@ function scatter_plot(data,
     // declare brush
     let brush = d3
         .brush()
-        .on("start", brushStart)
-        .on("brush", brushed)
+        // .on("start", brushStart)
+        // .on("brush", brushed)
         .on("end", brushedEnd)
         .extent([
             [margin, margin],
             [1000 - margin, 1000 - margin]
         ]);
     // call brush event handler
-    axis
+    let brushArea = axis
         .append("g")
         .attr("class", "brush")
         .call(brush);
@@ -115,18 +114,18 @@ function scatter_plot(data,
 
     // style brushed circles
 
-
-    function brushed() {
-        // use d3.brushSelection to get bounds of the brush
-        let selected_items = d3.brushSelection(this); // these are values on the screen
-        // where is brushed?
-        // let us select elements that are between the brush area
-        d3.selectAll(".markers").classed("selected", function (d){
-            if(isBrushed(selected_items,d)){
-                return 'true'
-            }
-        })
-    }
+    //
+    // function brushed() {
+    //     // use d3.brushSelection to get bounds of the brush
+    //     let selected_items = d3.brushSelection(this); // these are values on the screen
+    //     // where is brushed?
+    //     // let us select elements that are between the brush area
+    //     d3.selectAll(".markers").classed("selected", function (d){
+    //         if(isBrushed(selected_items,d)){
+    //             return 'true'
+    //         }
+    //     })
+    // }
 
     // function brushedEnd() {
     //     // use d3.brushSelection to get bounds of the brush
@@ -169,7 +168,9 @@ function scatter_plot(data,
             return isBrushed(selected_items, d);
         })
         console.log(filtered_data)
-        let markers1 = d3.select("svg").selectAll(".markers").data(filtered_data) // assign data
+        let markers1 = d3.select("svg").selectAll(".markers")
+            .data(filtered_data,function (d){return d.id})
+
         markers1.exit().remove();
         markers1.enter()
             .append('g')
@@ -184,6 +185,7 @@ function scatter_plot(data,
             .attr("r", d => rScale(d.r))
             .attr("fill", d => d.c)
     }
+
 
 
 // A function that return TRUE or FALSE according if a dot is in the selection or not
@@ -203,12 +205,12 @@ function scatter_plot(data,
         return false
     }
 
-    function brushStart() {
-        // if no selection already exists, colour all circles black
-        if (d3.brushSelection(this)[0][0] == d3.brushSelection(this)[1][0]) {
-            d3.selectAll(".markers").classed("selected", false)
-        }
-    }
+    // function brushStart() {
+    //     // if no selection already exists, colour all circles black
+    //     if (d3.brushSelection(this)[0][0] == d3.brushSelection(this)[1][0]) {
+    //         d3.selectAll(".markers").classed("selected", false)
+    //     }
+    // }
 
 
 }
