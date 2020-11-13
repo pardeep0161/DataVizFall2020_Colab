@@ -54,13 +54,14 @@
         return axis
     }
 
-    function scatter_plot(X, Y, markersize, ColorData, axis_key, title) {
+    function scatter_plot(X, Y, island, markersize, axis_key, title) {
         let margin = 100;
 
         let xScale = d3.scaleLinear().domain(d3.extent(X)).range([0 + margin, 1000 - margin])
         let yScale = d3.scaleLinear().domain(d3.extent(Y)).range([1000 - margin, 0 + margin])
-        let colorScale = d3.scaleLinear().domain(d3.extent(ColorData)).range(['steelblue', 'brown'])
+        let colorScale = d3.scaleOrdinal().domain(["Dream","Biscoe","Torgersen"]).range(['steelblue', 'brown', 'red'])
         let axis = d3.select(`#${axis_key}`)
+
         axis.selectAll('.markers')
             .data(X)
             .enter()
@@ -70,7 +71,7 @@
             })
             .append('circle').attr("r", markersize)
             .style("fill", function (d, i) {
-                return colorScale(ColorData[i])
+                return colorScale(island[i])
             })
 
         let x_axis = d3.axisBottom(xScale).ticks(4)
@@ -98,33 +99,23 @@
         })
         let species_types = new Set(species)
 
-        let species_code = d3.map(data, function (d) {
-            species = d.species
-            if (species === "Adelie") {
-                return 0
-            } else if (species === "Gentoo") {
-                return 1
-            } else {
-                return 2
-            }
-        })
-
         //keep state data only (remove the rows with state<0)
         // keep the birth and population columns only
         let dict = {}
         d3.map(data, function (d) {
             if (dict[d["species"]] === undefined) {
-                dict[d["species"]] = {"culmen_length_mm": [], "culmen_depth_mm": []}
+                dict[d["species"]] = {"culmen_length_mm": [], "culmen_depth_mm": [], "island":[]}
             }
             dict[d["species"]]["culmen_length_mm"].push(+d["culmen_length_mm"])
             dict[d["species"]]["culmen_depth_mm"].push(+d["culmen_depth_mm"])
+            dict[d["species"]]["island"].push(d["island"])
 
         })
         //////////////////////// Add subplots
         let axis = Object.keys(subplots(figure, 3, 1))
 
         d3.map(species_types, function (d, i) {
-            scatter_plot(dict[d]['culmen_length_mm'], dict[d]['culmen_depth_mm'], 20, species_code, axis[i], d)
+            scatter_plot(dict[d]['culmen_length_mm'], dict[d]['culmen_depth_mm'], dict[d]['island'], 20, axis[i], d)
         })
 
     }

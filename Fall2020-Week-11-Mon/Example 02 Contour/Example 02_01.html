@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Isoline</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+
+</head>
+<body>
+<div style="width: 600px;height: 400px" id="figure">
+
+</div>
+<script>
+
+    let figure = document.getElementById("figure");
+    let w = figure.clientWidth;
+    let h = figure.clientHeight;
+    let radius = 2;
+    let padding = 10;
+    let xDim = 30; // number of the nodes in x axis direction
+    let yDim = 30; // number of the nodes in y axis direction
+    let anim_len = 1000;
+    let dem_color = "#FF0000"
+    let gop_color = "#0015BC"
+
+    function draw(frame)
+    {
+        // as in animation we will clean ana redraw data
+        let old_svg=d3.select('svg');
+        if(old_svg!==undefined){
+            old_svg.remove();
+        }
+
+
+        let svg = d3.select(figure).append("svg")
+            .attr('width', '100%')
+            .attr('height', '100%');
+        let plot = svg.append('g')
+            .attr('id', 'plot')
+
+        let xScale = d3.scaleLinear()
+            .domain([0, xDim])
+            .range([padding, w - padding])
+        let yScale = d3.scaleLinear()
+            .domain([yDim, 0])
+            .range([padding, h - padding])
+
+
+        // random bit generator
+        function rand_bit() {
+            if (Math.random(1) > .5) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }
+        function color(d) {if (d === 0){return dem_color} else{return gop_color}}
+
+        let canvas = [] // is the matrix of 0 and 1 that we will use for contour generation
+        for (let i = 0; i < xDim; i++) {
+            canvas.push([])
+            for (let j = 0; j < yDim; j++) {
+                if (i < xDim - 1) {
+                    plot.append('line')
+                        .style("stroke", "black")
+                        .style("opacity", ".1")
+                        .attr('x1', xScale(i))
+                        .attr('y1', yScale(j))
+                        .attr('x2', xScale(i + 1))
+                        .attr('y2', yScale(j))
+                }
+            }
+        }
+        // create random bits
+        for (let i = 0; i < xDim; i++) {
+            for (let j = 0; j < yDim; j++) {
+                canvas[i][j] = rand_bit()
+                plot.append('circle')
+                    .attr('cx', xScale(i))
+                    .attr('cy', yScale(j))
+                    .attr('r', radius)
+                    .style('fill', color(canvas[i][j]))
+            }
+        }
+
+
+        function detect_Type_2(Matrix, i, j) {
+            let edges = [
+                [(Matrix[i][j] + Matrix[i + 1][j]) / 2,
+                    (i + i + 1) / 2,
+                    (j + j) / 2],
+                [(Matrix[i + 1][j] + Matrix[i + 1][j + 1]) / 2,
+                    (i + 1 + i + 1) / 2,
+                    (j + j + 1) / 2],
+                [(Matrix[i + 1][j + 1] + Matrix[i][j + 1]) / 2,
+                    (i + i + 1) / 2,
+                    (j + 1 + j + 1) / 2],
+                [(Matrix[i][j + 1] + Matrix[i][j]) / 2,
+                    (i + i) / 2,
+                    (j + j + 1) / 2]
+            ]
+            let connections = []
+            for (let k = 0; k < 4; k++) {
+                if (edges[k][0] === .5) {
+                    connections.push({x: edges[k][1], y: edges[k][2]})
+                }
+            }
+            return connections;
+        }
+
+
+        for (let i = 0; i < xDim-1; i++){
+            for (let j = 0; j < yDim-1; j++) {
+                let tmp = detect_Type_2(canvas, i, j);
+                if (tmp.length === 2) {
+                    plot.append('line')
+                        .style('stroke', 'black')
+                        .attr('x1', xScale(tmp[0]['x']))
+                        .attr('y1', yScale(tmp[0]['y']))
+                        .attr('x2', xScale(tmp[1]['x']))
+                        .attr('y2', yScale(tmp[1]['y']))}
+                if (tmp.length === 4) {
+                    plot.append('line')
+                        .style('stroke', 'black')
+                        .attr('x1', xScale(tmp[0]['x']))
+                        .attr('y1', yScale(tmp[0]['y']))
+                        .attr('x2', xScale(tmp[1]['x']))
+                        .attr('y2', yScale(tmp[1]['y']));
+                    plot.append('line')
+                        .style('stroke', 'black')
+                        .attr('x1', xScale(tmp[2]['x']))
+                        .attr('y1', yScale(tmp[2]['y']))
+                        .attr('x2', xScale(tmp[3]['x']))
+                        .attr('y2', yScale(tmp[3]['y']));}}}
+    }
+
+
+
+
+    function callme(duraion){
+
+            if (duraion>=anim_len*100)
+            {
+            timer.stop()
+             }
+            draw(frame_count);
+            frame_count++;
+
+    }
+    let frame_count = 0
+    //let timer = d3.timer(callme);
+    //let timer = d3.interval(callme,1000);
+    let timer = d3.timeout(callme,500)
+</script>
+</body>
+</html>
