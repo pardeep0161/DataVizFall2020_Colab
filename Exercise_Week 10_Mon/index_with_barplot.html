@@ -7,22 +7,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    
+
+
+    <script src="scatter_plot.js?2"></script>
     <script src="bar_plot.js?2"></script>
-    <style>
-        .axis {
-            font-size: 30pt;
-        }
+    <link rel="stylesheet" href="style.css">
 
-        circle {
-            fill-opacity: .7;
-        }
-
-        .title {
-            font-size: 50pt;
-            font-family: sans-serif;
-        }
-    </style>
 </head>
 <body>
 
@@ -48,11 +38,11 @@
             for (let j = 0; j < n; j++) {
                 let base_div = document.createElement("div");
                 // base_div.setAttribute("id",`div_${i}_${j}`)
-                base_div.setAttribute("class","col-sm-1")
-                base_div.appendChild(document.createTextNode(`Test_${i}_${j}`))
+                base_div.setAttribute("class","col-sm-4")
                 row.appendChild(base_div);
                 let table = document.createElement("TABLE");
                 table.setAttribute("id", `myTable_${i}_${j}`);
+                table.setAttribute("border",".01px");
                 base_div.appendChild(table);
                 let tr1 = document.createElement("TR");
                 table.appendChild(tr1);
@@ -96,70 +86,22 @@
         }
         return axis
     }
-    function scatter_plot(X, Y, markersize, ColorData, axis_key, title) {
-        let margin = 100;
-
-        let xScale = d3.scaleLinear().domain(d3.extent(X)).range([0 + margin, 1000 - margin])
-        let yScale = d3.scaleLinear().domain(d3.extent(Y)).range([1000 - margin, 0 + margin])
-        let colorScale = d3.scaleLinear().domain(d3.extent(ColorData)).range(['steelblue', 'brown'])
-        let axis = d3.select(`#${axis_key}`)
-        axis.selectAll('.markers')
-            .data(X)
-            .enter()
-            .append('g')
-            .attr('transform', function (d, i) {
-                return `translate(${xScale(X[i])}, ${yScale(Y[i])})`
-            })
-            .append('circle').attr("r", markersize)
-            .style("fill", function (d, i) {
-                return colorScale(ColorData[i])
-            })
-
-        let x_axis = d3.axisBottom(xScale).ticks(4)
-        let y_axis = d3.axisLeft(yScale).ticks(4)
-
-        axis.append("g").attr("class", "axis")
-            .attr("transform", `translate(${0},${1000 - margin})`)
-            .call(x_axis)
-
-        axis.append("g").attr("class", "axis")
-            .attr("transform", `translate(${margin},${0})`)
-            .call(y_axis)
-        axis.append('text')
-            .attr('x', 500)
-            .attr('y', 150)
-            .attr("text-anchor", "middle")
-            .text(title)
-            .attr("class", "title")
-
-    }
-
     function main(data) {
         let species = d3.map(data, function (d) {
             return d.species
         })
         let species_types = new Set(species)
 
-        let species_code = d3.map(data, function (d) {
-            species = d.species
-            if (species === "Adelie") {
-                return 0
-            } else if (species === "Gentoo") {
-                return 1
-            } else {
-                return 2
-            }
-        })
-
         //keep state data only (remove the rows with state<0)
         // keep the birth and population columns only
         let dict = {}
         d3.map(data, function (d) {
             if (dict[d["species"]] === undefined) {
-                dict[d["species"]] = {"culmen_length_mm": [], "culmen_depth_mm": []}
+                dict[d["species"]] = {"culmen_length_mm": [], "culmen_depth_mm": [], "island":[]}
             }
             dict[d["species"]]["culmen_length_mm"].push(+d["culmen_length_mm"])
             dict[d["species"]]["culmen_depth_mm"].push(+d["culmen_depth_mm"])
+            dict[d["species"]]["island"].push(d["island"])
 
         })
         //////////////////////// Add subplots
@@ -168,20 +110,20 @@
         d3.map(species_types, function (d, i) {
             let x = dict[d]['culmen_length_mm'];
             let y = dict[d]['culmen_depth_mm'];
-
+            console.log(dict[d]['island'])
+            let tableAxi = table_axis[Object.keys(table_axis)[i]];
             scatter_plot(x,
-                y,
-                10,
-                species_code,
-                table_axis[Object.keys(table_axis)[i]]['main']
-                ,title='Penguin Species',
+                y,dict[d]['island'],
+                5,
+                tableAxi['main']
+                ,title=d,
                 xLabel="culmen_depth_mm",
                 yLabel="culmen_length_mm");
             //#############
-            bar_plot(y, 20,
-                table_axis[Object.keys(table_axis)[i]]['top'])
-            h_bar_plot(x,20,
-                table_axis[Object.keys(table_axis)[i]]['right'])
+            bar_plot(y, 15,
+                tableAxi['top'])
+            h_bar_plot(x,15,
+                tableAxi['right'])
         })
 
     }
