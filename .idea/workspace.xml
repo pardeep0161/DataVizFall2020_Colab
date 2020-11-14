@@ -96,17 +96,17 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js.last.introduce.type" value="LET" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Exercise_Week 10_Mon" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Exercise_Week_11_Mon/data" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\UMassD\Semester 2 Fall\CIS 568 DV\DataVizFall2020_Colab\Exercise_Week_11_Mon\data" />
+      <recent name="D:\UMassD\Semester 2 Fall\CIS 568 DV\DataVizFall2020_Colab\Exercise_Week_11_Mon" />
       <recent name="D:\UMassD\Semester 2 Fall\CIS 568 DV\DataVizFall2020_Colab\Exercise_Week 10_Mon" />
       <recent name="D:\UMassD\Semester 2 Fall\CIS 568 DV\DataVizFall2020_Colab\Exercise_Week 10.3_Wed" />
       <recent name="D:\UMassD\Semester 2 Fall\CIS 568 DV\DataVizFall2020_Colab\Exercise_Week 10.2_Wed" />
-      <recent name="D:\UMassD\Semester 2 Fall\CIS 568 DV\DataVizFall2020_Colab\Fall2020-Week-10-Wed\Exercise 01" />
-      <recent name="D:\UMassD\Semester 2 Fall\CIS 568\DataVizFall2020_Colab\Exercise_Week_9" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\UMassD\Semester 2 Fall\CIS 568 DV\DataVizFall2020_Colab" />
@@ -152,7 +152,7 @@
       <workItem from="1604816048310" duration="17400000" />
       <workItem from="1604944826512" duration="572000" />
       <workItem from="1605284382773" duration="576000" />
-      <workItem from="1605286219485" duration="21324000" />
+      <workItem from="1605286219485" duration="24926000" />
     </task>
     <servers />
   </component>
@@ -212,6 +212,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="41" y="189" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1602278000956" />
+    <state x="561" y="271" key="scopes" timestamp="1605330619270">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="561" y="271" key="scopes/0.0.1536.824@0.0.1536.824" timestamp="1605330619270" />
     <state x="430" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1603425534599">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
