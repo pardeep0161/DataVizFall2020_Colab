@@ -20,7 +20,65 @@
     <!-- Load d3.js -->
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="https://d3js.org/topojson.v2.min.js"></script>
+<style>
+        .tooltipData{
+            font-size: small;
+        }
+        #tooltip{
+            opacity: 0;
+            background-color: #f5f3f0;
+            position: absolute;
+            font-family: sans-serif;
+            font-size: medium;
+            width: 160px;
+            height: 100px;
+        }
 
+        #caption{
+            margin: auto;
+            padding-top: 1%;
+            padding-bottom: 1%;
+            padding-left: 4%;
+            font-family: serif;
+            font-size: 20pt;
+        }
+        #container
+        {
+            width: 90vw;
+            height: 80vh;
+        }
+        #canvas
+        {
+            width: 90vw;
+            height: 80vh;
+            background-color: #fffefe;
+        }
+        path.path_geo{
+            stroke-width: .1px;
+            stroke: black;
+            fill-opacity: .8;
+        }
+        .efi{
+            fill: none;
+            stroke: #FF0000;
+            stroke-width: 4px;
+            stroke-opacity: .8;
+
+        }
+        .spi{
+            fill: none;
+            stroke: #0015BC;
+            stroke-width: 4px;
+            stroke-opacity: .8;
+        }
+        .country_name{
+            font-family: sans-serif;
+            font-size: medium;
+            color: dimgray;
+            font-weight: bold;
+
+        }
+    </style>
 </head>
 <body>
 <h1>Individual Project</h1>
@@ -39,80 +97,221 @@
             </div>
         </div>
     </nav>
+    <div class="custom-control custom-radio custom-control-inline">
+        <input type="radio" class="custom-control-input" id="efiCorr" name="attrCorr" value='efi'
+               onchange="handleCorrelation()" checked>
+        <label class="custom-control-label" for="efiCorr">EFI Correlation</label>
+    </div>
+    <!-- Default unchecked -->
+    <div class="custom-control custom-radio custom-control-inline">
+        <input type="radio" class="custom-control-input" id="spiCorr" name="attrCorr" value='spi'
+               onchange="handleCorrelation()">
+        <label class="custom-control-label" for="spiCorr">SPI Correlation</label>
+    </div>
+    <div class="d-flex justify-content-center my-4">
+        <div class="w-75">
+            <label for="year">Year</label>
+            <input type="range" class="custom-range" id="year" min="2011" max="2020" name="year" value="2020">
+        </div>
+        <span class="font-weight-bold text-primary ml-2 valueSpan2"></span>
+    </div>
+
+    <div id="container">
+        <svg id="canvas" width="100vw" height="100vh" viewBox="0 0 1000 800">
+        </svg>
+    </div>
     <div>
-        <svg id="worldMAp" viewBox="0 0 1000 800"></svg>
+
+    </div>
+    <div id="tooltip">
+        <svg id="svg_tooltop" width="100%" height="100%" viewBox="0 0 200 100">
+        </svg>
     </div>
 </div>
 <script>
+    var corrAttr = "efi";
+    var year = 2020;
+    $(document).ready(function () {
+
+        const $valueSpan = $('.valueSpan2');
+        const $value = $('#year');
+        $valueSpan.html($value.val());
+        $value.on('input change', () => {
+            window.year = $value.val();
+            $valueSpan.html($value.val());
+            main();
+        });
+    });
+
+    function handleCorrelation() {
+        const rbg = document.querySelectorAll('input[name="attrCorr"]')
+        for (const rb of rbg) {
+            if (rb.checked) {
+                window.corrAttr = rb.value;
+                main();
+                break;
+            }
+        }
+
+    }
+
     let geojson = "https://raw.githubusercontent.com/pardeep0161/DataVizFall2020_Colab/master/Individual%20Project/data/countries_geo_topo.json";
 
-    corrAttr = "spi"
     let projection = d3.geoEquirectangular()
-        .scale(300).translate([500, 500])
+        .scale(200).translate([350, 350])
 
     let apiURL = 'http://127.0.0.1:5000';
     let responseJson = fetch(apiURL + '/raw_data')
         .then(function (response) {
             return response.json(); // But parse it as JSON this time
         })
-    Promise.all(
-        [
-            d3.json(geojson),
-            responseJson],
-        d3.autoType())
-        .then(main)
 
-    function main(data) {
-        let topo_Json = topojson.feature(data[0], data[0].objects.countries_geo).features;
-        let geo_generator = d3.geoPath().projection(projection)
+    function main() {
+        Promise.all(
+            [
+                d3.json(geojson),
+                responseJson],
+            d3.autoType())
+            .then(plot)
 
-        let indexData = d3.group(data[1], function (d) {
-            return d.SPI_country_code;
-        });
+        function plot(data) {
+            let topo_Json = topojson.feature(data[0], data[0].objects.countries_geo).features;
+            let geo_generator = d3.geoPath().projection(projection)
 
+            //let indexData = d3.group(data[1], function (d) {
+            //  return d.SPI_country_code;
+            //});
+            let indexData = {}
 
-        let spi_domain = [0, d3.max(data[1], function (d) {
-            return d.Social_Progress_Index;
-        })]
-        let colorScale = d3.scaleLinear()
-            .domain(spi_domain)
-            .range(["yellow", "darkred"])
-            .interpolate(d3.interpolateCubehelix.gamma(10));
-
-        let svg = d3.select('#worldMAp')
-            .attr('width', '100%')
-            .attr('height', '30vw')
-            .attr('viewBox', '0 0 1000 800')
-            .style('background-color', '#f5f3f3');
-
-
-        let mapCanvas = svg.append('g')
-        mapCanvas.selectAll('path')
-            .data(topo_Json)
-            .enter()
-            .append('path')
-            .attr("class", "path_geo")
-            .attr("d", geo_generator)
-            .attr("fill", "white")
-            .style("fill", function (d) {
+            d3.map(data[1], function (d) {
                 try {
-                    color = colorScale(parseInt(indexData.get(d.id)[0].Social_Progress_Index))
-                    return color;
+
+                    if (indexData[d.SPI_country_code] == undefined) {
+                        indexData[d.SPI_country_code] =
+                            {name: d.Name, year: [], efi: [], spi: []}
+                    }
+
+                    indexData[d.SPI_country_code]['year'].push(+d.Index_Year)
+                    indexData[d.SPI_country_code]['efi'].push(+d.Economic_Freedom_Index)
+                    indexData[d.SPI_country_code]['spi'].push(+d.Social_Progress_Index)
                 } catch (error) {
-                    return "white"
+                    console.log(error)
                 }
             })
-        svg.call(d3.zoom()
-            .extent([[0, 0], [1000, 800]])
-            .scaleExtent([1, 8])
-            .on("zoom", zoomed)
-        )
 
-        function zoomed({transform}) {
+            let domain = [0, d3.max(data[1], function (d) {
+                if (window.corrAttr == 'efi') {
+                    return d.Economic_Freedom_Index;
+                }
+                return d.Social_Progress_Index;
+            })]
+            let colorScale = d3.scaleLinear()
+                .domain(domain)
+                .range(["yellow", "darkred"])
+                .interpolate(d3.interpolateCubehelix.gamma(10));
 
-            mapCanvas.attr("transform", transform)
+            let svg = d3.select('#canvas')
+                //.attr('width', '100%')
+                //.attr('height', '30vw')
+                //.attr('viewBox', '0 0 800 600')
+                .style('background-color', '#f5f3f3');
+
+
+            let mapCanvas = svg.append('g')
+            mapCanvas.selectAll('path')
+                .data(topo_Json)
+                .enter()
+                .append('path')
+                .attr("class", "path_geo")
+                .attr("d", geo_generator)
+                .attr("fill", "white")
+                .style("fill", function (d) {
+                    try {
+                        let i;
+                        for (i = 0; i < indexData[d.id]['year'].length; i++) {
+                            if (indexData[d.id]['year'][i] == window.year) {
+                                break
+                            }
+                        }
+                        console.log(indexData[d.id]['year'][i])
+                        color = colorScale(parseInt(indexData[d.id][window.corrAttr][i]))
+                        console.log(color)
+                        return color;
+                    } catch (error) {
+                        return "white"
+                    }
+                }).on("mousemove", function (mouseData, d) {
+                tooltip_html(d.id)
+                d3.select('#tooltip')
+                    .style("opacity", .8)
+                    .style("left", (mouseData.clientX + 10).toString() + "px")
+                    .style("top", (mouseData.clientY + 10).toString() + "px")
+            })
+            svg.call(d3.zoom()
+                .extent([[0, 0], [1000, 800]])
+                .scaleExtent([1, 8])
+                .on("zoom", zoomed)
+            )
+
+            function zoomed({transform}) {
+
+                mapCanvas.attr("transform", transform)
+            }
+
+            function tooltip_html(id) {
+                let margin = {x: 30, y: 0}
+                let plot_height = 90
+                let efi = indexData[id]['efi']
+                let spi = indexData[id]['spi']
+                let extent = d3.extent([efi, spi].flat(), function (d) {
+                    return d
+                })
+                let xScale = d3.scaleLinear().domain([2011, 2020]).range([0, 150])
+                let yScale = d3.scaleLinear().domain(extent).range([plot_height, 0])
+                let x_axis_values = [2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020]
+                let lineGenerator = d3.line()
+                    .x(function (d, i) {
+                        return xScale(x_axis_values[i]);
+                    })
+                    .y(function (d) {
+                        return yScale(d);
+                    });
+                let efiLine = lineGenerator(efi);
+                let spiLine = lineGenerator(spi);
+
+                let svg_tooltip = d3.select("#svg_tooltop")
+                svg_tooltip.selectAll('g').remove()
+                svg_tooltip.append('g').attr("transform", `translate(${margin.x},${margin.y})`)
+                    .append("text")
+                    .attr("x", 20)
+                    .attr('y', 1)
+                    .text(indexData[id]['name'])
+                    .attr("class", "country_name")
+
+                svg_tooltip.selectAll('g').append('path').attr("d", efiLine).attr("class", "efi")
+                svg_tooltip.selectAll('g').append('path').attr("d", spiLine).attr("class", "spi")
+
+                // formatting numbers in y axis to look human readable:
+                let formatValue = d3.format(".2s");
+                // x and y Axis function
+                let x_axis = d3.axisBottom(xScale).ticks(4)
+                let y_axis = d3.axisLeft(yScale).ticks(4).tickFormat(function (d) {
+                    return formatValue(d)
+                });
+                //X Axis
+                svg_tooltip.append("g").attr("class", "axis")
+                    .attr("transform", `translate(${margin.x},${plot_height})`)
+                    .call(x_axis)
+                // Y Axis
+                svg_tooltip.append("g").attr("class", "axis")
+                    .attr("transform", `translate(${margin.x},${0})`)
+                    .call(y_axis)
+
+
+            }
         }
     }
+    main();
 </script>
 </body>
 </html>

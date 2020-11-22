@@ -5,6 +5,11 @@ import data_main
 app = Flask(__name__)
 CORS(app)
 
+@app.route('/bar')
+def bar():
+    print('Incoming...GET...')
+    return data_main.get_latest_data() # serialize and use JSON headers
+
 @app.route('/raw_data')
 def page1():
     print('Incoming...GET...')
@@ -12,9 +17,9 @@ def page1():
 
 @app.route('/corr')
 def corr():
-
-    attr_var = request.args.get('attr_var')
-    print('Incoming...GET...Correlation for : '+attr_var)
-    return data_main.get_Correlation(attr_var) # serialize and use JSON headers
+    corr_attr = request.args.get('corr_attr')
+    year = request.args.get('year')
+    print('Incoming...GET...Correlation for : '+corr_attr+' '+year)
+    return data_main.get_Correlation(corr_attr, year) # serialize and use JSON headers
 
 app.run()

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Individual Project</title>
+    <title>Title</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -16,9 +16,15 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css"/>
+    <
 
     <!-- Load d3.js -->
     <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/topojson.v2.min.js"></script>
 </head>
 <body>
 <h1>Individual Project</h1>
@@ -31,282 +37,157 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link active" href="index.html">Home <span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" href="page1.html">World Map</a>
-                <a class="nav-item nav-link active" href="page2.html">Attribute Correlation</a>
+                <a class="nav-item nav-link" href="page2.html">Attribute Correlation</a>
             </div>
         </div>
     </nav>
+    <form method="post" id="framework_form">
+        <div class="form-group">
+            <label>Select Countries</label>
+            <select id="framework" name="framework[]" multiple class="form-control">
+                <option value="Codeigniter">Codeigniter</option>
+                <option value="CakePHP">CakePHP</option>
+                <option value="Laravel">Laravel</option>
+                <option value="YII">YII</option>
+                <option value="Zend">Zend</option>
+                <option value="Symfony">Symfony</option>
+                <option value="Phalcon">Phalcon</option>
+                <option value="Slim">Slim</option>
+            </select>
+            <input type="submit" class="btn btn-info" name="submit" value="Submit"/>
+        </div>
+    </form>
 
-
-    <!-- Default checked -->
-    <div class="custom-control custom-radio custom-control-inline">
-        <input type="radio" class="custom-control-input" id="efiCorr" name="attrCorr" value='efi'
-               onchange="handleCorrelation()" checked>
-        <label class="custom-control-label" for="efiCorr">EFI Correlation</label>
-    </div>
-    <!-- Default unchecked -->
-    <div class="custom-control custom-radio custom-control-inline">
-        <input type="radio" class="custom-control-input" id="spiCorr" name="attrCorr" value='spi'
-               onchange="handleCorrelation()">
-        <label class="custom-control-label" for="spiCorr">SPI Correlation</label>
-    </div>
-
-    <div>
-        <svg id="correlation" viewBox="0 0 2000 1000"></svg>
-    </div>
+    <div id="bar"></div>
 </div>
 <script>
+    d3.csv("/data/countries_name.csv", function(data) {
+        console.log(data);
+    });
 
-    function handleCorrelation() {
-        const rbg = document.querySelectorAll('input[name="attrCorr"]')
-        for (const rb of rbg) {
-            if (rb.checked) {
-                corrAttr = rb.value;
-                showCorrelation(corrAttr);
-                break;
-            }
-        }
-    }
 
-    function showCorrelation(corrAttr) {
+    $(document).ready(function () {
+        $('#framework').multiselect({
+            nonSelectedText: 'Select Framework',
+            enableFiltering: true,
+            enableCaseInsensitiveFiltering: true,
+            buttonWidth: '400px'
+        });
 
-        
-        let apiURL = 'http://127.0.0.1:5000';
-        let responseJson = fetch(apiURL + '/corr?attr_var=' + corrAttr)
+        $('#framework_form').on('submit', function (event) {
+            event.preventDefault();
+            var form_data = $(this).serialize();
+            $('#framework option:selected').each(function () {
+                console.log($(this)[0].value)
+            });
+
+        });
+
+
+    });
+    let margins = 30;
+    let width = 1000 - 2 * margins;
+    let height = 600 - 2 * margins;
+
+    let svg = d3.select('#bar')
+        .append('svg')
+        .attr('width', '100%')
+        .attr('height', '40vw')
+        .attr('viewBox', '0 0 1000 600')
+        .style('background-color', '#f5f3f3')
+        .append("g")
+        .attr("transform",
+            "translate(" + margins + "," + margins + ")");
+    ;
+
+
+    function main() {
+        // Parse the Data
+        let apiURL = 'http://127.0.0.1:5000/';
+
+        fetch(apiURL + '/bar')
             .then(function (response) {
                 return response.json(); // But parse it as JSON this time
             })
-            .then(jsonData => {
-                // Going from wide to long format
-                corr = JSON.parse(jsonData['corr'])
-                rawData = JSON.parse(jsonData['data'])
+            .then(data => {
+                // List of subgroups = header of the csv files = soil condition here
+                let subgroups = ['Name', 'Economic_Freedom_Index', 'Social_Progress_Index']
 
+                // List of groups = species here = value of the first column called group -> I show them on the X axis
+                let names = d3.map(data, function (d) {
+                    return (d.Name)
+                }).keys()
 
-                let data = [];
-                let rowCount = 0
-                for (const [key, value] of Object.entries(corr)) {
-                    rowCount += 1;
-                    for (const [key1, value1] of Object.entries(value)) {
-                        data.push({
-                            x: key,
-                            y: key1,
-                            value: value1
-                        });
-                    }
-                }
-                // Graph dimension
-                let margin = {top: rowCount*5, right: rowCount*8, bottom: rowCount*2, left: rowCount},
-                    width = (rowCount * 120) - margin.left - margin.right,
-                    height = (rowCount * 60) - margin.top - margin.bottom
-
-
-                // List of all variables and number of them
-                let domain = d3.set(data.map(function (d) {
-                    return d.x
-                })).values()
-
-                // Create a color scale
-                let color = d3.scaleLinear()
-                    .domain([-1, 0, 1])
-                    .range(["#B22222", "#fff", "#000080"]);
-
-                // Create a size scale for bubbles on top right. Watch out: must be a rootscale!
-                let size = d3.scaleSqrt()
-                    .domain([0, 1])
-                    .range([0, 15]);
-
-                // X scale
-                let x = d3.scalePoint()
+                // Add X axis
+                let x = d3.scaleBand()
+                    .domain(names)
                     .range([0, width])
-                    .domain(domain)
+                    .padding([0.1])
+                svg.append("g")
+                    .attr("class", "x_axis")
+                    .attr("transform", "translate(0," + height + ")")
+                    .call(d3.axisBottom(x).tickSize(0));
 
-                // Y scale
-                let y = d3.scalePoint()
-                    .range([0, height])
-                    .domain(domain)
+                // Add Y axis
+                let y = d3.scaleLinear()
+                    .domain([0, 100])
+                    .range([height, 0]);
+                svg.append("g")
+                    .attr("class", "y_axis")
+                    .call(d3.axisLeft(y));
 
+                // Another scale for subgroup position?
+                let xSubgroup = d3.scaleBand()
+                    .domain(subgroups)
+                    .range([0, x.bandwidth()])
+                    .padding(0)
 
-                // Create the svg area
-                let svg = d3.select("#correlation")
-                svg.selectAll("*").remove();
-
-                svg = svg.attr("width", width + margin.left + margin.right)
-                    .attr("height", height + margin.top + margin.bottom).append("g")
-                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-                // Create one 'g' element for each cell of the correlogram
-                let cor = svg.selectAll(".cor")
+                // color palette = one color per subgroup
+                let color = d3.scaleOrdinal()
+                    .domain(subgroups)
+                    .range(['#FF0000', '#0015BC'])
+                // Show the bars
+                svg.append("g")
+                    .selectAll("g")
+                    // Enter in data = loop group per group
                     .data(data)
                     .enter()
                     .append("g")
-                    .attr("class", "cor")
                     .attr("transform", function (d) {
-                        return "translate(" + x(d.x) + "," + y(d.y) + ")";
-                    });
-
-                // Low left part + Diagonal: Add the text with specific color
-
-
-                // Up right part: add circles
-                cor
-                    .filter(function (d) {
-                        let ypos = domain.indexOf(d.y);
-                        let xpos = domain.indexOf(d.x);
-                        return xpos > ypos;
+                        return "translate(" + x(d.Name) + ",0)";
                     })
-                    .append("circle")
-                    .attr("r", function (d) {
-                        return 2*size(Math.abs(d.value))
+                    .selectAll("rect")
+                    .data(function (d) {
+                        return subgroups.map(function (key) {
+                            return {key: key, value: d[key]};
+                        });
                     })
-                    .style("fill", function (d) {
-                        return color(d.value)
+                    .enter().append("rect")
+                    .transition()
+                    .duration(1500)
+                    .attr("x", function (d) {
+                        return xSubgroup(d.key);
                     })
-                    .style("opacity", 0.8);
-
-                cor
-                    .filter(function (d) {
-                        let ypos = domain.indexOf(d.y);
-                        let xpos = domain.indexOf(d.x);
-                        return xpos > ypos;
+                    .attr("y", function (d) {
+                        return y(d.value);
                     })
-                    .append("text")
-                    .attr("dx", function (d) {
-                        return -10
+                    .attr("width", xSubgroup.bandwidth())
+                    .attr("height", function (d) {
+                        return height - y(d.value);
                     })
-                    .attr("y", 5)
-                    .text(d => d.value.toFixed(2))
-                    .style("font-size", 10)
-                    .style("font-weight", "bold")
-                    .style("text-align", "center");
-
-                cor
-                    .filter(function (d) {
-                        let ypos = domain.indexOf(d.y);
-                        let xpos = domain.indexOf(d.x);
-                        return xpos == ypos;
+                    .attr("fill", function (d) {
+                        return color(d.key);
                     })
-                    .append("text")
-                    .attr("dx", function (d) {
-                        return -10
-                    })
-                    .attr("y", 5)
-                    .text(function (d) {
-                            return d.x.split("_").join(" ")
-                    })
-                    .style("font-size", 10)
-                    .style("font-weight", "bold")
-                    .style("text-align", "center")
-                    .attr("transform", function (d) {
-                    return "rotate(45)"
-                })
-
-                /////////////////////////////////////////////////////////////
-
-                let keys = Object.keys(rawData)
-                let numVar = keys.length
-
-                // Now I can compute the size of a single chart
-
-                let mar = 5
-                let spWSize = width / numVar
-                let spHSize = height / numVar
-                let position = d3.scalePoint()
-                    .domain(keys)
-                    .range([0, width - spWSize])
-
-                for (const iStr in keys) {
-                    for (const jStr in keys) {
-                        let i = parseInt(iStr)
-                        let j = parseInt(jStr)
-                        if (i >= j) {
-                            continue;
-                        }
-
-                        // Get current variable name
-                        let var1 = keys[i]
-                        let var2 = keys[j]
-                        // Add X Scale of each graph
-                        let spXextent = d3.extent(rawData, function (d) {
-                            return +d[var1]
-                        })
-                        let spX = d3.scaleLinear()
-                            .domain(spXextent).nice()
-                            .range([0, spWSize - 2 * mar]);
-
-                        // Add Y Scale of each graph
-                        let spYextent = d3.extent(rawData, function (d) {
-                            return +d[var2]
-                        })
-                        let spY = d3.scaleLinear()
-                            .domain(spYextent).nice()
-                            .range([spWSize - 2 * mar, 0]);
-
-                        // Add a 'g' at the right position
-                        let tmp = svg
-                            .append('g')
-                            .attr("transform", "translate(" + (position(var1) + mar) + "," + (position(var2) + mar) + ")");
-
-                        // Add X and Y axis in tmp
-                        tmp.append("g")
-                            .attr("transform", "translate(" + 0 + "," + (spWSize - mar * 2) + ")")
-                            .call(d3.axisBottom(spX).ticks(3));
-                        tmp.append("g")
-                            .call(d3.axisLeft(spY).ticks(3));
-
-                        // Add circle
-                        tmp
-                            .selectAll("myCircles")
-                            .data(rawData)
-                            .enter()
-                            .append("circle")
-                            .attr("cx", function (d) {
-                                return spX(+d[var1])
-                            })
-                            .attr("cy", function (d) {
-                                return spY(+d[var2])
-                            })
-                            .attr("r", 3)
-                    }
-                }
-
-
-                /////////////////////////////////////////////////////////////
-
-
-                // build the "yAxis" color scale
-                // its a series of rects colored correctly
-                // to produce a smooth gradient
-                let aS = d3.scaleLinear()
-                    .range([height + margin.bottom - 5, -margin.top + 5])
-                    .domain([-1, 1]);
-
-                let yA = d3.axisRight()
-                    .scale(aS)
-                    .tickPadding(7);
-
-                let aG = svg.append("g")
-                    .attr("class", "y_axis")
-                    .call(yA)
-                    .attr("transform", "translate(" + (width + margin.right / 2) + " ,0)")
-
-                let iR = d3.range(-1, 1.01, 0.1);
-                let h = height / iR.length + 3;
-                iR.forEach(function (d) {
-                    aG.append('rect')
-                        .style('fill', color(d))
-                        .style('stroke-width', 0)
-                        .style('stoke', 'none')
-                        .attr('height', h)
-                        .attr('width', 10)
-                        .attr('x', 0)
-                        .attr('y', aS(d))
-                });
+                    .transition()
+                    .duration(1500);
 
             })
     }
 
-    showCorrelation('efi')
+    main();
+
 </script>
 </body>
 </html>

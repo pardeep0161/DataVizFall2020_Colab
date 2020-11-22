@@ -123,7 +123,7 @@
                 election_data[d.county_fips]['gop'].push(+d.votes_gop)}
             catch (error)
             {console.log(error)}})
-
+        console.log(election_data)
         let mapCanvas = svg.append('g')
         mapCanvas.selectAll('path')
             .data(geoJson)
@@ -166,53 +166,58 @@
         }
 
 
-   function tooltip_html(fips){
-    let margin={x:30,y:0}
-    let plot_height = 90
-    let history_dems = election_data[fips]['dems']
-    let history_gop = election_data[fips]['gop']
-    let extent = d3.extent([history_dems,history_gop].flat(),function (d){return d})
-    let xScale=d3.scaleLinear().domain([2006,2020]).range([0,150])
-    let yScale=d3.scaleLinear().domain(extent).range([plot_height,0])
-    let x_axis_values = [2008, 2012,2016,2020]
-    let lineGenerator = d3.line()
-            .x(function(d, i) {
-                return xScale(x_axis_values[i]);
+        function tooltip_html(fips) {
+            let margin = {x: 30, y: 0}
+            let plot_height = 90
+            let history_dems = election_data[fips]['dems']
+            let history_gop = election_data[fips]['gop']
+            let extent = d3.extent([history_dems, history_gop].flat(), function (d) {
+                return d
             })
-            .y(function(d) {
-                return yScale(d);
+            let xScale = d3.scaleLinear().domain([2006, 2020]).range([0, 150])
+            let yScale = d3.scaleLinear().domain(extent).range([plot_height, 0])
+            let x_axis_values = [2008, 2012, 2016, 2020]
+            let lineGenerator = d3.line()
+                .x(function (d, i) {
+                    return xScale(x_axis_values[i]);
+                })
+                .y(function (d) {
+                    return yScale(d);
+                });
+            let demsLine = lineGenerator(history_dems);
+            let gopLine = lineGenerator(history_gop);
+
+            let svg_tooltip = d3.select("#svg_tooltop")
+            svg_tooltip.selectAll('g').remove()
+            svg_tooltip.append('g').attr("transform", `translate(${margin.x},${margin.y})`)
+                .append("text")
+                .attr("x", 20)
+                .attr('y', 1)
+                .text(election_data[fips]['name'])
+                .attr("class", "county_name")
+
+            svg_tooltip.selectAll('g').append('path').attr("d", demsLine).attr("class", "dems")
+            svg_tooltip.selectAll('g').append('path').attr("d", gopLine).attr("class", "gop")
+
+            // formatting numbers in y axis to look human readable:
+            let formatValue = d3.format(".2s");
+            // x and y Axis function
+            let x_axis = d3.axisBottom(xScale).ticks(4)
+            let y_axis = d3.axisLeft(yScale).ticks(4).tickFormat(function (d) {
+                return formatValue(d)
             });
-    let demsLine = lineGenerator(history_dems);
-    let gopLine = lineGenerator(history_gop);
-
-    let svg_tooltip = d3.select("#svg_tooltop")
-       svg_tooltip.selectAll('g').remove()
-       svg_tooltip.append('g').attr("transform",`translate(${margin.x},${margin.y})`)
-           .append("text")
-           .attr("x",20)
-           .attr('y',1)
-           .text(election_data[fips]['name'])
-           .attr("class","county_name")
-
-       svg_tooltip.selectAll('g').append('path').attr("d",demsLine).attr("class","dems")
-       svg_tooltip.selectAll('g').append('path').attr("d",gopLine).attr("class","gop")
-
-       // formatting numbers in y axis to look human readable:
-       let formatValue = d3.format(".2s");
-       // x and y Axis function
-       let x_axis = d3.axisBottom(xScale).ticks(4)
-       let y_axis = d3.axisLeft(yScale).ticks(4).tickFormat(function(d) { return formatValue(d)});
-       //X Axis
-       svg_tooltip.append("g").attr("class","axis")
-           .attr("transform", `translate(${margin.x},${plot_height})`)
-           .call(x_axis)
-       // Y Axis
-       svg_tooltip.append("g").attr("class","axis")
-           .attr("transform", `translate(${margin.x},${0})`)
-           .call(y_axis)
+            //X Axis
+            svg_tooltip.append("g").attr("class", "axis")
+                .attr("transform", `translate(${margin.x},${plot_height})`)
+                .call(x_axis)
+            // Y Axis
+            svg_tooltip.append("g").attr("class", "axis")
+                .attr("transform", `translate(${margin.x},${0})`)
+                .call(y_axis)
 
 
-   }}
+        }
+    }
 
 
 

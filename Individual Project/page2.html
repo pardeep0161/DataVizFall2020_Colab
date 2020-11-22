@@ -51,37 +51,55 @@
                onchange="handleCorrelation()">
         <label class="custom-control-label" for="spiCorr">SPI Correlation</label>
     </div>
-
+    <div class="d-flex justify-content-center my-4">
+        <div class="w-75">
+            <label for="year">Year</label>
+            <input type="range" class="custom-range" id="year" min="2011" max="2020" name="year" value="2020">
+        </div>
+        <span class="font-weight-bold text-primary ml-2 valueSpan2"></span>
+    </div>
     <div>
         <svg id="correlation" viewBox="0 0 2000 1000"></svg>
     </div>
 </div>
 <script>
 
+    var corrAttr = "efi";
+    var year = 2020;
+    $(document).ready(function () {
+
+        const $valueSpan = $('.valueSpan2');
+        const $value = $('#year');
+        $valueSpan.html($value.val());
+        $value.on('input change', () => {
+            window.year = $value.val();
+            $valueSpan.html($value.val());
+            showCorrelation()
+        });
+    });
+
     function handleCorrelation() {
         const rbg = document.querySelectorAll('input[name="attrCorr"]')
         for (const rb of rbg) {
             if (rb.checked) {
-                corrAttr = rb.value;
-                showCorrelation(corrAttr);
+                window.corrAttr = rb.value;
+                showCorrelation();
                 break;
             }
         }
+
     }
 
-    function showCorrelation(corrAttr) {
-
-
+    function showCorrelation() {
         let apiURL = 'http://127.0.0.1:5000';
-        let responseJson = fetch(apiURL + '/corr?attr_var=' + corrAttr)
+        let responseJson = fetch(apiURL + '/corr?corr_attr=' + this.corrAttr+'&year='+this.year)
             .then(function (response) {
                 return response.json(); // But parse it as JSON this time
             })
             .then(jsonData => {
                 // Going from wide to long format
-                corr = JSON.parse(jsonData['corr'])
                 rawData = JSON.parse(jsonData['data'])
-
+                corr = JSON.parse(jsonData['corr'])
 
                 let data = [];
                 let rowCount = 0
@@ -95,12 +113,13 @@
                         });
                     }
                 }
+                if (rowCount < 10) {
+                    rowCount = 8;
+                }
                 // Graph dimension
-                let margin = {top: rowCount*5, right: rowCount*8, bottom: rowCount*2, left: rowCount},
+                let margin = {top: rowCount * 5, right: rowCount * 8, bottom: rowCount * 2, left: rowCount},
                     width = (rowCount * 120) - margin.left - margin.right,
-                    height = (rowCount * 60) - margin.top - margin.bottom
-
-
+                    height = (rowCount * 120) - margin.top - margin.bottom
                 // List of all variables and number of them
                 let domain = d3.set(data.map(function (d) {
                     return d.x
@@ -114,7 +133,7 @@
                 // Create a size scale for bubbles on top right. Watch out: must be a rootscale!
                 let size = d3.scaleSqrt()
                     .domain([0, 1])
-                    .range([0, 15]);
+                    .range([0, 20]);
 
                 // X scale
                 let x = d3.scalePoint()
@@ -127,14 +146,23 @@
                     .domain(domain)
 
 
+                let keys = Object.keys(rawData)
+                let numVar = keys.length
+
+                let mar = 10
+                let spWSize = width / numVar
+                let spHSize = height / numVar
+                let position = d3.scalePoint()
+                    .domain(keys)
+                    .range([0, width - spWSize])
+
                 // Create the svg area
                 let svg = d3.select("#correlation")
                 svg.selectAll("*").remove();
 
                 svg = svg.attr("width", width + margin.left + margin.right)
                     .attr("height", height + margin.top + margin.bottom).append("g")
-                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
+                    .attr("transform", "translate(0,-400)");
                 // Create one 'g' element for each cell of the correlogram
                 let cor = svg.selectAll(".cor")
                     .data(data)
@@ -142,7 +170,7 @@
                     .append("g")
                     .attr("class", "cor")
                     .attr("transform", function (d) {
-                        return "translate(" + x(d.x) + "," + y(d.y) + ")";
+                        return "translate(" + (position(d.x) + mar) + "," + (position(d.y) + mar) + ")";
                     });
 
                 // Low left part + Diagonal: Add the text with specific color
@@ -156,8 +184,12 @@
                         return xpos > ypos;
                     })
                     .append("circle")
+                    .attr("cx", function (d) {
+                        return 50
+                    })
+                    .attr("cy", 50)
                     .attr("r", function (d) {
-                        return 2*size(Math.abs(d.value))
+                        return 2 * size(Math.abs(d.value))
                     })
                     .style("fill", function (d) {
                         return color(d.value)
@@ -172,11 +204,11 @@
                     })
                     .append("text")
                     .attr("dx", function (d) {
-                        return -10
+                        return 40
                     })
-                    .attr("y", 5)
+                    .attr("y", 60)
                     .text(d => d.value.toFixed(2))
-                    .style("font-size", 10)
+                    .style("font-size", 15)
                     .style("font-weight", "bold")
                     .style("text-align", "center");
 
@@ -188,59 +220,56 @@
                     })
                     .append("text")
                     .attr("dx", function (d) {
-                        return -10
+                        return 25
                     })
                     .attr("y", 5)
                     .text(function (d) {
-                            return d.x.split("_").join(" ")
+                        return d.x.split("_").join(" ")
                     })
-                    .style("font-size", 10)
+                    .style("font-size", 20)
                     .style("font-weight", "bold")
-                    .style("text-align", "center")
+                    .style("text-align", "left")
                     .attr("transform", function (d) {
-                    return "rotate(45)"
-                })
+                        return "rotate(40)"
+                    })
 
                 /////////////////////////////////////////////////////////////
 
-                let keys = Object.keys(rawData)
-                let numVar = keys.length
 
                 // Now I can compute the size of a single chart
 
-                let mar = 5
-                let spWSize = width / numVar
-                let spHSize = height / numVar
-                let position = d3.scalePoint()
-                    .domain(keys)
-                    .range([0, width - spWSize])
 
                 for (const iStr in keys) {
+
+                    let i = parseInt(iStr)
+                    let var1 = keys[i]
+                    let X = []
+                    for (let j = 0; j < Object.keys(rawData[var1]).length; j++) {
+                        X.push(rawData[var1][j])
+                    }
+
                     for (const jStr in keys) {
-                        let i = parseInt(iStr)
                         let j = parseInt(jStr)
                         if (i >= j) {
                             continue;
                         }
 
                         // Get current variable name
-                        let var1 = keys[i]
                         let var2 = keys[j]
+
+                        let Y = []
+                        for (let j = 0; j < Object.keys(rawData[var2]).length; j++) {
+                            Y.push(rawData[var2][j])
+                        }
                         // Add X Scale of each graph
-                        let spXextent = d3.extent(rawData, function (d) {
-                            return +d[var1]
-                        })
                         let spX = d3.scaleLinear()
-                            .domain(spXextent).nice()
-                            .range([0, spWSize - 2 * mar]);
+                            .domain(d3.extent(X))
+                            .range([2 * mar, spWSize - 2 * mar]);
 
                         // Add Y Scale of each graph
-                        let spYextent = d3.extent(rawData, function (d) {
-                            return +d[var2]
-                        })
                         let spY = d3.scaleLinear()
-                            .domain(spYextent).nice()
-                            .range([spWSize - 2 * mar, 0]);
+                            .domain(d3.extent(Y))
+                            .range([spWSize - mar, 2 * mar]);
 
                         // Add a 'g' at the right position
                         let tmp = svg
@@ -249,24 +278,25 @@
 
                         // Add X and Y axis in tmp
                         tmp.append("g")
-                            .attr("transform", "translate(" + 0 + "," + (spWSize - mar * 2) + ")")
+                            .attr("transform", "translate(" + -2 * mar + "," + (spWSize - mar) + ")")
                             .call(d3.axisBottom(spX).ticks(3));
                         tmp.append("g")
                             .call(d3.axisLeft(spY).ticks(3));
-
                         // Add circle
                         tmp
                             .selectAll("myCircles")
-                            .data(rawData)
+                            .data(Y)
                             .enter()
                             .append("circle")
-                            .attr("cx", function (d) {
-                                return spX(+d[var1])
+                            .attr("cx", function (d, i) {
+                                return spX(X[i])
                             })
                             .attr("cy", function (d) {
-                                return spY(+d[var2])
+                                return spY(d)
                             })
-                            .attr("r", 3)
+                            .attr("r", 1.5)
+                            .style("fill", "blue")
+                            .style("opacity", 0.5);
                     }
                 }
 
@@ -288,7 +318,7 @@
                 let aG = svg.append("g")
                     .attr("class", "y_axis")
                     .call(yA)
-                    .attr("transform", "translate(" + (width + margin.right / 2) + " ,0)")
+                    .attr("transform", "translate(" + (width + margin.right / 2) + " ," + 0 + ")")
 
                 let iR = d3.range(-1, 1.01, 0.1);
                 let h = height / iR.length + 3;

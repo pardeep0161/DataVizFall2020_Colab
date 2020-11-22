@@ -40,6 +40,8 @@
       <change beforePath="$PROJECT_DIR$/Exercise_Mon 5.1/index3.html" beforeDir="false" afterPath="$PROJECT_DIR$/Exercise_Mon 5.1/index3.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Exercise_Week 10.3_Wed/data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Exercise_Week 10.3_Wed/data.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Exercise_Week 10_Mon/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Exercise_Week 10_Mon/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exercise_Week 10_Mon/index_with_barplot.html" beforeDir="false" afterPath="$PROJECT_DIR$/Exercise_Week 10_Mon/index_with_barplot.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fall2020-Week-11-Mon/Example 01 US Election/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Fall2020-Week-11-Mon/Example 01 US Election/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Fall2020-Week-4-Friday/data/iris.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Fall2020-Week-4-Friday/data/iris.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Fall2020-Week-4-Monday/Example 4.1/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Fall2020-Week-4-Monday/Example 4.1/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Fall2020-Week-4-Monday/Example 4.2/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Fall2020-Week-4-Monday/Example 4.2/index.html" afterDir="false" />
@@ -63,6 +65,7 @@
       <change beforePath="$PROJECT_DIR$/Individual Project/page2.html" beforeDir="false" afterPath="$PROJECT_DIR$/Individual Project/page2.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Individual Project/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/Individual Project/test.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Python_Basics_lec02.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Python_Basics_lec02.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Week_11_Mon.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Week_11_Mon.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/cb_2018_us_state_20m.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/cb_2018_us_state_20m.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/practice.html" beforeDir="false" afterPath="$PROJECT_DIR$/practice.html" afterDir="false" />
@@ -152,7 +155,9 @@
       <workItem from="1604816048310" duration="17400000" />
       <workItem from="1604944826512" duration="572000" />
       <workItem from="1605284382773" duration="576000" />
-      <workItem from="1605286219485" duration="24926000" />
+      <workItem from="1605286219485" duration="25549000" />
+      <workItem from="1605493334791" duration="1890000" />
+      <workItem from="1605944550302" duration="3927000" />
     </task>
     <servers />
   </component>
