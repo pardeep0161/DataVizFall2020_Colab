@@ -17,7 +17,7 @@ def get_latest_data():
         right_on=["Country"],
         suffixes=("_efi", "_spi"))
     res = res[['Name', 'Economic_Freedom_Index', 'Social_Progress_Index']]
-    res = res.reset_index(drop=True).head(5)
+    res = res.reset_index(drop=True)
     # return res
     return res.to_json(orient="records")
 

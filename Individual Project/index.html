@@ -16,22 +16,20 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css"/>
 
 
     <!-- Load d3.js -->
     <script src="https://d3js.org/d3.v4.js"></script>
     <script src="https://d3js.org/topojson.v2.min.js"></script>
-
 </head>
 <body>
-<h1>Individual Project</h1>
 <div class="container">
+    <h1>EFI vs SPI</h1>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link active" href="index.html">Home <span class="sr-only">(current)</span></a>
@@ -40,18 +38,60 @@
             </div>
         </div>
     </nav>
+    <form method="post" id="framework_form">
+        <div class="form-group">
+            <select id="framework" name="framework[]" multiple class="form-control">
+            </select>
+            <input type="submit" class="btn btn-info" name="submit" value="Submit"/>
+        </div>
+    </form>
+
     <div id="bar"></div>
 </div>
 <script>
+    let default_countries = ['China', 'India', 'United States'];
+    d3.csv("https://raw.githubusercontent.com/pardeep0161/DataVizFall2020_Colab/master/Individual%20Project/data/countries_name.csv", function (data) {
 
+        let str = ''
+        data.forEach(function (d) {
+            if (default_countries.includes(d.Name)) {
+                str += '<option selected>' + d.Name + '</option>'
+            } else {
+                str += '<option>' + d.Name + '</option>'
+            }
+        })
+
+        document.getElementById("framework").innerHTML = str;
+    });
+
+
+    $(document).ready(function () {
+        $('#framework').multiselect({
+            nonSelectedText: 'Select Framework',
+            enableFiltering: true,
+            enableCaseInsensitiveFiltering: true,
+            buttonWidth: '400px'
+        });
+
+        $('#framework_form').on('submit', function (event) {
+            event.preventDefault();
+            let selected_countries = [];
+            $('#framework option:selected').each(function () {
+                selected_countries.push($(this)[0].value)
+            });
+            main(selected_countries)
+        });
+
+
+    });
     let margins = 30;
     let width = 1000 - 2 * margins;
     let height = 600 - 2 * margins;
 
     let svg = d3.select('#bar')
         .append('svg')
-        .attr('width', '100%')
-        .attr('height', '40vw')
+        .attr('width', '80%')
+        .attr('height', '30vw')
         .attr('viewBox', '0 0 1000 600')
         .style('background-color', '#f5f3f3')
         .append("g")
@@ -60,81 +100,148 @@
     ;
 
 
-    // Parse the Data
-    let apiURL = 'http://127.0.0.1:5000/';
+    function main(selected_countries) {
 
-    fetch(apiURL + '/bar')
-        .then(function (response) {
-            return response.json(); // But parse it as JSON this time
-        })
-        .then(data => {
-            // List of subgroups = header of the csv files = soil condition here
-            let subgroups = ['Name', 'Economic_Freedom_Index', 'Social_Progress_Index']
+        // Parse the Data
+        let apiURL = 'http://127.0.0.1:5000/';
 
-            // List of groups = species here = value of the first column called group -> I show them on the X axis
-            let names = d3.map(data, function (d) {
-                return (d.Name)
-            }).keys()
+        fetch(apiURL + '/bar')
+            .then(function (response) {
+                return response.json(); // But parse it as JSON this time
+            })
+            .then(data => {
+                // List of subgroups = header of the csv files = soil condition here
+                let subgroups = ['Name', 'Economic_Freedom_Index', 'Social_Progress_Index']
 
-            // Add X axis
-            let x = d3.scaleBand()
-                .domain(names)
-                .range([0, width])
-                .padding([0.1])
-            svg.append("g")
-                .attr("transform", "translate(0," + height + ")")
-                .call(d3.axisBottom(x).tickSize(0));
+                // List of groups = species here = value of the first column called group -> I show them on the X axis
+                let names = []
+                d3.map(data, function (d) {
+                    if (selected_countries.includes(d.Name)) {
+                        names.push(d.Name)
+                    }
+                }).keys()
+                // Add X axis
+                let x = d3.scaleBand()
+                    .domain(names)
+                    .range([0, width])
+                    .padding([0.1])
+                svg.selectAll(".x_axis").remove()
+                svg.append("g")
+                    .attr("class", "x_axis")
+                    .attr("transform", "translate(0," + height + ")")
+                    .call(d3.axisBottom(x).tickSize(0));
 
-            // Add Y axis
-            let y = d3.scaleLinear()
-                .domain([0, 100])
-                .range([height, 0]);
-            svg.append("g")
-                .call(d3.axisLeft(y));
+                // Add Y axis
+                let y = d3.scaleLinear()
+                    .domain([0, 100])
+                    .range([height, 0]);
+                svg.append("g")
+                    .attr("class", "y_axis")
+                    .call(d3.axisLeft(y));
 
-            // Another scale for subgroup position?
-            let xSubgroup = d3.scaleBand()
-                .domain(subgroups)
-                .range([0, x.bandwidth()])
-                .padding(0)
+                svg.append("text")
+                    .attr("transform", "rotate(-90)")
+                    .attr("y", margins / 2)
+                    .attr("x", 0 - margins)
+                    .attr("dy", "1em")
+                    .style("text-anchor", "middle")
+                    .text("Index Values");
 
-            // color palette = one color per subgroup
-            let color = d3.scaleOrdinal()
-                .domain(subgroups)
-                .range(['#FF0000', '#0015BC'])
+                // Another scale for subgroup position?
+                let xSubgroup = d3.scaleBand()
+                    .domain(subgroups)
+                    .range([0, x.bandwidth()])
+                    .padding(0)
 
-            // Show the bars
-            svg.append("g")
-                .selectAll("g")
-                // Enter in data = loop group per group
-                .data(data)
-                .enter()
-                .append("g")
-                .attr("transform", function (d) {
-                    return "translate(" + x(d.Name) + ",0)";
-                })
-                .selectAll("rect")
-                .data(function (d) {
-                    return subgroups.map(function (key) {
-                        return {key: key, value: d[key]};
+                // color palette = one color per subgroup
+                let color = d3.scaleOrdinal()
+                    .domain(subgroups)
+                    .range(['#FF0000', '#0015BC'])
+                svg.selectAll("rect.country_rect")
+                    .transition()
+                    .duration(1500)
+                    .attr("y", height)
+                    .remove()
+                // Show the bars
+                svg.append("g")
+                    .selectAll("g")
+                    // Enter in data = loop group per group
+                    .data(data)
+                    .enter()
+                    .append("g")
+                    .filter(function (d) {
+                        return selected_countries.includes(d.Name);
+                    })
+                    .attr("transform", function (d) {
+                        return "translate(" + x(d.Name) + ",0)";
+                    })
+                    .selectAll("rect")
+                    .data(function (d) {
+                        return subgroups.map(function (key) {
+                            return {key: key, value: d[key]};
+                        });
+                    })
+                    .enter().append("rect")
+                    .attr("class","country_rect")
+                    .attr("x", function (d) {
+                        return xSubgroup(d.key);
+                    })
+                    .attr("y", height)
+                    .transition()
+                    .delay(1000)
+                    .duration(1500)
+                    .attr("x", function (d) {
+                        return xSubgroup(d.key);
+                    })
+                    .attr("y", function (d) {
+                        return y(d.value);
+                    })
+                    .attr("width", xSubgroup.bandwidth())
+                    .attr("height", function (d) {
+                        return height - y(d.value);
+                    })
+                    .attr("fill", function (d) {
+                        console.log(d.key)
+                        console.log(color(d.key))
+                        return color(d.key);
                     });
-                })
-                .enter().append("rect")
-                .attr("x", function (d) {
-                    return xSubgroup(d.key);
-                })
-                .attr("y", function (d) {
-                    return y(d.value);
-                })
-                .attr("width", xSubgroup.bandwidth())
-                .attr("height", function (d) {
-                    return height - y(d.value);
-                })
-                .attr("fill", function (d) {
-                    return color(d.key);
-                });
 
-        })
+
+                ///////////////////////
+                let lineLegend = svg.selectAll(".lineLegend").data(["EFI", "SPI"])
+                    .enter().append("g")
+                    .attr("class", "lineLegend")
+                    .attr("transform", function (d, i) {
+                        return "translate(" + (width + margins / 2) + "," + (i * 20) + ")";
+                    });
+
+                lineLegend.append("rect")
+                    .attr("fill", function (d) {
+                        return color(d);
+                    })
+                    .attr("transform", "translate(0,5)")
+                    .attr("width", 10).attr("height", 10);
+
+
+                lineLegend.append("text").text(function (d) {
+                    return d;
+                })
+                    .attr("transform", "translate(15,15)"); //align texts with boxes
+
+
+                svg.append("text")
+                .attr("x", (width / 2))
+                .attr("y", 0)
+                .attr("text-anchor", "middle")
+                .style("font-size", "24px")
+                .style("text-decoration", "underline")
+                .text("Countries 2020 Index Comparison");
+
+            })
+    }
+
+
+    main(default_countries);
 
 </script>
 </body>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>World Trade</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://d3js.org/topojson.v2.min.js"></script>
+    <style>
+        .tooltipData {
+            font-size: small;
+        }
+
+        #tooltip {
+            opacity: 0;
+            background-color: #f5f3f0;
+            position: absolute;
+            font-family: sans-serif;
+            font-size: medium;
+            width: 160px;
+            height: 100px;
+        }
+
+        #caption {
+            margin: auto;
+            padding-top: 1%;
+            padding-bottom: 1%;
+            padding-left: 4%;
+            font-family: serif;
+            font-size: 20pt;
+        }
+
+        #container {
+            width: 90vw;
+            height: 80vh;
+        }
+
+        #canvas {
+            width: 90vw;
+            height: 80vh;
+            background-color: #fffefe;
+        }
+
+        path.path_geo {
+            stroke-width: .1px;
+            stroke: black;
+            fill-opacity: .8;
+        }
+
+        .gop {
+            fill: none;
+            stroke: #FF0000;
+            stroke-width: 4px;
+            stroke-opacity: .8;
+
+        }
+
+        .dems {
+            fill: none;
+            stroke: #0015BC;
+            stroke-width: 4px;
+            stroke-opacity: .8;
+        }
+
+        .county_name {
+            font-family: sans-serif;
+            font-size: medium;
+            color: dimgray;
+            font-weight: bold;
+
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div id="caption">
+        Trade Network
+    </div>
+
+    <div class="d-flex justify-content-center my-4">
+        <div class="w-75">
+            <label for="year">Year</label>
+            <input type="range" class="custom-range" id="year" min="2011" max="2018" name="year" value="2018">
+        </div>
+        <span class="font-weight-bold text-primary ml-2 valueSpan2"></span>
+    </div>
+    <div id="container">
+        <svg id="canvas" width="100vw" height="60vh" viewBox="0 0 1000 600">
+            <defs>
+                <marker id="triangle" viewBox="0 0 10 10"
+                        refX="1" refY="5"
+                        markerUnits="strokeWidth"
+                        markerWidth="10" markerHeight="10"
+                        orient="auto">
+                    <path d="M 0 0 L 5 5 L 0 10 z" fill="#f00" style="fill-opacity: .25;"/>
+                </marker>
+            </defs>
+        </svg>
+    </div>
+
+
+    <div id="tooltip"></div>
+</div>
+<script>
+    var year = 2018;
+    $(document).ready(function () {
+
+        const $valueSpan = $('.valueSpan2');
+        const $value = $('#year');
+        $valueSpan.html($value.val());
+        $value.on('input change', () => {
+            window.year = $value.val();
+            $valueSpan.html($value.val());
+            main();
+        });
+    });
+
+
+    // load the data sources:
+    // source 1
+    let trade_data = d3.csv("data/WTO_Agg_Updated.csv")
+    let countries_point = d3.csv("data/countries_lat_long.csv")
+    // source 2: US Census Counties geojson
+    //let geojson = "data/countries_geo_topo.json";
+    let geojson = d3.json("data/detailed_topo.json");
+    let projection = d3.geoEquirectangular()
+        .scale(200).translate([400, 350])
+
+    let line_width = d3.scaleLog().range([0.5,4])
+    let radius = d3.scaleSqrt()
+        .domain([0, 100])
+        .range([0, 14]);
+
+    let path = d3.geoPath()
+        .projection(projection)
+        .pointRadius(2.5)
+    function main(){
+        Promise.all(
+            [
+                geojson,
+                trade_data,
+                countries_point ]
+            , d3.autoType()).then(plot_map)
+
+        function plot_map(data) {
+            //let geoJson = topojson.feature(data[0], data[0].objects.countries_geo).features;
+            let geoJson = topojson.feature(data[0], data[0].objects.custom).features;
+            let geo_generator = d3.geoPath().projection(projection);
+            let lat_long = {}
+            d3.map(data[2], function (d) {
+                lat_long[d.country] =
+                    {lat: d.latitude, long: d.longitude}
+            })
+
+
+            let trade_data = data[1];
+            trade_data = trade_data.filter(function (d) {
+                return d['Year'] == year;
+            })
+
+            let link = {};
+            let trade_details = new Map();
+            let amount = [];
+            trade_data.forEach(function (d) {
+                amount.push(parseFloat(d['Value']))
+                if (lat_long[d['Reporting Country']] != undefined && lat_long[d['Partner Country']] != undefined) {
+                    let source = [+lat_long[d['Reporting Country']].long, +lat_long[d['Reporting Country']].lat]
+                    let target = [+lat_long[d['Partner Country']].long, +lat_long[d['Partner Country']].lat]
+                    if (link[d['Reporting Country Code']] === undefined) {
+                        link[d['Reporting Country Code']] = []
+                    }
+                    link[d['Reporting Country Code']].push({type: "LineString", coordinates: [source, target], trade_value: parseFloat(d['Value'])});
+                }
+                let value = trade_details.get(d['Reporting Country Code']);
+                if (value === undefined) {
+                    value = {name: d['Reporting Country'], trade_value:0};
+                }
+                value.trade_value += parseFloat(d['Value'])
+                trade_details.set(d['Reporting Country Code'], value);
+
+            })
+
+            line_width.domain(d3.extent(amount))
+
+            let domain = d3.extent(trade_details, function (d) {
+                return d[1].trade_value
+            })
+
+            let log_values = d3.scaleLog().domain(domain).range([0, 100]);
+
+            let colorScale = d3.scaleLinear()
+                .domain([0, 100])
+                .range(["yellow", "darkred"])
+                .interpolate(d3.interpolateCubehelix.gamma(10));
+
+
+            // Draw the map
+            let svg = d3.select('#canvas')
+
+            let mapCanvas = svg.append('g')
+            mapCanvas.selectAll("path")
+                .data(geoJson)
+                .enter().append("path")
+                .style("fill", function (d) {
+                    let detail = trade_details.get(d.properties.iso_a3);
+                    if (detail === undefined) {
+                        return 'lightgrey'
+                    }
+                    return colorScale(log_values(detail.trade_value))
+                })
+                .attr("d", geo_generator)
+                .style("stroke", "#fff")
+                // .style("stroke-width", 0)
+                .on("mousemove", function (mouseData, d) {
+                    path_append(mouseData, d.properties.iso_a3)
+                    d3.select('#tooltip')
+                        .style("opacity", .8)
+                        .style("left", (mouseData.clientX + 10).toString() + "px")
+                        .style("top", (mouseData.clientY + 10).toString() + "px")
+                })
+
+            function path_append(mouseData, iso_a3) {
+                // Add the path
+                let link_data = link[iso_a3];
+                if (link_data != undefined) {
+                    d3.select('#tooltip')
+                        .attr("opacity", .8)
+                        .attr("left", (mouseData.clientX + 10).toString() + "px")
+                        .attr("top", (mouseData.clientY + 10).toString() + "px")
+                        .html(
+                            "<div class='tooltipData'>Country: " + trade_details.get(iso_a3).name + "</div>" +
+                            "<div class='tooltipData'>Trade amount (in million US Dollars): " + trade_details.get(iso_a3).trade_value + "</div>" +
+                            "<div class='tooltipData'></div>")
+
+
+                    d3.selectAll(".link_path").remove();
+
+                    svg.selectAll("myPath")
+                        .data(link_data)
+                        .enter()
+                        .append("path")
+                        .attr("class", "link_path")
+                        .transition()
+                        .delay(function (d, i) {
+                            return i * 100;
+                        })
+                        .attr("d", function (d) {
+                            return path(d)
+                        })
+                        .attr("fill", "none")
+                        .attr("stroke", "#69b3a2")
+                        .attr('marker-end', 'url(#triangle)')
+                        .attr("stroke-width", function(d){
+                            return line_width(d.trade_value)
+                        })
+                }
+
+
+            }
+
+        }
+    }
+    main()
+
+</script>
+</body>
+</html>

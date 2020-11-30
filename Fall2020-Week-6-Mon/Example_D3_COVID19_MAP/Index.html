@@ -60,7 +60,7 @@
     // Source 1: NY times COVID-19 Data (live)
     let covid19="https://raw.githubusercontent.com/nytimes/covid-19-data/master/live/us-counties.csv";
     // source 2: US Census Counties geojson
-    let geojson = "../data/us_counties_topo.json";
+    let geojson = "../../data/us_counties_topo.json";
     let projection = d3.geoAlbersUsa()
                         .scale(1300).translate([500, 400])
     Promise.all(

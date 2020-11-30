@@ -1,0 +1,974 @@
+﻿LOCATION,Country,Time,Value
+CAN,Canada,19-Jan,-1.766019
+CAN,Canada,19-Feb,-2.627985
+CAN,Canada,19-Mar,-1.259707
+CAN,Canada,19-Apr,-1.657583
+CAN,Canada,19-May,0.9247788
+CAN,Canada,19-Jun,0.26213
+CAN,Canada,19-Jul,-0.8208888
+CAN,Canada,19-Aug,-1.912529
+CAN,Canada,19-Sep,-0.08525197
+CAN,Canada,19-Oct,-0.7082568
+CAN,Canada,19-Nov,0.05129155
+CAN,Canada,19-Dec,3.024062
+CAN,Canada,20-Jan,0.8271396
+CAN,Canada,20-Feb,-0.2701747
+CAN,Canada,20-Mar,-0.9088694
+CAN,Canada,20-Apr,-2.425379
+CAN,Canada,20-May,-0.2956578
+CAN,Canada,20-Jun,-1.793759
+CAN,Canada,20-Jul,-2.585727
+CAN,Canada,20-Aug,-2.548162
+CAN,Canada,20-Sep,-1.252858
+FRA,France,19-Jan,-9.315008
+FRA,France,19-Feb,-6.599703
+FRA,France,19-Mar,-6.951293
+FRA,France,19-Apr,-7.361588
+FRA,France,19-May,-6.540802
+FRA,France,19-Jun,-7.031259
+FRA,France,19-Jul,-6.738586
+FRA,France,19-Aug,-7.199841
+FRA,France,19-Sep,-7.928639
+FRA,France,19-Oct,-6.444613
+FRA,France,19-Nov,-7.231008
+FRA,France,19-Dec,-4.361861
+FRA,France,20-Jan,-9.717091
+FRA,France,20-Feb,-6.751114
+FRA,France,20-Mar,-4.104872
+FRA,France,20-Apr,-6.009328
+FRA,France,20-May,-9.721801
+FRA,France,20-Jun,-10.66008
+FRA,France,20-Jul,-8.352942
+FRA,France,20-Aug,-10.25309
+FRA,France,20-Sep,-9.234138
+DEU,Germany,19-Jan,17.24705
+DEU,Germany,19-Feb,20.51867
+DEU,Germany,19-Mar,25.66422
+DEU,Germany,19-Apr,20.45015
+DEU,Germany,19-May,23.54288
+DEU,Germany,19-Jun,19.11591
+DEU,Germany,19-Jul,24.30738
+DEU,Germany,19-Aug,18.72773
+DEU,Germany,19-Sep,23.84877
+DEU,Germany,19-Oct,24.102
+DEU,Germany,19-Nov,20.75757
+DEU,Germany,19-Dec,17.1351
+DEU,Germany,20-Jan,15.7464
+DEU,Germany,20-Feb,22.52861
+DEU,Germany,20-Mar,19.30319
+DEU,Germany,20-Apr,3.766159
+DEU,Germany,20-May,7.654115
+DEU,Germany,20-Jun,17.56619
+DEU,Germany,20-Jul,22.3295
+DEU,Germany,20-Aug,14.33304
+DEU,Germany,20-Sep,24.8652
+ITA,Italy,19-Jan,0.370892
+ITA,Italy,19-Feb,3.674267
+ITA,Italy,19-Mar,5.172519
+ITA,Italy,19-Apr,3.203377
+ITA,Italy,19-May,6.024635
+ITA,Italy,19-Jun,6.438835
+ITA,Italy,19-Jul,8.542555
+ITA,Italy,19-Aug,2.890149
+ITA,Italy,19-Sep,2.957016
+ITA,Italy,19-Oct,8.905795
+ITA,Italy,19-Nov,5.40298
+ITA,Italy,19-Dec,5.563692
+ITA,Italy,20-Jan,0.6053961
+ITA,Italy,20-Feb,6.637803
+ITA,Italy,20-Mar,6.275318
+ITA,Italy,20-Apr,-1.229438
+ITA,Italy,20-May,6.090181
+ITA,Italy,20-Jun,7.012628
+ITA,Italy,20-Jul,11.11668
+ITA,Italy,20-Aug,4.647398
+ITA,Italy,20-Sep,6.892577
+JPN,Japan,19-Jan,-13.04973
+JPN,Japan,19-Feb,2.97986
+JPN,Japan,19-Mar,4.65073
+JPN,Japan,19-Apr,0.5284373
+JPN,Japan,19-May,-8.769672
+JPN,Japan,19-Jun,5.442283
+JPN,Japan,19-Jul,-2.345745
+JPN,Japan,19-Aug,-1.431644
+JPN,Japan,19-Sep,-1.201312
+JPN,Japan,19-Oct,0.1032437
+JPN,Japan,19-Nov,-0.8123608
+JPN,Japan,19-Dec,-1.457692
+JPN,Japan,20-Jan,-12.02844
+JPN,Japan,20-Feb,10.05714
+JPN,Japan,20-Mar,0.06701414
+JPN,Japan,20-Apr,-8.637379
+JPN,Japan,20-May,-7.846519
+JPN,Japan,20-Jun,-2.536655
+JPN,Japan,20-Jul,0.06627113
+JPN,Japan,20-Aug,2.305722
+JPN,Japan,20-Sep,6.516166
+KOR,Korea,19-Jan,1.015545
+KOR,Korea,19-Feb,2.830366
+KOR,Korea,19-Mar,5.010857
+KOR,Korea,19-Apr,3.733992
+KOR,Korea,19-May,2.084281
+KOR,Korea,19-Jun,3.903592
+KOR,Korea,19-Jul,2.315976
+KOR,Korea,19-Aug,1.562815
+KOR,Korea,19-Sep,5.88758
+KOR,Korea,19-Oct,5.252239
+KOR,Korea,19-Nov,3.311507
+KOR,Korea,19-Dec,1.980911
+KOR,Korea,20-Jan,0.377991
+KOR,Korea,20-Feb,3.910791
+KOR,Korea,20-Mar,4.384408
+KOR,Korea,20-Apr,-1.571283
+KOR,Korea,20-May,0.359961
+KOR,Korea,20-Jun,3.611675
+KOR,Korea,20-Jul,4.107562
+KOR,Korea,20-Aug,3.837726
+KOR,Korea,20-Sep,8.695963
+KOR,Korea,20-Oct,5.98
+MEX,Mexico,19-Jan,-4.625277
+MEX,Mexico,19-Feb,1.363944
+MEX,Mexico,19-Mar,1.488307
+MEX,Mexico,19-Apr,1.509703
+MEX,Mexico,19-May,0.957455
+MEX,Mexico,19-Jun,2.54115
+MEX,Mexico,19-Jul,-1.29003
+MEX,Mexico,19-Aug,0.402174
+MEX,Mexico,19-Sep,-0.152188
+MEX,Mexico,19-Oct,-0.68775
+MEX,Mexico,19-Nov,0.767155
+MEX,Mexico,19-Dec,3.133873
+MEX,Mexico,20-Jan,-2.481098
+MEX,Mexico,20-Feb,2.867994
+MEX,Mexico,20-Mar,3.335532
+MEX,Mexico,20-Apr,-3.0874
+MEX,Mexico,20-May,-3.522622
+MEX,Mexico,20-Jun,5.546664
+MEX,Mexico,20-Jul,5.798685
+MEX,Mexico,20-Aug,6.115739
+MEX,Mexico,20-Sep,4.384719
+GBR,United Kingdom,19-Jan,-19.49256
+GBR,United Kingdom,19-Feb,-15.87658
+GBR,United Kingdom,19-Mar,-17.66693
+GBR,United Kingdom,19-Apr,-13.98843
+GBR,United Kingdom,19-May,-13.47082
+GBR,United Kingdom,19-Jun,-12.97936
+GBR,United Kingdom,19-Jul,-14.88026
+GBR,United Kingdom,19-Aug,-14.38868
+GBR,United Kingdom,19-Sep,-14.89497
+GBR,United Kingdom,19-Oct,-17.20778
+GBR,United Kingdom,19-Nov,-14.23539
+GBR,United Kingdom,19-Dec,-9.817359
+GBR,United Kingdom,20-Jan,-13.90177
+GBR,United Kingdom,20-Feb,-11.10181
+GBR,United Kingdom,20-Mar,-13.41963
+GBR,United Kingdom,20-Apr,-8.699224
+GBR,United Kingdom,20-May,-7.366186
+GBR,United Kingdom,20-Jun,-10.64528
+GBR,United Kingdom,20-Jul,-12.81061
+GBR,United Kingdom,20-Aug,-12.07873
+GBR,United Kingdom,20-Sep,-18.29702
+USA,United States,19-Jan,-74.979
+USA,United States,19-Feb,-55.775
+USA,United States,19-Mar,-59.497
+USA,United States,19-Apr,-74.336
+USA,United States,19-May,-78.354
+USA,United States,19-Jun,-69.297
+USA,United States,19-Jul,-85.67
+USA,United States,19-Aug,-77.337
+USA,United States,19-Sep,-72.563
+USA,United States,19-Oct,-76.996
+USA,United States,19-Nov,-62.536
+USA,United States,19-Dec,-67.031
+USA,United States,20-Jan,-67.404
+USA,United States,20-Feb,-46.103
+USA,United States,20-Mar,-59.822
+USA,United States,20-Apr,-69.653
+USA,United States,20-May,-73.382
+USA,United States,20-Jun,-74.653
+USA,United States,20-Jul,-88.012
+USA,United States,20-Aug,-85.415
+USA,United States,20-Sep,-84.922
+BRA,Brazil,19-Jan,1.614077
+BRA,Brazil,19-Feb,3.115612
+BRA,Brazil,19-Mar,4.2957
+BRA,Brazil,19-Apr,5.653116
+BRA,Brazil,19-May,5.624357
+BRA,Brazil,19-Jun,5.377381
+BRA,Brazil,19-Jul,2.391406
+BRA,Brazil,19-Aug,4.099604
+BRA,Brazil,19-Sep,3.803236
+BRA,Brazil,19-Oct,2.549555
+BRA,Brazil,19-Nov,3.564612
+BRA,Brazil,19-Dec,5.946891
+BRA,Brazil,20-Jan,-1.678691
+BRA,Brazil,20-Feb,2.32522
+BRA,Brazil,20-Mar,3.832716
+BRA,Brazil,20-Apr,5.98911
+BRA,Brazil,20-May,4.153387
+BRA,Brazil,20-Jun,7.062753
+BRA,Brazil,20-Jul,7.945918
+BRA,Brazil,20-Aug,6.357025
+BRA,Brazil,20-Sep,5.967933
+BRA,Brazil,20-Oct,5.472585
+CHN,China (People's Republic of),19-Jan,39.59
+CHN,China (People's Republic of),19-Feb,4.12
+CHN,China (People's Republic of),19-Mar,32.419
+CHN,China (People's Republic of),19-Apr,13.772
+CHN,China (People's Republic of),19-May,41.657
+CHN,China (People's Republic of),19-Jun,50.97607
+CHN,China (People's Republic of),19-Jul,44.61327
+CHN,China (People's Republic of),19-Aug,34.82648
+CHN,China (People's Republic of),19-Sep,39.64826
+CHN,China (People's Republic of),19-Oct,43.01802
+CHN,China (People's Republic of),19-Nov,37.92642
+CHN,China (People's Republic of),19-Dec,47.21034
+CHN,China (People's Republic of),20-Jan,-7.81
+CHN,China (People's Republic of),20-Feb,0.71
+CHN,China (People's Republic of),20-Mar,19.93312
+CHN,China (People's Republic of),20-Apr,45.33305
+CHN,China (People's Republic of),20-May,62.92608
+CHN,China (People's Republic of),20-Jun,46.4212
+CHN,China (People's Republic of),20-Jul,62.32941
+CHN,China (People's Republic of),20-Aug,58.92539
+CHN,China (People's Republic of),20-Sep,36.99863
+CHN,China (People's Republic of),20-Oct,58.44314
+COL,Colombia,19-Jan,-1.2361
+COL,Colombia,19-Feb,-0.7682
+COL,Colombia,19-Mar,-0.9562
+COL,Colombia,19-Apr,-0.6657
+COL,Colombia,19-May,-1.0406
+COL,Colombia,19-Jun,-0.8868
+COL,Colombia,19-Jul,-1.3092
+COL,Colombia,19-Aug,-1.6488
+COL,Colombia,19-Sep,-1.1331
+COL,Colombia,19-Oct,-1.0068
+COL,Colombia,19-Nov,-1.8137
+COL,Colombia,19-Dec,-0.7483
+COL,Colombia,20-Jan,-0.9099
+COL,Colombia,20-Feb,-1.0248
+COL,Colombia,20-Mar,-1.1487
+COL,Colombia,20-Apr,-1.2326
+COL,Colombia,20-May,-0.6561
+COL,Colombia,20-Jun,-0.6124
+COL,Colombia,20-Jul,-1.0972
+COL,Colombia,20-Aug,-0.9825
+COL,Colombia,20-Sep,-0.9443
+CRI,Costa Rica,19-Jan,-0.5852605
+CRI,Costa Rica,19-Feb,-0.3710275
+CRI,Costa Rica,19-Mar,-0.6165813
+CRI,Costa Rica,19-Apr,-0.4726884
+CRI,Costa Rica,19-May,-0.4662905
+CRI,Costa Rica,19-Jun,-0.3813596
+CRI,Costa Rica,19-Jul,-0.4781818
+CRI,Costa Rica,19-Aug,-0.4934809
+CRI,Costa Rica,19-Sep,-0.3540443
+CRI,Costa Rica,19-Oct,-0.4364512
+CRI,Costa Rica,19-Nov,-0.5124948
+CRI,Costa Rica,19-Dec,-0.5412976
+CRI,Costa Rica,20-Jan,-0.3486126
+CRI,Costa Rica,20-Feb,-0.233771
+CRI,Costa Rica,20-Mar,-0.1104427
+CRI,Costa Rica,20-Apr,-0.2158725
+CRI,Costa Rica,20-May,-0.1768482
+CRI,Costa Rica,20-Jun,-0.2330159
+CRI,Costa Rica,20-Jul,-0.185961
+CRI,Costa Rica,20-Aug,-0.2286912
+CRI,Costa Rica,20-Sep,-0.1622505
+IND,India,19-Jan,-15.04785
+IND,India,19-Feb,-9.729052
+IND,India,19-Mar,-10.96526
+IND,India,19-Apr,-16.34961
+IND,India,19-May,-16.83335
+IND,India,19-Jun,-16.00515
+IND,India,19-Jul,-14.19901
+IND,India,19-Aug,-13.86017
+IND,India,19-Sep,-11.68109
+IND,India,19-Oct,-11.77398
+IND,India,19-Nov,-12.77875
+IND,India,19-Dec,-12.49805
+IND,India,20-Jan,-15.29619
+IND,India,20-Feb,-10.16171
+IND,India,20-Mar,-9.980249
+IND,India,20-Apr,-6.854812
+IND,India,20-May,-3.022768
+IND,India,20-Jun,0.8444572
+IND,India,20-Jul,-4.834094
+IND,India,20-Aug,-6.77228
+IND,India,20-Sep,-2.73
+IND,India,20-Oct,-8.72
+IDN,Indonesia,19-Jan,-0.9771
+IDN,Indonesia,19-Feb,0.32349
+IDN,Indonesia,19-Mar,0.70117
+IDN,Indonesia,19-Apr,-2.33112
+IDN,Indonesia,19-May,0.14523
+IDN,Indonesia,19-Jun,0.26796
+IDN,Indonesia,19-Jul,-0.28006
+IDN,Indonesia,19-Aug,0.09261
+IDN,Indonesia,19-Sep,-0.18334
+IDN,Indonesia,19-Oct,0.12238
+IDN,Indonesia,19-Nov,-1.39599
+IDN,Indonesia,19-Dec,-0.07796
+IDN,Indonesia,20-Jan,-0.63668
+IDN,Indonesia,20-Feb,2.5128
+IDN,Indonesia,20-Mar,0.71576
+IDN,Indonesia,20-Apr,-0.37209
+IDN,Indonesia,20-May,2.01565
+IDN,Indonesia,20-Jun,1.24902
+IDN,Indonesia,20-Jul,3.23837
+IDN,Indonesia,20-Aug,2.35337
+IDN,Indonesia,20-Sep,2.39043
+IDN,Indonesia,20-Oct,3.6068
+RUS,Russia,19-Jan,14.406
+RUS,Russia,19-Feb,16.485
+RUS,Russia,19-Mar,16.059
+RUS,Russia,19-Apr,14.602
+RUS,Russia,19-May,12.464
+RUS,Russia,19-Jun,12.356
+RUS,Russia,19-Jul,11.051
+RUS,Russia,19-Aug,12.354
+RUS,Russia,19-Sep,14.503
+RUS,Russia,19-Oct,13.161
+RUS,Russia,19-Nov,12.581
+RUS,Russia,19-Dec,15.23
+RUS,Russia,20-Jan,13.438
+RUS,Russia,20-Feb,10.208
+RUS,Russia,20-Mar,9.519
+RUS,Russia,20-Apr,7.281
+RUS,Russia,20-May,3.682
+RUS,Russia,20-Jun,5.353
+RUS,Russia,20-Jul,4.734
+RUS,Russia,20-Aug,3.234
+RUS,Russia,20-Sep,10.052
+ZAF,South Africa,19-Jan,-0.942636
+ZAF,South Africa,19-Feb,0.2803199
+ZAF,South Africa,19-Mar,0.3271208
+ZAF,South Africa,19-Apr,-0.2490398
+ZAF,South Africa,19-May,0.1174762
+ZAF,South Africa,19-Jun,0.3803941
+ZAF,South Africa,19-Jul,-0.2651895
+ZAF,South Africa,19-Aug,0.2999546
+ZAF,South Africa,19-Sep,0.305283
+ZAF,South Africa,19-Oct,0.1846171
+ZAF,South Africa,19-Nov,0.3812595
+ZAF,South Africa,19-Dec,0.9624833
+ZAF,South Africa,20-Jan,-0.1889955
+ZAF,South Africa,20-Feb,0.9131414
+ZAF,South Africa,20-Mar,1.441084
+ZAF,South Africa,20-Apr,-1.935103
+ZAF,South Africa,20-May,1.085347
+ZAF,South Africa,20-Jun,2.669188
+ZAF,South Africa,20-Jul,2.216912
+ZAF,South Africa,20-Aug,2.245998
+ZAF,South Africa,20-Sep,2.004925
+AUT,Austria,19-Jan,-0.7801522
+AUT,Austria,19-Feb,-0.5299686
+AUT,Austria,19-Mar,-0.6487677
+AUT,Austria,19-Apr,-0.7453948
+AUT,Austria,19-May,-0.6497396
+AUT,Austria,19-Jun,-0.1888526
+AUT,Austria,19-Jul,-1.089267
+AUT,Austria,19-Aug,-0.6195481
+AUT,Austria,19-Sep,-0.3159347
+AUT,Austria,19-Oct,0.3363743
+AUT,Austria,19-Nov,-0.4697139
+AUT,Austria,19-Dec,-0.3863505
+AUT,Austria,20-Jan,-0.5738662
+AUT,Austria,20-Feb,-0.2729717
+AUT,Austria,20-Mar,0.01766296
+AUT,Austria,20-Apr,-0.1047001
+AUT,Austria,20-May,-0.5054975
+AUT,Austria,20-Jun,-0.2028991
+AUT,Austria,20-Jul,0.4937993
+AUT,Austria,20-Aug,-0.8184729
+AUT,Austria,20-Sep,0.1721701
+NLD,Netherlands,19-Jan,4.368373
+NLD,Netherlands,19-Feb,6.859638
+NLD,Netherlands,19-Mar,8.242502
+NLD,Netherlands,19-Apr,4.562256
+NLD,Netherlands,19-May,6.494488
+NLD,Netherlands,19-Jun,6.059322
+NLD,Netherlands,19-Jul,4.838621
+NLD,Netherlands,19-Aug,5.327736
+NLD,Netherlands,19-Sep,6.883302
+NLD,Netherlands,19-Oct,7.094038
+NLD,Netherlands,19-Nov,6.059983
+NLD,Netherlands,19-Dec,6.122716
+NLD,Netherlands,20-Jan,5.448565
+NLD,Netherlands,20-Feb,7.530986
+NLD,Netherlands,20-Mar,7.496822
+NLD,Netherlands,20-Apr,3.816715
+NLD,Netherlands,20-May,4.446851
+NLD,Netherlands,20-Jun,5.281005
+NLD,Netherlands,20-Jul,7.273099
+NLD,Netherlands,20-Aug,5.348524
+NLD,Netherlands,20-Sep,7.477437
+ESP,Spain,19-Jan,-4.398063
+ESP,Spain,19-Feb,-2.922259
+ESP,Spain,19-Mar,-3.178205
+ESP,Spain,19-Apr,-1.520452
+ESP,Spain,19-May,-2.784886
+ESP,Spain,19-Jun,-2.63411
+ESP,Spain,19-Jul,-2.736009
+ESP,Spain,19-Aug,-4.409483
+ESP,Spain,19-Sep,-5.367366
+ESP,Spain,19-Oct,-2.946343
+ESP,Spain,19-Nov,-2.125701
+ESP,Spain,19-Dec,-3.708832
+ESP,Spain,20-Jan,-3.921808
+ESP,Spain,20-Feb,-2.165015
+ESP,Spain,20-Mar,-2.833028
+ESP,Spain,20-Apr,-1.775444
+ESP,Spain,20-May,0.08397692
+ESP,Spain,20-Jun,0.6326802
+ESP,Spain,20-Jul,-0.1554596
+ESP,Spain,20-Aug,-2.063394
+ESP,Spain,20-Sep,-2.229373
+ARG,Argentina,19-Jan,0.373
+ARG,Argentina,19-Feb,0.45
+ARG,Argentina,19-Mar,1.181
+ARG,Argentina,19-Apr,1.165
+ARG,Argentina,19-May,1.399
+ARG,Argentina,19-Jun,1.068
+ARG,Argentina,19-Jul,0.951
+ARG,Argentina,19-Aug,1.168
+ARG,Argentina,19-Sep,1.744
+ARG,Argentina,19-Oct,1.768
+ARG,Argentina,19-Nov,2.484
+ARG,Argentina,19-Dec,2.241
+ARG,Argentina,20-Jan,1.022
+ARG,Argentina,20-Feb,1.129
+ARG,Argentina,20-Mar,1.158
+ARG,Argentina,20-Apr,1.411
+ARG,Argentina,20-May,1.893
+ARG,Argentina,20-Jun,1.484
+ARG,Argentina,20-Jul,1.451
+ARG,Argentina,20-Aug,1.43
+ARG,Argentina,20-Sep,0.584
+AUS,Australia,19-Jan,2.651573
+AUS,Australia,19-Feb,4.166877
+AUS,Australia,19-Mar,5.120743
+AUS,Australia,19-Apr,4.455601
+AUS,Australia,19-May,5.08978
+AUS,Australia,19-Jun,7.94015
+AUS,Australia,19-Jul,6.283836
+AUS,Australia,19-Aug,5.405189
+AUS,Australia,19-Sep,4.715667
+AUS,Australia,19-Oct,1.877745
+AUS,Australia,19-Nov,4.001782
+AUS,Australia,19-Dec,5.544496
+AUS,Australia,20-Jan,2.277507
+AUS,Australia,20-Feb,4.067824
+AUS,Australia,20-Mar,7.139028
+AUS,Australia,20-Apr,4.435771
+AUS,Australia,20-May,4.578278
+AUS,Australia,20-Jun,5.217751
+AUS,Australia,20-Jul,1.991506
+AUS,Australia,20-Aug,2.960444
+AUS,Australia,20-Sep,3.699942
+BEL,Belgium,19-Jan,1.105939
+BEL,Belgium,19-Feb,1.56937
+BEL,Belgium,19-Mar,1.315836
+BEL,Belgium,19-Apr,0.5069673
+BEL,Belgium,19-May,0.6976199
+BEL,Belgium,19-Jun,1.434693
+BEL,Belgium,19-Jul,2.847929
+BEL,Belgium,19-Aug,2.079586
+BEL,Belgium,19-Sep,2.359493
+BEL,Belgium,19-Oct,2.333507
+BEL,Belgium,19-Nov,1.954434
+BEL,Belgium,19-Dec,1.029268
+BEL,Belgium,20-Jan,1.293503
+BEL,Belgium,20-Feb,2.009717
+BEL,Belgium,20-Mar,2.007947
+BEL,Belgium,20-Apr,0.4869696
+BEL,Belgium,20-May,0.9560282
+BEL,Belgium,20-Jun,1.951524
+BEL,Belgium,20-Jul,2.60392
+BEL,Belgium,20-Aug,1.609147
+CZE,Czech Republic,19-Jan,1.621658
+CZE,Czech Republic,19-Feb,1.604763
+CZE,Czech Republic,19-Mar,2.12139
+CZE,Czech Republic,19-Apr,1.758934
+CZE,Czech Republic,19-May,2.094015
+CZE,Czech Republic,19-Jun,1.861122
+CZE,Czech Republic,19-Jul,1.252609
+CZE,Czech Republic,19-Aug,1.268484
+CZE,Czech Republic,19-Sep,2.282573
+CZE,Czech Republic,19-Oct,1.72906
+CZE,Czech Republic,19-Nov,1.800108
+CZE,Czech Republic,19-Dec,0.71465
+CZE,Czech Republic,20-Jan,1.804748
+CZE,Czech Republic,20-Feb,1.932955
+CZE,Czech Republic,20-Mar,0.9490134
+CZE,Czech Republic,20-Apr,-0.232113
+CZE,Czech Republic,20-May,0.6119769
+CZE,Czech Republic,20-Jun,2.454479
+CZE,Czech Republic,20-Jul,1.919075
+CZE,Czech Republic,20-Aug,1.398177
+CZE,Czech Republic,20-Sep,3.012358
+DNK,Denmark,19-Jan,0.9052957
+DNK,Denmark,19-Feb,0.6526413
+DNK,Denmark,19-Mar,0.7372811
+DNK,Denmark,19-Apr,1.172665
+DNK,Denmark,19-May,1.4039
+DNK,Denmark,19-Jun,0.9929285
+DNK,Denmark,19-Jul,1.31544
+DNK,Denmark,19-Aug,1.189608
+DNK,Denmark,19-Sep,1.18064
+DNK,Denmark,19-Oct,1.089104
+DNK,Denmark,19-Nov,1.553241
+DNK,Denmark,19-Dec,0.5874908
+DNK,Denmark,20-Jan,1.281544
+DNK,Denmark,20-Feb,1.084442
+DNK,Denmark,20-Mar,1.190875
+DNK,Denmark,20-Apr,0.9151163
+DNK,Denmark,20-May,1.068171
+DNK,Denmark,20-Jun,1.05849
+DNK,Denmark,20-Jul,1.124319
+DNK,Denmark,20-Aug,0.3458737
+DNK,Denmark,20-Sep,1.407207
+FIN,Finland,19-Jan,0.6434657
+FIN,Finland,19-Feb,-0.08350608
+FIN,Finland,19-Mar,-0.08088415
+FIN,Finland,19-Apr,-0.3211243
+FIN,Finland,19-May,0.02852679
+FIN,Finland,19-Jun,0.1464963
+FIN,Finland,19-Jul,-0.4984858
+FIN,Finland,19-Aug,-0.2436363
+FIN,Finland,19-Sep,-0.2178518
+FIN,Finland,19-Oct,0.01348592
+FIN,Finland,19-Nov,-0.08541257
+FIN,Finland,19-Dec,0.4517978
+FIN,Finland,20-Jan,-0.2717788
+FIN,Finland,20-Feb,-0.7714748
+FIN,Finland,20-Mar,-0.3185956
+FIN,Finland,20-Apr,0.2422345
+FIN,Finland,20-May,-0.2889024
+FIN,Finland,20-Jun,-0.2267695
+FIN,Finland,20-Jul,-0.4612159
+FIN,Finland,20-Aug,-0.2737312
+FIN,Finland,20-Sep,-0.4088008
+GRC,Greece,19-Jan,-2.408514
+GRC,Greece,19-Feb,-1.778248
+GRC,Greece,19-Mar,-2.193248
+GRC,Greece,19-Apr,-1.820341
+GRC,Greece,19-May,-2.469637
+GRC,Greece,19-Jun,-1.771284
+GRC,Greece,19-Jul,-2.103173
+GRC,Greece,19-Aug,-1.933515
+GRC,Greece,19-Sep,-2.12755
+GRC,Greece,19-Oct,-2.208596
+GRC,Greece,19-Nov,-1.820514
+GRC,Greece,19-Dec,-1.786635
+GRC,Greece,20-Jan,-2.099513
+GRC,Greece,20-Feb,-1.865324
+GRC,Greece,20-Mar,-1.801512
+GRC,Greece,20-Apr,-1.170619
+GRC,Greece,20-May,-1.238714
+GRC,Greece,20-Jun,-1.606866
+GRC,Greece,20-Jul,-1.874235
+GRC,Greece,20-Aug,-1.790964
+GRC,Greece,20-Sep,-1.744562
+HUN,Hungary,19-Jan,0.3949291
+HUN,Hungary,19-Feb,0.8363802
+HUN,Hungary,19-Mar,0.6484616
+HUN,Hungary,19-Apr,0.2341389
+HUN,Hungary,19-May,0.675867
+HUN,Hungary,19-Jun,0.5676638
+HUN,Hungary,19-Jul,0.08964579
+HUN,Hungary,19-Aug,0.01941011
+HUN,Hungary,19-Sep,0.5346512
+HUN,Hungary,19-Oct,0.4170575
+HUN,Hungary,19-Nov,0.3685595
+HUN,Hungary,19-Dec,0.1072394
+HUN,Hungary,20-Jan,0.4631016
+HUN,Hungary,20-Feb,1.213027
+HUN,Hungary,20-Mar,0.3778681
+HUN,Hungary,20-Apr,-0.5952965
+HUN,Hungary,20-May,0.09795724
+HUN,Hungary,20-Jun,0.731687
+HUN,Hungary,20-Jul,0.2495472
+HUN,Hungary,20-Aug,0.3198523
+HUN,Hungary,20-Sep,1.364399
+CHE,Switzerland,19-Jan,3.005897
+CHE,Switzerland,19-Feb,2.893736
+CHE,Switzerland,19-Mar,3.138164
+CHE,Switzerland,19-Apr,2.277142
+CHE,Switzerland,19-May,3.145948
+CHE,Switzerland,19-Jun,4.020999
+CHE,Switzerland,19-Jul,3.706726
+CHE,Switzerland,19-Aug,1.737736
+CHE,Switzerland,19-Sep,4.008073
+CHE,Switzerland,19-Oct,3.53755
+CHE,Switzerland,19-Nov,3.941903
+CHE,Switzerland,19-Dec,2.004213
+CHE,Switzerland,20-Jan,4.872683
+CHE,Switzerland,20-Feb,3.632075
+CHE,Switzerland,20-Mar,4.030016
+CHE,Switzerland,20-Apr,4.078339
+CHE,Switzerland,20-May,2.67021
+CHE,Switzerland,20-Jun,3.371651
+CHE,Switzerland,20-Jul,3.509611
+CHE,Switzerland,20-Aug,3.904382
+CHE,Switzerland,20-Sep,3.338935
+CHE,Switzerland,20-Oct,4.230605
+CHL,Chile,19-Jan,1.064952
+CHL,Chile,19-Feb,0.1725102
+CHL,Chile,19-Mar,0.5654032
+CHL,Chile,19-Apr,0.368781
+CHL,Chile,19-May,0.1525316
+CHL,Chile,19-Jun,0.3590734
+CHL,Chile,19-Jul,-0.09516608
+CHL,Chile,19-Aug,0.252229
+CHL,Chile,19-Sep,0.03021848
+CHL,Chile,19-Oct,-0.2862136
+CHL,Chile,19-Nov,0.05759841
+CHL,Chile,19-Dec,1.523398
+CHL,Chile,20-Jan,1.078354
+CHL,Chile,20-Feb,0.7602436
+CHL,Chile,20-Mar,1.425511
+CHL,Chile,20-Apr,1.440568
+CHL,Chile,20-May,1.732799
+CHL,Chile,20-Jun,1.726914
+CHL,Chile,20-Jul,1.173249
+CHL,Chile,20-Aug,0.9042544
+CHL,Chile,20-Sep,0.8860041
+CHL,Chile,20-Oct,1.208272
+EST,Estonia,19-Jan,-0.1374858
+EST,Estonia,19-Feb,-0.09939038
+EST,Estonia,19-Mar,-0.1879766
+EST,Estonia,19-Apr,-0.1685397
+EST,Estonia,19-May,-0.1122054
+EST,Estonia,19-Jun,-0.1218732
+EST,Estonia,19-Jul,-0.2251877
+EST,Estonia,19-Aug,-0.1084682
+EST,Estonia,19-Sep,-0.1849374
+EST,Estonia,19-Oct,-0.1905716
+EST,Estonia,19-Nov,-0.08718049
+EST,Estonia,19-Dec,-0.2893462
+EST,Estonia,20-Jan,-0.01676413
+EST,Estonia,20-Feb,-0.1308694
+EST,Estonia,20-Mar,-0.1650383
+EST,Estonia,20-Apr,-0.06882156
+EST,Estonia,20-May,-0.0971733
+EST,Estonia,20-Jun,-0.001013369
+EST,Estonia,20-Jul,-0.1437571
+EST,Estonia,20-Aug,-0.1334351
+EST,Estonia,20-Sep,0.004949448
+ISL,Iceland,19-Jan,0.1685001
+ISL,Iceland,19-Feb,-0.1659883
+ISL,Iceland,19-Mar,-0.1114626
+ISL,Iceland,19-Apr,-0.1659908
+ISL,Iceland,19-May,-0.05898025
+ISL,Iceland,19-Jun,-0.2681531
+ISL,Iceland,19-Jul,-0.1998192
+ISL,Iceland,19-Aug,-0.1309351
+ISL,Iceland,19-Sep,-0.19215
+ISL,Iceland,19-Oct,-0.0319473
+ISL,Iceland,19-Nov,-0.07195229
+ISL,Iceland,19-Dec,-0.1179307
+ISL,Iceland,20-Jan,-0.05987134
+ISL,Iceland,20-Feb,-0.05422485
+ISL,Iceland,20-Mar,-0.1293769
+ISL,Iceland,20-Apr,-0.03031673
+ISL,Iceland,20-May,-0.01439782
+ISL,Iceland,20-Jun,-0.1275882
+ISL,Iceland,20-Jul,-0.1151245
+ISL,Iceland,20-Aug,-0.1125604
+ISL,Iceland,20-Sep,-0.08093432
+IRL,Ireland,19-Jan,6.679026
+IRL,Ireland,19-Feb,6.719289
+IRL,Ireland,19-Mar,4.503078
+IRL,Ireland,19-Apr,5.894169
+IRL,Ireland,19-May,7.031463
+IRL,Ireland,19-Jun,5.323678
+IRL,Ireland,19-Jul,6.354152
+IRL,Ireland,19-Aug,5.717665
+IRL,Ireland,19-Sep,5.769385
+IRL,Ireland,19-Oct,6.497562
+IRL,Ireland,19-Nov,5.610379
+IRL,Ireland,19-Dec,3.650607
+IRL,Ireland,20-Jan,8.12039
+IRL,Ireland,20-Feb,3.594872
+IRL,Ireland,20-Mar,10.69857
+IRL,Ireland,20-Apr,5.777749
+IRL,Ireland,20-May,6.88698
+IRL,Ireland,20-Jun,7.174767
+IRL,Ireland,20-Jul,5.49478
+IRL,Ireland,20-Aug,8.078738
+IRL,Ireland,20-Sep,8.623588
+LUX,Luxembourg,19-Jan,-0.5253924
+LUX,Luxembourg,19-Feb,-0.6043979
+LUX,Luxembourg,19-Mar,-0.6837874
+LUX,Luxembourg,19-Apr,-0.5597764
+LUX,Luxembourg,19-May,-0.6810632
+LUX,Luxembourg,19-Jun,-0.5709629
+LUX,Luxembourg,19-Jul,-0.5988559
+LUX,Luxembourg,19-Aug,-0.553911
+LUX,Luxembourg,19-Sep,-0.5873963
+LUX,Luxembourg,19-Oct,-0.5782366
+LUX,Luxembourg,19-Nov,-0.6970019
+LUX,Luxembourg,19-Dec,-0.8420374
+LUX,Luxembourg,20-Jan,-0.5924067
+LUX,Luxembourg,20-Feb,-0.5581578
+LUX,Luxembourg,20-Mar,-0.5292264
+LUX,Luxembourg,20-Apr,-0.3670483
+LUX,Luxembourg,20-May,-0.4406062
+LUX,Luxembourg,20-Jun,-0.5431659
+LUX,Luxembourg,20-Jul,-0.6533892
+LUX,Luxembourg,20-Aug,-0.5083073
+LUX,Luxembourg,20-Sep,-0.5588162
+NZL,New Zealand,19-Jan,-0.6336122
+NZL,New Zealand,19-Feb,-0.06395581
+NZL,New Zealand,19-Mar,0.5638751
+NZL,New Zealand,19-Apr,0.2423515
+NZL,New Zealand,19-May,0.1147652
+NZL,New Zealand,19-Jun,0.2176818
+NZL,New Zealand,19-Jul,-0.4890735
+NZL,New Zealand,19-Aug,-1.056263
+NZL,New Zealand,19-Sep,-0.8310712
+NZL,New Zealand,19-Oct,-0.6576372
+NZL,New Zealand,19-Nov,-0.5030202
+NZL,New Zealand,19-Dec,0.250681
+NZL,New Zealand,20-Jan,-0.2613577
+NZL,New Zealand,20-Feb,0.351906
+NZL,New Zealand,20-Mar,0.4391146
+NZL,New Zealand,20-Apr,0.8121139
+NZL,New Zealand,20-May,0.7876662
+NZL,New Zealand,20-Jun,0.3046081
+NZL,New Zealand,20-Jul,0.3005699
+NZL,New Zealand,20-Aug,-0.1859235
+NZL,New Zealand,20-Sep,-0.6777642
+NOR,Norway,19-Jan,3.053634
+NOR,Norway,19-Feb,1.657694
+NOR,Norway,19-Mar,2.150627
+NOR,Norway,19-Apr,1.767029
+NOR,Norway,19-May,1.013736
+NOR,Norway,19-Jun,0.702812
+NOR,Norway,19-Jul,0.803596
+NOR,Norway,19-Aug,0.630469
+NOR,Norway,19-Sep,-0.1405365
+NOR,Norway,19-Oct,1.057249
+NOR,Norway,19-Nov,2.519482
+NOR,Norway,19-Dec,2.638974
+NOR,Norway,20-Jan,1.821701
+NOR,Norway,20-Feb,1.790794
+NOR,Norway,20-Mar,-0.02749468
+NOR,Norway,20-Apr,-0.3585154
+NOR,Norway,20-May,-0.5901452
+NOR,Norway,20-Jun,-1.021248
+NOR,Norway,20-Jul,-0.2324459
+NOR,Norway,20-Aug,-0.3737281
+NOR,Norway,20-Sep,-0.9363737
+NOR,Norway,20-Oct,0.2919458
+POL,Poland,19-Jan,0.1951262
+POL,Poland,19-Feb,-0.5138105
+POL,Poland,19-Mar,0.6568246
+POL,Poland,19-Apr,0.1536342
+POL,Poland,19-May,-0.2764484
+POL,Poland,19-Jun,0.1089588
+POL,Poland,19-Jul,-0.1394865
+POL,Poland,19-Aug,-0.2798767
+POL,Poland,19-Sep,0.6833468
+POL,Poland,19-Oct,0.2512485
+POL,Poland,19-Nov,0.595143
+POL,Poland,19-Dec,-0.1209216
+POL,Poland,20-Jan,0.3087785
+POL,Poland,20-Feb,0.7855828
+POL,Poland,20-Mar,-0.06044428
+POL,Poland,20-Apr,-0.2431038
+POL,Poland,20-May,1.324968
+POL,Poland,20-Jun,2.722202
+POL,Poland,20-Jul,0.8896608
+POL,Poland,20-Aug,1.217846
+POL,Poland,20-Sep,1.618538
+PRT,Portugal,19-Jan,-2.036937
+PRT,Portugal,19-Feb,-1.523078
+PRT,Portugal,19-Mar,-1.834127
+PRT,Portugal,19-Apr,-2.000229
+PRT,Portugal,19-May,-1.812738
+PRT,Portugal,19-Jun,-2.112506
+PRT,Portugal,19-Jul,-2.08994
+PRT,Portugal,19-Aug,-1.805245
+PRT,Portugal,19-Sep,-1.905846
+PRT,Portugal,19-Oct,-1.877749
+PRT,Portugal,19-Nov,-1.887474
+PRT,Portugal,19-Dec,-1.587959
+PRT,Portugal,20-Jan,-1.625566
+PRT,Portugal,20-Feb,-1.68407
+PRT,Portugal,20-Mar,-1.718275
+PRT,Portugal,20-Apr,-1.288474
+PRT,Portugal,20-May,-1.03248
+PRT,Portugal,20-Jun,-0.9944531
+PRT,Portugal,20-Jul,-0.8944376
+PRT,Portugal,20-Aug,-1.338491
+PRT,Portugal,20-Sep,-1.282025
+SVK,Slovak Republic,19-Jan,0.1532442
+SVK,Slovak Republic,19-Feb,0.2306628
+SVK,Slovak Republic,19-Mar,0.108561
+SVK,Slovak Republic,19-Apr,-0.2974163
+SVK,Slovak Republic,19-May,-0.07674266
+SVK,Slovak Republic,19-Jun,0.06460747
+SVK,Slovak Republic,19-Jul,-0.4132554
+SVK,Slovak Republic,19-Aug,-0.3202871
+SVK,Slovak Republic,19-Sep,-0.007815805
+SVK,Slovak Republic,19-Oct,0.1516614
+SVK,Slovak Republic,19-Nov,-0.007071674
+SVK,Slovak Republic,19-Dec,-0.07811458
+SVK,Slovak Republic,20-Jan,-0.05306792
+SVK,Slovak Republic,20-Feb,-0.03009995
+SVK,Slovak Republic,20-Mar,-0.5972288
+SVK,Slovak Republic,20-Apr,-0.5699251
+SVK,Slovak Republic,20-May,0.1296735
+SVK,Slovak Republic,20-Jun,0.6993374
+SVK,Slovak Republic,20-Jul,0.2707636
+SVK,Slovak Republic,20-Aug,0.2213272
+SVK,Slovak Republic,20-Sep,0.6438996
+SWE,Sweden,19-Jan,0.1001599
+SWE,Sweden,19-Feb,0.4757019
+SWE,Sweden,19-Mar,0.5167585
+SWE,Sweden,19-Apr,-0.04292524
+SWE,Sweden,19-May,0.5729416
+SWE,Sweden,19-Jun,0.1700193
+SWE,Sweden,19-Jul,0.6907935
+SWE,Sweden,19-Aug,-0.5806714
+SWE,Sweden,19-Sep,0.1132107
+SWE,Sweden,19-Oct,-0.3989257
+SWE,Sweden,19-Nov,0.2697835
+SWE,Sweden,19-Dec,-0.3073816
+SWE,Sweden,20-Jan,1.221441
+SWE,Sweden,20-Feb,1.341797
+SWE,Sweden,20-Mar,0.6120042
+SWE,Sweden,20-Apr,0.5586514
+SWE,Sweden,20-May,0.1847275
+SWE,Sweden,20-Jun,0.6018199
+SWE,Sweden,20-Jul,0.4751479
+SWE,Sweden,20-Aug,-0.2409694
+SWE,Sweden,20-Sep,0.2942077
+TUR,Turkey,19-Jan,-2.305754
+TUR,Turkey,19-Feb,-1.743607
+TUR,Turkey,19-Mar,-1.851876
+TUR,Turkey,19-Apr,-2.617289
+TUR,Turkey,19-May,-1.631984
+TUR,Turkey,19-Jun,-3.48652
+TUR,Turkey,19-Jul,-3.345977
+TUR,Turkey,19-Aug,-2.266643
+TUR,Turkey,19-Sep,-1.663347
+TUR,Turkey,19-Oct,-1.737254
+TUR,Turkey,19-Nov,-1.990579
+TUR,Turkey,19-Dec,-4.583925
+TUR,Turkey,20-Jan,-4.501177
+TUR,Turkey,20-Feb,-2.98114
+TUR,Turkey,20-Mar,-5.36062
+TUR,Turkey,20-Apr,-4.451772
+TUR,Turkey,20-May,-3.462074
+TUR,Turkey,20-Jun,-2.838467
+TUR,Turkey,20-Jul,-2.805094
+TUR,Turkey,20-Aug,-6.167788
+TUR,Turkey,20-Sep,-4.729519
+ISR,Israel,19-Jan,-2.083
+ISR,Israel,19-Feb,-1.376
+ISR,Israel,19-Mar,-1.1009
+ISR,Israel,19-Apr,-2.4849
+ISR,Israel,19-May,-1.7526
+ISR,Israel,19-Jun,-1.9286
+ISR,Israel,19-Jul,-2.971
+ISR,Israel,19-Aug,-2.1587
+ISR,Israel,19-Sep,-1.3961
+ISR,Israel,19-Oct,-2.5699
+ISR,Israel,19-Nov,-0.8952
+ISR,Israel,19-Dec,-3.0826
+ISR,Israel,20-Jan,-1.6397
+ISR,Israel,20-Feb,-1.4344
+ISR,Israel,20-Mar,-1.9178
+ISR,Israel,20-Apr,-1.5742
+ISR,Israel,20-May,-0.8813
+ISR,Israel,20-Jun,-1.5529
+ISR,Israel,20-Jul,-2.1935
+ISR,Israel,20-Aug,-2.084
+ISR,Israel,20-Sep,-1.0193
+ISR,Israel,20-Oct,-1.5538
+LVA,Latvia,19-Jan,-0.1442231
+LVA,Latvia,19-Feb,-0.15907
+LVA,Latvia,19-Mar,-0.3778736
+LVA,Latvia,19-Apr,-0.3238209
+LVA,Latvia,19-May,-0.408884
+LVA,Latvia,19-Jun,-0.2760501
+LVA,Latvia,19-Jul,-0.3960972
+LVA,Latvia,19-Aug,-0.1924615
+LVA,Latvia,19-Sep,-0.2741036
+LVA,Latvia,19-Oct,-0.1668054
+LVA,Latvia,19-Nov,-0.1241963
+LVA,Latvia,19-Dec,-0.4100182
+LVA,Latvia,20-Jan,-0.1190142
+LVA,Latvia,20-Feb,-0.1140745
+LVA,Latvia,20-Mar,-0.2619638
+LVA,Latvia,20-Apr,-0.07980256
+LVA,Latvia,20-May,-0.1295644
+LVA,Latvia,20-Jun,-0.2006471
+LVA,Latvia,20-Jul,-0.3187208
+LVA,Latvia,20-Aug,-0.182172
+LVA,Latvia,20-Sep,-0.1761768
+LTU,Lithuania,19-Jan,-0.1478772
+LTU,Lithuania,19-Feb,-0.2647007
+LTU,Lithuania,19-Mar,-0.1636887
+LTU,Lithuania,19-Apr,-0.2695511
+LTU,Lithuania,19-May,-0.5311577
+LTU,Lithuania,19-Jun,-0.1436726
+LTU,Lithuania,19-Jul,-0.4379273
+LTU,Lithuania,19-Aug,-0.1563055
+LTU,Lithuania,19-Sep,-0.06781036
+LTU,Lithuania,19-Oct,-0.08191041
+LTU,Lithuania,19-Nov,-0.1166826
+LTU,Lithuania,19-Dec,-0.2262323
+LTU,Lithuania,20-Jan,-0.128562
+LTU,Lithuania,20-Feb,-0.1531172
+LTU,Lithuania,20-Mar,-0.05861895
+LTU,Lithuania,20-Apr,-0.04435892
+LTU,Lithuania,20-May,0.004253377
+LTU,Lithuania,20-Jun,-0.07679088
+LTU,Lithuania,20-Jul,-0.1996308
+LTU,Lithuania,20-Aug,0.09652752
+LTU,Lithuania,20-Sep,0.179005
+SVN,Slovenia,19-Jan,0.2146789
+SVN,Slovenia,19-Feb,0.2227207
+SVN,Slovenia,19-Mar,0.1769058
+SVN,Slovenia,19-Apr,-0.2447196
+SVN,Slovenia,19-May,0.2833661
+SVN,Slovenia,19-Jun,0.2277075
+SVN,Slovenia,19-Jul,0.07435232
+SVN,Slovenia,19-Aug,0.08276959
+SVN,Slovenia,19-Sep,0.05316949
+SVN,Slovenia,19-Oct,-0.002652969
+SVN,Slovenia,19-Nov,0.1622065
+SVN,Slovenia,19-Dec,-0.3143473
+SVN,Slovenia,20-Jan,0.2989789
+SVN,Slovenia,20-Feb,0.2932564
+SVN,Slovenia,20-Mar,0.2860295
+SVN,Slovenia,20-Apr,0.2785479
+SVN,Slovenia,20-May,0.3101693
+SVN,Slovenia,20-Jun,0.2876843
+SVN,Slovenia,20-Jul,0.3809047
+SVN,Slovenia,20-Aug,-0.02034649
+SVN,Slovenia,20-Sep,0.5304158
+SAU,Saudi Arabia,19-Jan,10.75059
+SAU,Saudi Arabia,19-Feb,9.906592
+SAU,Saudi Arabia,19-Mar,11.22125
+SAU,Saudi Arabia,19-Apr,9.71175
+SAU,Saudi Arabia,19-May,8.621746
+SAU,Saudi Arabia,19-Jun,9.048256
+SAU,Saudi Arabia,19-Jul,7.391905
+SAU,Saudi Arabia,19-Aug,7.862381
+SAU,Saudi Arabia,19-Sep,8.858311
+SAU,Saudi Arabia,19-Oct,7.189928
+SAU,Saudi Arabia,19-Nov,9.801307
+SAU,Saudi Arabia,19-Dec,9.284721
+SAU,Saudi Arabia,20-Jan,11.54889
+SAU,Saudi Arabia,20-Feb,6.385336
+SAU,Saudi Arabia,20-Mar,1.730955
+SAU,Saudi Arabia,20-Apr,-0.2585495
+SAU,Saudi Arabia,20-May,0.5259616
+SAU,Saudi Arabia,20-Jun,-0.2750634
+SAU,Saudi Arabia,20-Jul,3.593847
+SAU,Saudi Arabia,20-Aug,4.904054
