@@ -105,19 +105,19 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\UMassD\Semester 2 Fall\CIS 568 DV\DataVizFall2020_Colab\Group Project" />
+      <recent name="D:\UMassD\Semester 2 Fall\CIS 568 DV\DataVizFall2020_Colab\Group Project\data" />
+      <recent name="D:\UMassD\Semester 2 Fall\CIS 568 DV\DataVizFall2020_Colab\vishal" />
+      <recent name="D:\UMassD\Semester 2 Fall\CIS 568 DV\DataVizFall2020_Colab" />
+      <recent name="D:\UMassD\Semester 2 Fall\CIS 568 DV\DataVizFall2020_Colab\Exercise_Week_10_Wed" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\UMassD\Semester 2 Fall\CIS 568 DV\DataVizFall2020_Colab\Group Project\data" />
       <recent name="D:\UMassD\Semester 2 Fall\CIS 568 DV\DataVizFall2020_Colab" />
       <recent name="D:\UMassD\Semester 2 Fall\CIS 568 DV\DataVizFall2020_Colab\Exercise_Week_11_Mon\data" />
       <recent name="D:\UMassD\Semester 2 Fall\CIS 568 DV\DataVizFall2020_Colab\Exercise_Week_11_Mon" />
       <recent name="D:\UMassD\Semester 2 Fall\CIS 568 DV\DataVizFall2020_Colab\Exercise_Week 10_Mon" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\UMassD\Semester 2 Fall\CIS 568 DV\DataVizFall2020_Colab\Group Project\data" />
-      <recent name="D:\UMassD\Semester 2 Fall\CIS 568 DV\DataVizFall2020_Colab\vishal" />
-      <recent name="D:\UMassD\Semester 2 Fall\CIS 568 DV\DataVizFall2020_Colab" />
-      <recent name="D:\UMassD\Semester 2 Fall\CIS 568 DV\DataVizFall2020_Colab\Exercise_Week_10_Wed" />
-      <recent name="D:\UMassD\Semester 2 Fall\CIS 568 DV\DataVizFall2020_Colab\data" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -166,7 +166,9 @@
       <workItem from="1606245311634" duration="2129000" />
       <workItem from="1606247898254" duration="2495000" />
       <workItem from="1606438301261" duration="26096000" />
-      <workItem from="1606666204735" duration="19118000" />
+      <workItem from="1606666204735" duration="27613000" />
+      <workItem from="1606791376127" duration="3089000" />
+      <workItem from="1606864255956" duration="14879000" />
     </task>
     <servers />
   </component>

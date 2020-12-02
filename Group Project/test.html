@@ -16,285 +16,290 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css"/>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://d3js.org/topojson.v2.min.js"></script>
+    <style>
+        .tooltipData {
+            font-size: small;
+        }
 
-    <!--    <script src="https://d3js.org/d3.v6.min.js"></script>-->
-    <script src="https://d3js.org/d3.v4.js"></script>
+        #tooltip {
+            opacity: 0;
+            background-color: #f5f3f0;
+            position: absolute;
+            font-family: sans-serif;
+            font-size: medium;
+            width: 160px;
+            height: 100px;
+        }
 
+        #caption {
+            margin: auto;
+            padding-top: 1%;
+            padding-bottom: 1%;
+            padding-left: 4%;
+            font-family: serif;
+            font-size: 20pt;
+        }
+
+        #container {
+            width: 90vw;
+            height: 80vh;
+        }
+
+        #canvas {
+            width: 90vw;
+            height: 80vh;
+            background-color: #fffefe;
+        }
+
+
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        @media screen and (max-height: 450px) {
+            .sidenav {padding-top: 15px;}
+            .sidenav a {font-size: 18px;}
+        }
+
+    </style>
 </head>
 <body>
 <div class="container">
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Clients</a>
+        <a href="#">Contact</a>
+    </div>
     <div id="caption">
         Trade Network
     </div>
-    <form method="post" id="framework_form">
-        <div class="form-group">
-            <select id="framework" name="framework[]" multiple class="form-control">
-            </select>
-            <input type="submit" class="btn btn-info" name="submit" value="Submit"/>
+
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
+    <div class="d-flex justify-content-center my-4">
+        <div class="w-75">
+            <label for="year">Year</label>
+            <input type="range" class="custom-range" id="year" min="2011" max="2018" name="year" value="2018">
         </div>
-    </form>
-    <div class="row">
-        <div class="col-sm-6">
-            <svg id="svg_2019">
-            </svg>
-        </div>
-        <div class="col-sm-6">
-            <svg id="svg_2020">
-            </svg>
-        </div>
+        <span class="font-weight-bold text-primary ml-2 valueSpan2"></span>
     </div>
+    <div id="container">
+        <svg id="canvas" width="100vw" height="60vh" viewBox="0 0 1000 600">
+            <defs>
+                <marker id="triangle" viewBox="0 0 10 10"
+                        refX="1" refY="5"
+                        markerUnits="strokeWidth"
+                        markerWidth="10" markerHeight="10"
+                        orient="auto">
+                    <path d="M 0 0 L 5 5 L 0 10 z" fill="#f00" style="fill-opacity: .25;"/>
+                </marker>
+            </defs>
+        </svg>
+    </div>
+
+
+    <div id="tooltip"></div>
 </div>
 <script>
 
-
-    var selected_countries = ['CHN', 'DEU', 'RUS', 'SAU', 'NLD', 'BRA', 'ITA', 'AUS', 'IRL'];
-
-
-    d3.csv("data/country_iso_code.csv", function (data) {
-
-        let str = ''
-        data.forEach(function (d) {
-            str += '<option';
-            if (selected_countries.includes(d.LOCATION)) {
-                str += ' selected'
-            }
-            str += '>' + d.Country + '</option>'
-        });
-        document.getElementById("framework").innerHTML += str;
-    });
-
-    $(document).ready(function () {
-        $('#framework').multiselect({
-            nonSelectedText: 'Select Country',
-            enableFiltering: true,
-            enableCaseInsensitiveFiltering: true,
-            buttonWidth: '400px'
-        });
-
-        // $('#framework_form').on('submit', function (event) {
-        //     event.preventDefault();
-        //     let selected_countries = [];
-        //     $('#framework option:selected').each(function () {
-        //         selected_countries.push($(this)[0].value)
-        //     });
-        //     main(selected_countries)
-        // });
-
-
-    });
-
-    let margin = 40;
-    let width = 1000 - 2 * margin;
-    let height = 600 - 2 * margin;
-
-    let trade_data_net = "data/latest_trade_net.csv"
-    let trade_data_export = "data/latest_trade_export.csv"
-    let trade_data_import = "data/latest_trade_import.csv"
-    d3.csv(trade_data_net,main)
-
-
-    let parseDate = d3.timeParse("%y-%b");
-
-    function main(data) {
-        data.forEach(function (d) {
-            d.Time = parseDate(d.Time);
-        });
-        // let selected_countries = ['India'];
-        trade_2019 = []
-        trade_2020 = []
-        d3.map(data, function (d) {
-
-            if (selected_countries.includes(d.LOCATION)) {
-                if (d.Time.getFullYear() == '2019') {
-                    trade_2019.push(d)
-                }
-                if (d.Time.getFullYear() == '2020') {
-                    trade_2020.push(d)
-                }
-            }
-
-        })
-
-
-        let y_extent = d3.extent(data, d => +d.Value)
-        let y = d3.scaleLinear()
-            .domain(y_extent)
-            .range([height, 2 * margin]);
-
-
-        let color = d3.scaleOrdinal()
-            .domain(selected_countries)
-            .range(d3.schemeCategory10)
-
-        let svg_2019 = d3.select("#svg_2019");
-        svg_2019
-            .attr('width', '100%')
-            .attr('height', '40vw')
-            .attr('viewBox', '0 0 1000 600')
-            .style('background-color', '#f5f3f3')
-            .append("g")
-            .attr("transform",
-                "translate(" + margin + "," + margin + ")");
-        let svg_2020 = d3.select("#svg_2020");
-        svg_2020.attr('width', '100%')
-            .attr('height', '40vw')
-            .attr('viewBox', '0 0 1000 600')
-            .style('background-color', '#f5f3f3')
-            .append("g")
-            .attr("transform",
-                "translate(" + margin + "," + margin + ")");
-
-
-        linePlot(svg_2019, trade_2019, "2019 Trade amount");
-        linePlot(svg_2020, trade_2020, "2020 Trade amount");
-
-///////////////////////////////////////////////////////
-        function linePlot(svg, data, title) {
-            let other_svg = "";
-            let svg_id = svg._groups[0][0].id;
-            if (svg_id === "svg_2019") {
-                other_svg = "svg_2020"
-            } else {
-                other_svg = "svg_2019"
-            }
-            let x_extent = d3.extent(data, d => d.Time)
-            let x = d3.scaleTime()
-                .domain(x_extent)
-                .range([2 * margin, width]);
-
-            // Add Y axis
-
-            svg.append("g")
-                .attr("class", "x_axis")
-                .attr("transform", "translate(0," + height + ")")
-                .call(d3.axisBottom(x));
-
-            // text label for the x axis
-            svg.append("text")
-                .attr("transform",
-                    "translate(" + (width / 2) + " ," +
-                    (height + margin + 20) + ")")
-                .style("text-anchor", "middle")
-                .text("Time (Year-month)");
-
-            svg.append("g")
-                .attr("class", "y_axis")
-                .attr("transform", "translate(" + 2 * margin + ",0)")
-                .call(d3.axisLeft(y));
-            // text label for the y axis
-            svg.append("text")
-                .attr("transform", "rotate(-90)")
-                .attr("y", margin / 2)
-                .attr("x", 0 - (height / 2))
-                .attr("dy", "1em")
-                .style("text-anchor", "middle")
-                .text("Net Trade Value ($ in Billion)");
-
-
-            /////////////////////////////
-            // Legends
-
-            let lineLegend = svg.selectAll(".lineLegend").data(selected_countries)
-                .enter().append("g")
-                .attr("class", "lineLegend")
-                .attr("transform", function (d, i) {
-                    return "translate(" + (width + margin / 2) + "," + (i * 20) + ")";
-                });
-
-            lineLegend.append("rect")
-                .attr("fill", function (d) {
-                    return color(d);
-                })
-                .attr("transform", "translate(0,5)")
-                .attr("width", 10).attr("height", 10);
-
-
-            lineLegend.append("text").text(function (d) {
-                return d;
-            })
-                .attr("transform", "translate(15,15)"); //align texts with boxes
-
-
-            svg.append("text")
-                .attr("x", (width / 2))
-                .attr("y", 0 - (margin / 2))
-                .attr("text-anchor", "middle")
-                .style("font-size", "24px")
-                .style("text-decoration", "underline")
-                .text(title);
-
-
-////////////////////////////
-//////////////////            Line
-
-
-            let groupedData = new Map();
-            data.forEach(function(d){
-                let value = groupedData.get(d.Country);
-                if (value === undefined) {
-                    value = [];
-                }
-                value.push(d)
-                groupedData.set(d.Country, value);
-            });
-            // let groupedData = d3.group(data, d => d.Country)
-
-            const line = d3.line()
-                .curve(d3.curveCatmullRom.alpha(0.5))
-                .x(function (d) {
-                    return x(d.Time);
-                })
-                .y(function (d) {
-                    return y(d.Value);
-                })
-
-            // Draw the line
-            svg.selectAll(".country_path")
-                .data(groupedData)
-                .enter()
-                .append("g")
-                .append("path")
-                .attr("class", "country_path")
-                .attr("id", function (d) {
-                    return svg._groups[0][0].id + "_" + d[1][0].LOCATION;
-                })
-                .attr("fill", "none")
-                .attr("stroke", function (d) {
-                    return color(d[0])
-                })
-                .attr("opacity", "0.5")
-                .attr("stroke-width", 5)
-                .attr("stroke-dasharray", ("3, 3"))
-                .attr("d", function (d) {
-                    return line(d[1])
-                })
-                .on("mouseover", function (mouseD, d) {
-                        d3.select(this)
-                            .style("opacity", "1")
-                            .style("stroke-dasharray", null);
-                        d3.select("#" + other_svg + "_" + d[1][0].LOCATION)
-                            .style("opacity", "1")
-                            .style("stroke-dasharray", null);
-                    }
-                )
-
-                .on('mouseout', function (mouseD, d) { // on mouse out hide line, circles and text
-                    d3.select(this)
-                        .style("opacity", "0.5")
-                        .style("stroke-dasharray", ("3, 3"));
-                    d3.select("#" + other_svg + "_" + d[1][0].LOCATION)
-                        .style("opacity", "0.5")
-                        .style("stroke-dasharray", ("3, 3"));
-                })
-
-        }
-
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
     }
 
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+    var year = 2018;
+    $(document).ready(function () {
+
+        const $valueSpan = $('.valueSpan2');
+        const $value = $('#year');
+        $valueSpan.html($value.val());
+        $value.on('input change', () => {
+            window.year = $value.val();
+            $valueSpan.html($value.val());
+            main();
+        });
+    });
+
+
+    // load the data sources:
+    // source 1
+    let trade_data = d3.csv("data/WTO_Agg_Updated.csv")
+    let countries_point = d3.csv("data/countries_lat_long.csv")
+    // source 2: US Census Counties geojson
+    let geojson = d3.json("data/detailed_topo.json");
+    let projection = d3.geoEquirectangular()
+        .scale(200).translate([400, 350])
+
+    let line_width = d3.scaleLog().range([0.5,4])
+    let radius = d3.scaleSqrt()
+        .domain([0, 100])
+        .range([0, 14]);
+
+    let path = d3.geoPath()
+        .projection(projection)
+        .pointRadius(2.5)
+    function main(){
+        Promise.all(
+            [
+                geojson,
+                trade_data,
+                countries_point ]
+            , d3.autoType()).then(plot_map)
+
+        function plot_map(data) {
+            //let geoJson = topojson.feature(data[0], data[0].objects.countries_geo).features;
+            let geoJson = topojson.feature(data[0], data[0].objects.custom).features;
+            let geo_generator = d3.geoPath().projection(projection);
+            let lat_long = {}
+            d3.map(data[2], function (d) {
+                lat_long[d.country] =
+                    {lat: d.latitude, long: d.longitude}
+            })
+
+
+            let trade_data = data[1];
+            trade_data = trade_data.filter(function (d) {
+                return d['Year'] == year;
+            })
+
+            let link = {};
+            let trade_details = new Map();
+            let amount = [];
+            trade_data.forEach(function (d) {
+                amount.push(parseFloat(d['Value']))
+                if (lat_long[d['Reporting Country']] != undefined && lat_long[d['Partner Country']] != undefined) {
+                    let source = [+lat_long[d['Reporting Country']].long, +lat_long[d['Reporting Country']].lat]
+                    let target = [+lat_long[d['Partner Country']].long, +lat_long[d['Partner Country']].lat]
+                    if (link[d['Reporting Country Code']] === undefined) {
+                        link[d['Reporting Country Code']] = []
+                    }
+                    link[d['Reporting Country Code']].push({type: "LineString", coordinates: [source, target], trade_value: parseFloat(d['Value'])});
+                }
+                let value = trade_details.get(d['Reporting Country Code']);
+                if (value === undefined) {
+                    value = {name: d['Reporting Country'], trade_value:0};
+                }
+                value.trade_value += parseFloat(d['Value'])
+                trade_details.set(d['Reporting Country Code'], value);
+
+            })
+
+            line_width.domain(d3.extent(amount))
+
+            let domain = d3.extent(trade_details, function (d) {
+                return d[1].trade_value
+            })
+
+            let log_values = d3.scaleLog().domain(domain).range([0, 100]);
+
+            let colorScale = d3.scaleLinear()
+                .domain([0, 100])
+                .range(["yellow", "darkred"])
+                .interpolate(d3.interpolateCubehelix.gamma(10));
+
+
+            // Draw the map
+            let svg = d3.select('#canvas')
+
+            let mapCanvas = svg.append('g')
+            mapCanvas.selectAll("path")
+                .data(geoJson)
+                .enter().append("path")
+                .style("fill", function (d) {
+                    let detail = trade_details.get(d.properties.iso_a3);
+                    if (detail === undefined) {
+                        return 'lightgrey'
+                    }
+                    return colorScale(log_values(detail.trade_value))
+                })
+                .attr("d", geo_generator)
+                .style("stroke", "#fff")
+                // .style("stroke-width", 0)
+                .on("mousemove", function (mouseData, d) {
+                    path_append(mouseData, d.properties.iso_a3)
+                    d3.select('#tooltip')
+                        .style("opacity", .8)
+                        .style("left", (mouseData.clientX + 10).toString() + "px")
+                        .style("top", (mouseData.clientY + 10).toString() + "px")
+                })
+
+            function path_append(mouseData, iso_a3) {
+                // Add the path
+                let link_data = link[iso_a3];
+                if (link_data != undefined) {
+                    d3.select('#tooltip')
+                        .attr("opacity", .8)
+                        .attr("left", (mouseData.clientX + 10).toString() + "px")
+                        .attr("top", (mouseData.clientY + 10).toString() + "px")
+                        .html(
+                            "<div class='tooltipData'>Country: " + trade_details.get(iso_a3).name + "</div>" +
+                            "<div class='tooltipData'>Trade amount (in million US Dollars): " + trade_details.get(iso_a3).trade_value + "</div>" +
+                            "<div class='tooltipData'></div>")
+
+
+                    d3.selectAll(".link_path").remove();
+
+                    svg.selectAll("myPath")
+                        .data(link_data)
+                        .enter()
+                        .append("path")
+                        .attr("class", "link_path")
+                        .transition()
+                        .delay(function (d, i) {
+                            return i * 100;
+                        })
+                        .attr("d", function (d) {
+                            return path(d)
+                        })
+                        .attr("fill", "none")
+                        .attr("stroke", "#69b3a2")
+                        .attr('marker-end', 'url(#triangle)')
+                        .attr("stroke-width", function(d){
+                            return line_width(d.trade_value)
+                        })
+                }
+
+
+            }
+
+        }
+    }
+    main()
 
 </script>
 </body>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>World Trade</title>
+    <title>World Trade Line charts</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -27,30 +27,95 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 
+    <style>
+
+        #caption {
+            margin: auto;
+            padding-top: 1%;
+            padding-bottom: 1%;
+            padding-left: 4%;
+            font-family: serif;
+            font-size: 20pt;
+        }
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        @media screen and (max-height: 450px) {
+            .sidenav {padding-top: 15px;}
+            .sidenav a {font-size: 18px;}
+        }
+    </style>
 </head>
 <body>
+
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="world_map_network.html">World Data Network till 2018</a>
+    <a href="latest_trade_world_map.html">2020 Trade World Map</a>
+    <a href="linecharts.html">2019 vs 2020 Countries Trade Data</a>
+    <a href="world_trade_bar.html">2019 vs 2020 World Trade data</a>
+</div>
+<div id="caption">
+    2019 vs 2020 Countries Trade Data
+</div>
+
+<span style="font-size:20px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
+
+
 <div class="container">
-    <div id="caption">
-        Trade Network
-    </div>
+
     <form method="post" id="framework_form">
         <div class="form-group">
             <label>Select Countries</label>
-            <select id="framework" name="framework[]" multiple class="form-control" style="width: 50%">
+            <select id="framework" name="framework[]" multiple class="form-control" style="width: 40%">
             </select>
             <input type="submit" class="btn btn-info" name="submit" value="Submit"/>
         </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-            <label class="form-check-label" for="exampleRadios1">
-                Default radio
-            </label>
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" id="importAttr" name="tradeAttr" value='import'
+                   onchange="handleTradeAttr()" checked>
+            <label class="custom-control-label" for="importAttr">Import Trade</label>
         </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-            <label class="form-check-label" for="exampleRadios2">
-                Second default radio
-            </label>
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" id="exportAttr" name="tradeAttr" value='export'
+                   onchange="handleTradeAttr()">
+            <label class="custom-control-label" for="exportAttr">Export Trade</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" id="netAttr" name="tradeAttr" value='net'
+                   onchange="handleTradeAttr()">
+            <label class="custom-control-label" for="netAttr">Net Trade</label>
         </div>
     </form>
     <div class="row">
@@ -66,9 +131,17 @@
 </div>
 <script>
 
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+    }
 
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+
+    var title =  "2019 Trade amount";
     var selected_countries = ['CHN', 'DEU', 'RUS', 'SAU', 'NLD'];
-
+    var trade_attr = 'import';
 
     d3.csv("data/country_iso_code.csv", function (data) {
         let str = ''
@@ -86,219 +159,280 @@
             maximumSelectionLength: 5
         });
 
-        // console.log($('#framework_form').find(':selected'))
-        // $('#framework_form').on('submit', function (event) {
-        //     event.preventDefault();
-        //     let selected_countries = [];
-        //     $('#framework option:selected').each(function () {
-        //         selected_countries.push($(this)[0].value)
-        //     });
-        //     main(selected_countries)
-        // });
+        $('#framework_form').on('submit', function (event) {
+            event.preventDefault();
+            window.selected_countries = [];
+            $('#framework option:selected').each(function () {
+                window.selected_countries.push($(this)[0].value)
+            });
+            main()
+        });
 
 
     });
 
+    function handleTradeAttr() {
+        const rbg = document.querySelectorAll('input[name="tradeAttr"]')
+        for (const rb of rbg) {
+            if (rb.checked) {
+                window.trade_attr = rb.value;
+                main();
+                break;
+            }
+        }
+
+    }
+
     let margin = 40;
     let width = 1000 - 2 * margin;
-    let height = 600 - 2 * margin;
+    let height = 700 - 2 * margin;
 
-    let trade_data_net = "data/latest_trade_net.csv"
-    let trade_data_export = "data/latest_trade_export.csv"
-    let trade_data_import = "data/latest_trade_import.csv"
-    d3.csv(trade_data_net).then(main)
+    let trade_data_net = d3.csv("data/latest_trade_net.csv",function(d) {
+        return {
+            LOCATION: d.LOCATION,
+            Country: d.Country,
+            Time: d3.timeParse("%y-%b")(d.Time),
+            Value: +d.Value
+        };
+    });
+    let trade_data_export = d3.csv("data/latest_trade_exports.csv",function(d) {
+        return {
+            LOCATION: d.LOCATION,
+            Country: d.Country,
+            Time: d3.timeParse("%y-%b")(d.Time),
+            Value: +d.Value
+        };
+    });
+    let trade_data_import = d3.csv("data/latest_trade_import.csv",function(d) {
+        return {
+            LOCATION: d.LOCATION,
+            Country: d.Country,
+            Time: d3.timeParse("%b-%y")(d.Time),
+            Value: +d.Value
+        };
+    });
 
+    // let parseDate = d3.timeParse("%y-%b");
 
-    let parseDate = d3.timeParse("%y-%b");
+    function main(){
+        if(trade_attr == 'import'){
+            // parseDate = d3.timeParse("");
+            trade_data = trade_data_import
+        }else if(trade_attr == 'export'){
+            trade_data = trade_data_export
+        }else if(trade_attr == 'net'){
+            trade_data = trade_data_net
+        }
+        Promise.all(
+            [trade_data]
+            , d3.autoType()).then(sub_main)
+        function sub_main(data_array) {
+            let data = data_array[0]
+            trade_2019 = []
+            trade_2020 = []
+            d3.map(data, function (d) {
 
-    function main(data) {
-        data.forEach(function (d) {
-            d.Time = parseDate(d.Time);
-        });
-        // let selected_countries = ['India'];
-        trade_2019 = []
-        trade_2020 = []
-        d3.map(data, function (d) {
-
-            if (selected_countries.includes(d.LOCATION)) {
-                if (d.Time.getFullYear() == '2019') {
-                    trade_2019.push(d)
+                if (selected_countries.includes(d.LOCATION)) {
+                    if (d.Time.getFullYear() == '2019') {
+                        trade_2019.push(d)
+                    }
+                    if (d.Time.getFullYear() == '2020') {
+                        trade_2020.push(d)
+                    }
                 }
-                if (d.Time.getFullYear() == '2020') {
-                    trade_2020.push(d)
-                }
-            }
 
-        })
+            })
 
 
-        let y_extent = d3.extent(data, d => +d.Value)
-        let y = d3.scaleLinear()
-            .domain(y_extent)
-            .range([height, 2 * margin]);
+            let y_extent = d3.extent(data, d => +d.Value)
+            let y = d3.scaleLinear()
+                .domain(y_extent)
+                .range([height, 2 * margin]);
 
 
-        let color = d3.scaleOrdinal()
-            .domain(selected_countries)
-            .range(d3.schemeCategory10)
+            let color = d3.scaleOrdinal()
+                .domain(selected_countries)
+                .range(d3.schemeCategory10)
 
-        let svg_2019 = d3.select("#svg_2019");
-        svg_2019
-            .attr('width', '100%')
-            .attr('height', '40vw')
-            .attr('viewBox', '0 0 1000 600')
-            .style('background-color', '#f5f3f3')
-            .append("g")
-            .attr("transform",
-                "translate(" + margin + "," + margin + ")");
-        let svg_2020 = d3.select("#svg_2020");
-        svg_2020.attr('width', '100%')
-            .attr('height', '40vw')
-            .attr('viewBox', '0 0 1000 600')
-            .style('background-color', '#f5f3f3')
-            .append("g")
-            .attr("transform",
-                "translate(" + margin + "," + margin + ")");
+            let svg_2019 = d3.select("#svg_2019");
+            svg_2019
+                .attr('width', '100%')
+                .attr('height', '30vw')
+                .attr('viewBox', '0 0 1000 600')
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin + "," + margin + ")");
+            let svg_2020 = d3.select("#svg_2020");
+            svg_2020.attr('width', '100%')
+                .attr('height', '30vw')
+                .attr('viewBox', '0 0 1000 600')
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin + "," + margin + ")");
 
 
-        linePlot(svg_2019, trade_2019, "2019 Trade amount");
-        linePlot(svg_2020, trade_2020, "2020 Trade amount");
+            linePlot(svg_2019, trade_2019, this.title);
+            linePlot(svg_2020, trade_2020, "2020 Trade amount");
 
 ///////////////////////////////////////////////////////
-        function linePlot(svg, data, title) {
-            let other_svg = "";
-            let svg_id = svg._groups[0][0].id;
-            if (svg_id === "svg_2019") {
-                other_svg = "svg_2020"
-            } else {
-                other_svg = "svg_2019"
-            }
-            let x_extent = d3.extent(data, d => d.Time)
-            let x = d3.scaleTime()
-                .domain(x_extent)
-                .range([2 * margin, width]);
+            function linePlot(svg, data, title) {
+                let other_svg = "";
+                let svg_id = svg._groups[0][0].id;
+                if (svg_id === "svg_2019") {
+                    other_svg = "svg_2020"
+                } else {
+                    other_svg = "svg_2019"
+                }
+                let x_extent = d3.extent(data, d => d.Time)
+                let x = d3.scaleTime()
+                    .domain(x_extent)
+                    .range([2 * margin, width]);
 
-            // Add Y axis
+                // Add axis
 
-            svg.append("g")
-                .attr("class", "x_axis")
-                .attr("transform", "translate(0," + height + ")")
-                .call(d3.axisBottom(x));
+                svg.selectAll(".x_axis").remove()
+                svg.append("g")
+                    .attr("class", "x_axis")
+                    .attr("transform", "translate(0," + height + ")")
+                    .call(d3.axisBottom(x));
 
-            // text label for the x axis
-            svg.append("text")
-                .attr("transform",
-                    "translate(" + (width / 2) + " ," +
-                    (height + margin + 20) + ")")
-                .style("text-anchor", "middle")
-                .text("Time (Year-month)");
+                // text label for the x axis
+                svg.append("text")
+                    .attr("transform",
+                        "translate(" + (width / 2) + " ," +
+                        (height + margin + 20) + ")")
+                    .style("text-anchor", "middle")
+                    .text("Time (Year-month)");
 
-            svg.append("g")
-                .attr("class", "y_axis")
-                .attr("transform", "translate(" + 2 * margin + ",0)")
-                .call(d3.axisLeft(y));
-            // text label for the y axis
-            svg.append("text")
-                .attr("transform", "rotate(-90)")
-                .attr("y", margin / 2)
-                .attr("x", 0 - (height / 2))
-                .attr("dy", "1em")
-                .style("text-anchor", "middle")
-                .text("Net Trade Value ($ in Billion)");
+                svg.selectAll(".y_axis").remove()
+                svg.append("g")
+                    .attr("class", "y_axis")
+                    .attr("transform", "translate(" + 2 * margin + ",0)")
+                    .call(d3.axisLeft(y));
+                // text label for the y axis
+                svg.append("text")
+                    .attr("transform", "rotate(-90)")
+                    .attr("y", margin / 2)
+                    .attr("x", 0 - (height / 2))
+                    .attr("dy", "1em")
+                    .style("text-anchor", "middle")
+                    .text("Trade Amount(in Billion US Dollars)");
 
 
-            /////////////////////////////
-            // Legends
+                /////////////////////////////
+                // Legends
+                svg.selectAll(".lineLegend").remove()
+                let lineLegend = svg.selectAll(".lineLegend").data(selected_countries)
+                    .enter().append("g")
+                    .attr("class", "lineLegend")
+                    .attr("transform", function (d, i) {
+                        return "translate(" + (width + margin / 2) + "," + (i * 20) + ")";
+                    });
 
-            let lineLegend = svg.selectAll(".lineLegend").data(selected_countries)
-                .enter().append("g")
-                .attr("class", "lineLegend")
-                .attr("transform", function (d, i) {
-                    return "translate(" + (width + margin / 2) + "," + (i * 20) + ")";
-                });
+                lineLegend.append("rect")
+                    .attr("fill", function (d) {
+                        return color(d);
+                    })
+                    .attr("transform", "translate(0,5)")
+                    .attr("width", 10).attr("height", 10);
 
-            lineLegend.append("rect")
-                .attr("fill", function (d) {
-                    return color(d);
+
+                lineLegend.append("text").text(function (d) {
+                    return d;
                 })
-                .attr("transform", "translate(0,5)")
-                .attr("width", 10).attr("height", 10);
+                    .attr("transform", "translate(15,15)"); //align texts with boxes
 
 
-            lineLegend.append("text").text(function (d) {
-                return d;
-            })
-                .attr("transform", "translate(15,15)"); //align texts with boxes
-
-
-            svg.append("text")
-                .attr("x", (width / 2))
-                .attr("y", 0 - (margin / 2))
-                .attr("text-anchor", "middle")
-                .style("font-size", "24px")
-                .style("text-decoration", "underline")
-                .text(title);
+                svg.append("text")
+                    .attr("x", (width / 2))
+                    .attr("y", 0 - (margin / 2))
+                    .attr("text-anchor", "middle")
+                    .style("font-size", "24px")
+                    .style("text-decoration", "underline")
+                    .text(title);
 
 
 ////////////////////////////
 //////////////////            Line
 
 
-            let groupedData = d3.group(data, d => d.Country)
+                let groupedData = d3.group(data, d => d.Country)
 
-            const line = d3.line()
-                .curve(d3.curveCatmullRom.alpha(0.5))
-                .x(function (d) {
-                    return x(d.Time);
-                })
-                .y(function (d) {
-                    return y(d.Value);
-                })
-            let i = 0;
-            // Draw the line
-            svg.selectAll("lines")
-                .data(groupedData)
-                .enter()
-                .append("g")
-                .append("path")
-                .attr("class", "country_path")
-                .attr("id", function (d, i) {
-                    return svg._groups[0][0].id + "_" + d[1][0].LOCATION;
-                })
-                .attr("fill", "none")
-                .attr("stroke", function (d) {
-                    return color(d[0])
-                })
-                .attr("opacity", "0.5")
-                .attr("stroke-width", 5)
-                .style("stroke-dasharray", ("3, 3"))
-                .attr("d", function (d) {
-                    return line(d[1])
-                })
-                .on("mouseover", function (mouseD, d) {
+                const line = d3.line()
+                    .curve(d3.curveCatmullRom.alpha(0.05))
+                    .x(function (d) {
+                        return x(d.Time);
+                    })
+                    .y(function (d) {
+                        return y(d.Value);
+                    })
+
+                svg.selectAll(".country_path").remove()
+
+
+                // Draw the line
+                svg.selectAll("lines")
+                    .data(groupedData)
+                    .enter()
+                    .append("g")
+                    .append("path")
+                    .attr("class", "country_path")
+                    .attr("id", function (d) {
+                        return svg._groups[0][0].id + "_" + d[1][0].LOCATION;
+                    })
+                    .attr("fill", "none")
+                    .attr("stroke", function (d) {
+                        return color(d[1][0].LOCATION)
+                    })
+                    .attr("opacity", "0.5")
+                    .attr("stroke-width", 7)
+                    .style("stroke-dasharray", ("3, 3"))
+                    .attr("d", function (d) {
+                        return line(d[1])
+                    })
+                    .on("mouseover", function (mouseD, d) {
+                            d3.select(this)
+                                .style("opacity", "1")
+                                .style("stroke-dasharray", null);
+                            d3.select("#" + other_svg + "_" + d[1][0].LOCATION)
+                                .style("opacity", "1")
+                                .style("stroke-dasharray", null);
+                            svg.append("text")
+                                .attr("class","country_name")
+                                .attr("x", (width / 2))
+                                .attr("y", 40)
+                                .attr("text-anchor", "middle")
+                                .style("font-size", "36px")
+                                .text(d[0])
+                            .attr("fill",color(d[1][0].LOCATION));
+                        d3.select("#" + other_svg).append("text")
+                            .attr("class","country_name")
+                            .attr("x", (width / 2))
+                            .attr("y", 40)
+                            .attr("text-anchor", "middle")
+                            .style("font-size", "36px")
+                            .text(d[0])
+                            .attr("fill",color(d[1][0].LOCATION));
+                        }
+                    )
+
+                    .on('mouseout', function (mouseD, d) { // on mouse out hide line, circles and text
                         d3.select(this)
-                            .style("opacity", "1")
-                            .style("stroke-dasharray", null);
+                            .style("opacity", "0.5")
+                            .style("stroke-dasharray", ("3, 3"));
                         d3.select("#" + other_svg + "_" + d[1][0].LOCATION)
-                            .style("opacity", "1")
-                            .style("stroke-dasharray", null);
-                    }
-                )
+                            .style("opacity", "0.5")
+                            .style("stroke-dasharray", ("3, 3"));
+                        d3.selectAll(".country_name").remove()
+                    })
 
-                .on('mouseout', function (mouseD, d) { // on mouse out hide line, circles and text
-                    d3.select(this)
-                        .style("opacity", "0.5")
-                        .style("stroke-dasharray", ("3, 3"));
-                    d3.select("#" + other_svg + "_" + d[1][0].LOCATION)
-                        .style("opacity", "0.5")
-                        .style("stroke-dasharray", ("3, 3"));
-                })
+            }
 
         }
 
     }
 
-
+    main();
 </script>
 </body>
 </html>

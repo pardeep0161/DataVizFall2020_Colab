@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>World Trade</title>
+    <title>World Trade Network</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -53,67 +53,96 @@
             background-color: #fffefe;
         }
 
-        path.path_geo {
-            stroke-width: .1px;
-            stroke: black;
-            fill-opacity: .8;
+
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
         }
 
-        .gop {
-            fill: none;
-            stroke: #FF0000;
-            stroke-width: 4px;
-            stroke-opacity: .8;
-
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
         }
 
-        .dems {
-            fill: none;
-            stroke: #0015BC;
-            stroke-width: 4px;
-            stroke-opacity: .8;
+        .sidenav a:hover {
+            color: #f1f1f1;
         }
 
-        .county_name {
-            font-family: sans-serif;
-            font-size: medium;
-            color: dimgray;
-            font-weight: bold;
-
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
         }
+
+        @media screen and (max-height: 450px) {
+            .sidenav {padding-top: 15px;}
+            .sidenav a {font-size: 18px;}
+        }
+
     </style>
 </head>
 <body>
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="world_map_network.html">World Data Network till 2018</a>
+    <a href="latest_trade_world_map.html">2020 Trade World Map</a>
+    <a href="linecharts.html">2019 vs 2020 Countries Trade Data</a>
+    <a href="world_trade_bar.html">2019 vs 2020 World Trade data</a>
+</div>
+<div id="caption">
+    World Data Network till 2018
+</div>
+
+<span style="font-size:20px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
+
+<div class="d-flex justify-content-center my-4">
+    <div class="w-50">
+        <label for="year">Year</label>
+        <input type="range" class="custom-range" id="year" min="2011" max="2018" name="year" value="2018">
+    </div>
+    <span class="font-weight-bold text-primary ml-2 valueSpan2"></span>
+</div>
+<svg id="canvas" width="100vw" height="60vh" viewBox="0 0 700 800">
+    <defs>
+        <marker id="triangle" viewBox="0 0 10 10"
+                refX="1" refY="5"
+                markerUnits="strokeWidth"
+                markerWidth="10" markerHeight="10"
+                orient="auto">
+            <path d="M 0 0 L 5 5 L 0 10 z" fill="#f00" style="fill-opacity: .25;"/>
+        </marker>
+    </defs>
+</svg>
+
+
+<div id="tooltip"></div>
 <div class="container">
-    <div id="caption">
-        Trade Network
-    </div>
 
-    <div class="d-flex justify-content-center my-4">
-        <div class="w-75">
-            <label for="year">Year</label>
-            <input type="range" class="custom-range" id="year" min="2011" max="2018" name="year" value="2018">
-        </div>
-        <span class="font-weight-bold text-primary ml-2 valueSpan2"></span>
-    </div>
-    <div id="container">
-        <svg id="canvas" width="100vw" height="60vh" viewBox="0 0 1000 600">
-            <defs>
-                <marker id="triangle" viewBox="0 0 10 10"
-                        refX="1" refY="5"
-                        markerUnits="strokeWidth"
-                        markerWidth="10" markerHeight="10"
-                        orient="auto">
-                    <path d="M 0 0 L 5 5 L 0 10 z" fill="#f00" style="fill-opacity: .25;"/>
-                </marker>
-            </defs>
-        </svg>
-    </div>
-
-
-    <div id="tooltip"></div>
 </div>
 <script>
+
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+
     var year = 2018;
     $(document).ready(function () {
 
@@ -133,7 +162,6 @@
     let trade_data = d3.csv("data/WTO_Agg_Updated.csv")
     let countries_point = d3.csv("data/countries_lat_long.csv")
     // source 2: US Census Counties geojson
-    //let geojson = "data/countries_geo_topo.json";
     let geojson = d3.json("data/detailed_topo.json");
     let projection = d3.geoEquirectangular()
         .scale(200).translate([400, 350])

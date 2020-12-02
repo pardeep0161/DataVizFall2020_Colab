@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2020 Trade World Map</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://d3js.org/topojson.v2.min.js"></script>
+    <style>
+        #caption {
+            margin: auto;
+            padding-top: 1%;
+            padding-bottom: 1%;
+            padding-left: 4%;
+            font-family: serif;
+            font-size: 20pt;
+        }
+
+        #container {
+            width: 90vw;
+            height: 80vh;
+        }
+
+        #canvas {
+            width: 90vw;
+            height: 80vh;
+            background-color: azure;
+        }
+
+        path.path_geo {
+            stroke-width: .5px;
+            stroke: black;
+        }
+
+        .tooltipData {
+            font-size: small;
+        }
+
+        #tooltip {
+            opacity: 0;
+            background-color: antiquewhite;
+            position: absolute;
+            width: 150px;
+            height: 60px;
+        }
+
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        @media screen and (max-height: 450px) {
+            .sidenav {padding-top: 15px;}
+            .sidenav a {font-size: 18px;}
+        }
+    </style>
+</head>
+
+<body>
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="world_map_network.html">World Data Network till 2018</a>
+    <a href="latest_trade_world_map.html">2020 Trade World Map</a>
+    <a href="linecharts.html">Affects of COVID-19 on Countries Trade</a>
+    <a href="world_trade_bar.html">Affects of COVID-19 on World Trade</a>
+</div>
+<div id="caption">
+    2020 Trade World Map
+</div>
+
+<span style="font-size:20px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
+
+<div id="container">
+    <svg id="canvas" viewBox="0 0 1000 800">
+    </svg>
+</div>
+
+<div id="tooltip"></div>
+
+<div id="filter">
+    <input type="radio" name="tradeAttr" value="imports" checked onchange="handleTradeAttr()"> Imports<br>
+    <input type="radio" name="tradeAttr" value="exports" onchange="handleTradeAttr()"> Exports<br>
+</div>
+
+<script>
+
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+
+    var trade_attr = 'imports'
+    let svg = d3.select('svg')
+    let trade_data_import = d3.csv("data/latest_trade_import.csv");
+    let trade_data_export = d3.csv("data/latest_trade_exports.csv");
+
+    let geojson = d3.json("data/detailed_topo.json");
+
+    let projection = d3.geoEquirectangular()
+        .scale(200).translate([350, 350])
+
+    function handleTradeAttr() {
+        const rbg = document.querySelectorAll('input[name="tradeAttr"]')
+        for (const rb of rbg) {
+            if (rb.checked) {
+                window.trade_attr = rb.value;
+                data_plot();
+                break;
+            }
+        }
+
+    }
+
+
+    function data_plot() {
+        if (trade_attr == 'imports') {
+            trade_data = trade_data_import
+        } else if (trade_attr == 'exports') {
+            trade_data = trade_data_export
+        }
+        Promise.all(
+            [
+                geojson,
+                trade_data],
+            d3.autoType())
+            .then(main)
+
+        function main(data) {
+            let geoJson = topojson.feature(data[0], data[0].objects.custom).features;
+            let geo_generator = d3.geoPath().projection(projection)
+
+            data[1] = data[1].filter(function (d) {
+                return d['Time'].includes('20');
+            })
+            console.log(data[1])
+            let mydata1 = new Map()
+            d3.map(data[1], function (d) {
+                let detail = mydata1.get(d.LOCATION)
+                if(detail === undefined){
+                    detail = {Country: d.Country,
+                        LOCATION: d.LOCATION,
+                        Value: 0}
+                }
+                detail.Value += parseFloat(d.Value);
+                mydata1.set(d.LOCATION, detail)
+            });
+
+            let value_extent = d3.extent(mydata1, function (d) {
+                return d[1].Value
+            })
+            value_extent[0]=1
+            let colorScale = d3.scaleLog()
+                .domain(value_extent)
+                .range(["#F4D03F","#C0392B"])
+                .interpolate(d3.interpolateCubehelix.gamma(10));
+
+            let mapCanvas = svg.append('g')
+            mapCanvas.selectAll('path')
+                .data(geoJson)
+                .enter()
+                .append('path')
+                .attr("class", "path_geo")
+                .attr("d", geo_generator)
+                .attr("fill", function (d) {
+                    try {
+                        color = colorScale(parseInt(mydata1.get(d.properties.iso_a3).Value))
+                        return color;
+                    } catch (error) {
+                        return "white"
+                    }
+                })
+                .on("mousemove", function (mouseData, d) {
+                    console.log(mydata1.get(d.properties.iso_a3))
+                    d3.select('#tooltip')
+                        .style("opacity", .8)
+                        .style("left", (mouseData.clientX + 10).toString() + "px")
+                        .style("top", (mouseData.clientY + 10).toString() + "px")
+                        .html(
+                            "<div class='tooltipData'>Country: " + mydata1.get(d.properties.iso_a3).Country + "</div>" +
+                            "<div class='tooltipData' style='color:black'>Value (in billion US Dollars): " + mydata1.get(d.properties.iso_a3).Value.toString() + "</div>" +
+                            "<div class='tooltipData'></div>")
+                })
+                .transition()
+                .delay(function (d, i) {
+                    return i * 2
+                })
+                .duration(800)
+            svg.call(d3.zoom()
+                .extent([[0, 0], [1000, 800]])
+                .scaleExtent([1, 8])
+                .on("zoom", zoomed)
+            )
+
+            function zoomed({transform}) {
+                mapCanvas.attr("transform", transform)
+            }
+        }
+    }
+
+    data_plot();
+
+</script>
+</body>
+</html>

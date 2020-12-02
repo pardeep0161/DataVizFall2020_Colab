@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>World Trade Line charts</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css"/>
+
+
+    <style>
+
+    #caption {
+        margin: auto;
+        padding-top: 1%;
+        padding-bottom: 1%;
+        padding-left: 4%;
+        font-family: serif;
+        font-size: 20pt;
+    }
+    .sidenav {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: #111;
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 60px;
+    }
+
+    .sidenav a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+    }
+
+    .sidenav a:hover {
+        color: #f1f1f1;
+    }
+
+    .sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+    }
+
+    @media screen and (max-height: 450px) {
+        .sidenav {padding-top: 15px;}
+        .sidenav a {font-size: 18px;}
+    }
+
+</style>
+<body>
+
+
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="world_map_network.html">World Data Network till 2018</a>
+    <a href="latest_trade_world_map.html">2020 Trade World Map</a>
+    <a href="linecharts.html">2019 vs 2020 Countries Trade Data</a>
+    <a href="world_trade_bar.html">2019 vs 2020 World Trade data</a>
+</div>
+<div id="caption">
+    2019 vs 2020 World Trade data
+</div>
+
+<span style="font-size:20px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
+<div class="container">
+    <div class="custom-control custom-radio custom-control-inline">
+        <input type="radio" class="custom-control-input" id="importAttr" name="tradeAttr" value='import'
+               onchange="handleTradeAttr()" checked>
+        <label class="custom-control-label" for="importAttr">Import Trade</label>
+    </div>
+    <div class="custom-control custom-radio custom-control-inline">
+        <input type="radio" class="custom-control-input" id="exportAttr" name="tradeAttr" value='export'
+               onchange="handleTradeAttr()">
+        <label class="custom-control-label" for="exportAttr">Export Trade</label>
+    </div>
+
+</div>
+
+<iframe id="trade_bar" src="trade_import.html" height="800" width="1500" style="border:none;" ></iframe>
+<script>
+
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+
+
+    function handleTradeAttr() {
+        const rbg = document.querySelectorAll('input[name="tradeAttr"]')
+        for (const rb of rbg) {
+            if (rb.checked) {
+               let trade_attr = rb.value;
+               let source='';
+               if(trade_attr === 'import'){
+                   source = "trade_import.html"
+               }
+               if(trade_attr === 'export'){
+                    source = "trade_export.html"
+                }
+                document.getElementById("trade_bar").src = source;
+            }
+        }
+
+    }
+</script>
+</body>
+</html>
